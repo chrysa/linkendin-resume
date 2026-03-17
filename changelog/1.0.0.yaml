@@ -1,0 +1,32 @@
+---
+version: 1.0.0
+date: 2026-03-16
+changes:
+  - type: added
+    description: Initial release — one-page persuasive CV with React 19 + Vite 7
+  - type: added
+    description: Dark/light theme with CSS custom properties
+  - type: added
+    description: Multilingual support (FR/EN) via i18next
+  - type: added
+    description: Framer Motion animations (parallax, count-up, stagger, 3D tilt)
+  - type: added
+    description: Contact via GitHub Issues (no server token)
+  - type: added
+    description: cv.json LinkedIn-ready data format
+  - type: added
+    description: Docker multi-stage build (dev/build/prod with serve)
+  - type: added
+    description: Docker Compose layered config (base / override / prod)
+  - type: added
+    description: Traefik labels with TLS via Let's Encrypt
+  - type: added
+    description: CI workflow (pre-commit, lint, type-check, test, build, docker)
+  - type: added
+    description: CD workflow (GHCR push + SSH deploy)
+  - type: added
+    description: Dependabot for npm, github-actions, docker, pre-commit
+  - type: added
+    description: pre-commit hooks (debug detection, prettier, csslint, eslint, gitleaks)
+  - type: added
+    description: Makefile with dev, ci, docker targets

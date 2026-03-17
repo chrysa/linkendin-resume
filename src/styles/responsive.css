@@ -1,0 +1,106 @@
+/* ─── Responsive ────────────────────────────────────────────────────────── */
+
+/* Tablette (≤ 900px) */
+@media (max-width: 900px) {
+  .metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .projects__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero__content {
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero__actions {
+    justify-content: center;
+  }
+  .hero__summary {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .navbar__links {
+    display: none;
+  }
+}
+
+/* Mobile (≤ 600px) */
+@media (max-width: 600px) {
+  :root {
+    --section-py: 4rem;
+    --space-2xl: 3rem;
+  }
+
+  .container {
+    padding: 0 var(--space-lg);
+  }
+
+  .metrics {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+
+  .projects__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .exp-card__header {
+    flex-direction: column;
+    gap: .4rem;
+  }
+
+  .edu-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+  .edu-card__years { min-width: unset; }
+
+  .hero__photo {
+    width: 130px;
+    height: 130px;
+  }
+  .hero__name {
+    font-size: 2.2rem;
+  }
+
+  .modal {
+    padding: var(--space-xl) var(--space-lg);
+    max-height: 95dvh;
+  }
+
+  .contact-section__cta {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer__inner {
+    flex-direction: column;
+    gap: var(--space-md);
+    text-align: center;
+  }
+}
+
+/* Impression PDF */
+@media print {
+  .navbar,
+  .hero__scroll,
+  .hero__actions .btn--ghost,
+  .contact-section,
+  .footer,
+  .modal-backdrop,
+  .modal {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+  .section {
+    padding: 2rem 0;
+    break-inside: avoid;
+  }
+}

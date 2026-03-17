@@ -1,0 +1,70 @@
+/* ─── Design Tokens ─────────────────────────────────────────────────────── */
+
+/* Thème sombre (défaut) */
+:root,
+[data-theme="dark"] {
+  /* Couleurs */
+  --clr-bg:        #0a0a0f;
+  --clr-bg-2:      #111118;
+  --clr-bg-card:   #16161f;
+  --clr-bg-card-hover: #1e1e2e;
+  --clr-border:    rgba(255,255,255,.07);
+  --clr-border-hover: rgba(124,58,237,.5);
+
+  /* Accent gradient */
+  --clr-accent-1:  #7c3aed;   /* violet */
+  --clr-accent-2:  #06b6d4;   /* cyan  */
+  --gradient:      linear-gradient(135deg, var(--clr-accent-1), var(--clr-accent-2));
+  --gradient-text: linear-gradient(90deg, var(--clr-accent-1), var(--clr-accent-2));
+
+  /* Texte */
+  --clr-text:      #e8e8f0;
+  --clr-text-2:    #a0a0b8;
+  --clr-text-3:    #5e5e7a;
+
+  /* Typographie */
+  --font-sans:     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:     'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Spacing */
+  --space-xs:  .25rem;
+  --space-sm:  .5rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2.5rem;
+  --space-2xl: 5rem;
+
+  /* Radius */
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-card: 0 4px 24px rgba(0,0,0,.4);
+  --shadow-glow: 0 0 32px rgba(124,58,237,.25);
+
+  /* Transitions */
+  --transition: .2s cubic-bezier(.4,0,.2,1);
+
+  /* Layout */
+  --max-width: 1100px;
+  --section-py: 6rem;
+}
+
+/* Thème clair */
+[data-theme="light"] {
+  --clr-bg:            #f8f8fc;
+  --clr-bg-2:          #f0f0f8;
+  --clr-bg-card:       #ffffff;
+  --clr-bg-card-hover: #f5f3ff;
+  --clr-border:        rgba(0,0,0,.08);
+  --clr-border-hover:  rgba(124,58,237,.4);
+
+  --clr-text:   #1a1a2e;
+  --clr-text-2: #4a4a6a;
+  --clr-text-3: #9090b0;
+
+  --shadow-card: 0 4px 24px rgba(0,0,0,.08);
+  --shadow-glow: 0 0 32px rgba(124,58,237,.15);
+}

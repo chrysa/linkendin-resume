@@ -1,0 +1,127 @@
+/* ─── Scroll Progress Bar ───────────────────────────────────────────────── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--clr-accent-1), var(--clr-accent-2));
+  transform-origin: left;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* ─── Custom Cursor ─────────────────────────────────────────────────────── */
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 38px;
+  height: 38px;
+  border: 2px solid var(--clr-accent-1);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transition: width 160ms ease, height 160ms ease, border-color 160ms ease;
+}
+
+.cursor-ring--hover {
+  width: 52px;
+  height: 52px;
+  border-color: var(--clr-accent-2);
+  mix-blend-mode: difference;
+}
+
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  background: var(--clr-accent-1);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ─── Floating CTA ──────────────────────────────────────────────────────── */
+.floating-cta {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .75rem 1.35rem;
+  background: linear-gradient(135deg, var(--clr-accent-1), var(--clr-accent-2));
+  color: #fff;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: .9rem;
+  border-radius: var(--radius-full);
+  box-shadow: 0 8px 32px rgba(124,58,237,.45);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.floating-cta i {
+  font-size: 1.05rem;
+}
+
+@media (max-width: 480px) {
+  .floating-cta span { display: none; }
+  .floating-cta { padding: .85rem; border-radius: 50%; }
+}
+
+/* ─── Skill Tooltip ─────────────────────────────────────────────────────── */
+.skill-tooltip {
+  position: absolute;
+  bottom: calc(100% + .6rem);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--clr-bg-card);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  padding: .7rem .9rem;
+  min-width: 160px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.5), var(--shadow-glow);
+  z-index: 100;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.skill-tooltip__level {
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--clr-accent-1);
+  margin-bottom: .4rem;
+  font-family: var(--font-mono);
+}
+
+.skill-tooltip__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+
+.skill-tooltip__list li {
+  font-size: .8rem;
+  color: var(--clr-text-2);
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+}
+
+.skill-tooltip__list li::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background: var(--clr-accent-2);
+  border-radius: 50%;
+  flex-shrink: 0;
+}

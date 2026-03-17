@@ -1,0 +1,195 @@
+/* ─── Modal ─────────────────────────────────────────────────────────────── */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0,0,0,.75);
+  backdrop-filter: blur(6px);
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 201;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.modal__box {
+  width: 90%;
+  max-width: 520px;
+  max-height: 90dvh;
+  overflow-y: auto;
+  background: var(--clr-bg-card);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+  box-shadow: 0 24px 80px rgba(0,0,0,.6), var(--shadow-glow);
+  position: relative;
+  pointer-events: all;
+}
+
+.modal__close {
+  position: absolute;
+  top: var(--space-lg);
+  right: var(--space-lg);
+  color: var(--clr-text-3);
+  font-size: 1.1rem;
+  transition: var(--transition);
+  padding: .4rem;
+  border-radius: var(--radius-sm);
+}
+.modal__close:hover {
+  color: var(--clr-text);
+  background: rgba(255,255,255,.05);
+}
+
+.modal__header { margin-bottom: var(--space-xl); }
+.modal__title  { font-size: 1.8rem; font-weight: 800; margin-bottom: .5rem; }
+.modal__subtitle {
+  color: var(--clr-text-2);
+  font-size: .9rem;
+  line-height: 1.6;
+}
+
+/* ─── Formulaire ────────────────────────────────────────────────────────── */
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.form-field { display: flex; flex-direction: column; gap: .4rem; }
+
+.form-field__label {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--clr-text-2);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.form-field__input {
+  background: var(--clr-bg-2);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  padding: .7rem 1rem;
+  color: var(--clr-text);
+  font-size: .95rem;
+  font-family: var(--font-sans);
+  transition: var(--transition);
+  outline: none;
+  resize: none;
+}
+.form-field__input:focus {
+  border-color: var(--clr-accent-1);
+  box-shadow: 0 0 0 3px rgba(124,58,237,.2);
+}
+.form-field__input--error {
+  border-color: #ef4444;
+}
+.form-field__input--error:focus {
+  box-shadow: 0 0 0 3px rgba(239,68,68,.2);
+}
+.form-field__textarea { resize: vertical; min-height: 120px; }
+
+.form-field__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.form-field__error {
+  font-size: .78rem;
+  color: #ef4444;
+}
+.form-field__count {
+  font-size: .75rem;
+  color: var(--clr-text-3);
+  font-family: var(--font-mono);
+  margin-left: auto;
+}
+
+/* ─── Success state ─────────────────────────────────────────────────────── */
+.modal__success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-lg);
+  padding: var(--space-lg) 0;
+}
+.modal__success-icon { font-size: 3rem; }
+.modal__success h3   { font-size: 1.5rem; font-weight: 800; }
+.modal__success p    { color: var(--clr-text-2); line-height: 1.6; }
+.modal__success-back {
+  color: var(--clr-text-3);
+  font-size: .85rem;
+  text-decoration: underline;
+  transition: var(--transition);
+  font-family: var(--font-sans);
+}
+.modal__success-back:hover { color: var(--clr-text); }
+
+/* ─── Tabs (GitHub / WhatsApp) ──────────────────────────────────────────── */
+.modal__tabs {
+  display: flex;
+  gap: .5rem;
+  margin: var(--space-lg) 0 var(--space-md);
+  background: var(--clr-bg-2);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  padding: .3rem;
+}
+
+.modal__tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  padding: .55rem .75rem;
+  border-radius: calc(var(--radius-md) - 2px);
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--clr-text-2);
+  font-family: var(--font-sans);
+  transition: var(--transition);
+}
+.modal__tab:hover {
+  color: var(--clr-text);
+  background: rgba(255,255,255,.06);
+}
+.modal__tab--active {
+  background: var(--clr-accent-1);
+  color: #fff;
+}
+.modal__tab--active:hover {
+  background: var(--clr-accent-2);
+  color: #fff;
+}
+
+/* ─── WhatsApp panel ────────────────────────────────────────────────────── */
+.modal__whatsapp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 160px;
+  padding: var(--space-xl) 0;
+}
+
+.btn--whatsapp {
+  background: #25d366;
+  color: #fff;
+  gap: .6rem;
+}
+.btn--whatsapp:hover {
+  background: #1ebe5d;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(37,211,102,.4);
+}

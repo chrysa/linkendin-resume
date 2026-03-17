@@ -1,0 +1,145 @@
+{
+  "_comment": "Format standard d'import LinkedIn — à remplir depuis votre profil LinkedIn",
+  "_howto": [
+    "1. Allez sur linkedin.com → Moi → Voir le profil",
+    "2. Plus → Enregistrer en PDF (pour vérifier les données)",
+    "3. Remplissez les champs ci-dessous en copiant depuis votre profil",
+    "4. Le site lit ce fichier au démarrage"
+  ],
+  "basics": {
+    "firstName": "Anthony",
+    "lastName": "VOTRE_NOM",
+    "headline": "Votre titre professionnel LinkedIn (ex: Développeur Full Stack React · TypeScript)",
+    "summary": "Votre résumé LinkedIn — section 'Infos'. Copiez-collez directement depuis LinkedIn.",
+    "photoUrl": "/assets/photo.jpg",
+    "location": "Paris, France",
+    "linkedinUrl": "https://linkedin.com/in/votre-profil",
+    "availability": {
+      "available": true,
+      "label": "Disponible dès mai 2026",
+      "label_en": "Available from May 2026",
+      "type": "Freelance · CDI"
+    },
+    "contact": {
+      "_howto": "Renseignez votre numéro WhatsApp au format international (ex: +33612345678). Laisser vide pour masquer l'option WhatsApp.",
+      "whatsapp": "",
+      "whatsappPrefill": "Bonjour ! J'ai consulté votre CV en ligne et souhaite vous contacter. ",
+      "whatsappPrefill_en": "Hello! I saw your online CV and would like to reach out. "
+    }
+  },
+  "metrics": [
+    {
+      "value": "×3",
+      "label": "Performance",
+      "label_en": "Performance",
+      "sublabel": "gain de vitesse de chargement",
+      "sublabel_en": "load time improvement"
+    },
+    {
+      "value": "+40%",
+      "label": "Conversion",
+      "label_en": "Conversion",
+      "sublabel": "après refonte onboarding",
+      "sublabel_en": "after onboarding redesign"
+    },
+    {
+      "value": "12",
+      "label": "Projets livrés",
+      "label_en": "Projects shipped",
+      "sublabel": "en 5 ans, 0 abandon",
+      "sublabel_en": "in 5 years, 0 dropped"
+    },
+    {
+      "value": "6",
+      "label": "Devs managés",
+      "label_en": "Devs managed",
+      "sublabel": "dont 2 juniors coachés",
+      "sublabel_en": "including 2 juniors coached"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Lead Développeur Full Stack",
+      "title_en": "Lead Full Stack Developer",
+      "company": "Nom de l'entreprise",
+      "location": "Paris",
+      "startMonth": 3,
+      "startYear": 2022,
+      "endMonth": null,
+      "endYear": null,
+      "description": "Copiez la description de votre poste depuis LinkedIn. Focalisez sur les résultats.",
+      "description_en": "English version of the description.",
+      "technologies": ["React", "TypeScript", "Node.js"]
+    },
+    {
+      "title": "Développeur Frontend Senior",
+      "title_en": "Senior Frontend Developer",
+      "company": "Autre entreprise",
+      "location": "Paris",
+      "startMonth": 6,
+      "startYear": 2020,
+      "endMonth": 2,
+      "endYear": 2022,
+      "description": "Description du poste...",
+      "description_en": "Job description...",
+      "technologies": ["Vue.js", "GraphQL", "Tailwind CSS"]
+    }
+  ],
+  "education": [
+    {
+      "school": "Nom de l'école",
+      "degree": "Diplôme",
+      "degree_en": "Degree name in English",
+      "fieldOfStudy": "Domaine d'étude",
+      "fieldOfStudy_en": "Field in English",
+      "startYear": 2017,
+      "endYear": 2018
+    }
+  ],
+  "skills": [
+    {
+      "name": "React",
+      "level": 5,
+      "category": "frontend"
+    },
+    {
+      "name": "TypeScript",
+      "level": 5,
+      "category": "frontend"
+    },
+    {
+      "name": "Node.js",
+      "level": 4,
+      "category": "backend"
+    },
+    {
+      "name": "CSS / Tailwind",
+      "level": 5,
+      "category": "frontend"
+    },
+    {
+      "name": "Docker",
+      "level": 4,
+      "category": "devops"
+    },
+    {
+      "name": "Git",
+      "level": 5,
+      "category": "tools"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Nom du projet",
+      "title_en": "Project name",
+      "description": "Description du projet en français.",
+      "description_en": "Project description in English.",
+      "url": null,
+      "githubUrl": "https://github.com/votre-username/projet",
+      "technologies": ["React", "TypeScript"],
+      "impact": "Impact chiffré du projet",
+      "impact_en": "Quantified impact",
+      "stars": null
+    }
+  ]
+}

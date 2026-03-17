@@ -1,0 +1,83 @@
+---
+version: 2
+updates:
+  # ─── npm (dependencies + devDependencies) ────────────────────────────────────
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '07:00'
+      timezone: Europe/Paris
+    open-pull-requests-limit: 10
+    groups:
+      framer-motion:
+        patterns:
+          - framer-motion
+      i18n:
+        patterns:
+          - i18next
+          - react-i18next
+          - i18next-*
+      react:
+        patterns:
+          - react
+          - react-dom
+          - react-*
+          - '@types/react*'
+      vite:
+        patterns:
+          - vite
+          - '@vitejs/*'
+          - vitest
+          - '@vitest/*'
+      typescript:
+        patterns:
+          - typescript
+          - '@typescript-eslint/*'
+          - '@types/*'
+      eslint:
+        patterns:
+          - eslint
+          - '@eslint/*'
+          - eslint-*
+    labels:
+      - dependencies
+      - javascript
+
+  # ─── GitHub Actions ───────────────────────────────────────────────────────────
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '07:00'
+      timezone: Europe/Paris
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - github-actions
+
+  # ─── Docker ───────────────────────────────────────────────────────────────────
+  - package-ecosystem: docker
+    directory: /docker
+    schedule:
+      interval: weekly
+      day: monday
+      time: '07:00'
+      timezone: Europe/Paris
+    labels:
+      - dependencies
+      - docker
+
+  # ─── pre-commit ───────────────────────────────────────────────────────────────
+  - package-ecosystem: pre-commit
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '07:00'
+      timezone: Europe/Paris
+    labels:
+      - dependencies
+      - pre-commit
