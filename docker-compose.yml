@@ -43,17 +43,14 @@ services:
     develop:
       watch:
         - action: sync
-          path: ./src
-          target: /srv/app/src
+          path: ./app
+          target: /srv/app
           ignore:
             - node_modules/
-        - action: sync
-          path: ./cv.json
-          target: /srv/app/cv.json
         - action: restart
           path: .env
         - action: rebuild
-          path: package.json
+          path: app/package.json
         - action: rebuild
           path: docker/Dockerfile
     healthcheck: *healthcheck-dev
@@ -61,7 +58,7 @@ services:
       - '${APP_PORT:-3000}:${APP_PORT:-3000}'
     volumes:
       - type: bind
-        source: ./
+        source: ./app/
         target: /srv/app/
       - type: volume
         source: node_modules

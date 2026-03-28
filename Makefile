@@ -1,91 +1,59 @@
+#!make
+ifneq (,)
+	$(error This Makefile requires GNU Make)
+endif
+
+include $(shell find . -type f -name "*.[Mm]akefile" -not -path "*/\.*" -exec echo " {}" \;)
+
 .DEFAULT_GOAL := help
 
-# ─── Variables ────────────────────────────────────────────────────────────────
-IMAGE      := ghcr.io/chrysa/resume
-PORT       := 3000
+.PHONY: $(shell grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(shell find makefiles -name "*.Makefile" -type f) | sort | cut -d":" -f1 | tr "\n" " ")
 
-# ─── Dev ──────────────────────────────────────────────────────────────────────
-.PHONY: install
-install: ## Install dependencies
-	npm ci
+help: ## Display this help message
+	@echo "==================================================================="
+	@echo "Resume — CV Online Portfolio"
+	@echo "==================================================================="
+	@echo ""
+	@echo "Available commands:"
+	@echo ""
+	@for file in $$(ls makefiles/*.Makefile 2>/dev/null | sort); do \
+		category=$$(basename $$file .Makefile); \
+		case $$category in \
+			gobal_rules|variables|functions) continue ;; \
+			development) icon="⚡" ;; \
+			docker) icon="🐳" ;; \
+			quality) icon="🔍" ;; \
+			tests) icon="🧪" ;; \
+			*) icon="📦" ;; \
+		esac; \
+		echo "$$icon $$(echo $$category | tr '[:lower:]' '[:upper:]'):"; \
+		grep -E '^[a-zA-Z_-]+(\([^)]*\))?:.*?## .*$$' $$file 2>/dev/null | sort | \
+			awk 'BEGIN {FS = ":.*?## "}; { \
+				cmd = $$1; \
+				desc = $$2; \
+				if (match(cmd, /\([^)]+\)/)) { \
+					args = substr(cmd, RSTART+1, RLENGTH-2); \
+					gsub(/\([^)]+\)/, "", cmd); \
+					printf "  \033[36m%-20s\033[0m \033[33m%-15s\033[0m %s\n", cmd, args, desc; \
+				} else { \
+					printf "  \033[36m%-20s\033[0m \033[33m%-15s\033[0m %s\n", cmd, "", desc; \
+				} \
+			}'; \
+		echo ""; \
+	done
+	@echo "📝 EXAMPLES:"
+	@echo "  make up               # Start dev container"
+	@echo "  make watch            # Start with file watching (hot-reload)"
+	@echo "  make ci               # Run full CI checks"
+	@echo "  make test             # Run unit tests"
+	@echo ""
+	@echo "Environment Variables:"
+	@echo "  SERVICE=$(SERVICE)"
+	@echo "  PORT=$(PORT)"
+	@echo "  IMAGE=$(IMAGE)"
+	@echo ""
+	@echo "==================================================================="
 
-.PHONY: dev
-dev: ## Start Vite dev server
-	npm run dev
-
-.PHONY: build
-build: ## Build for production
-	npm run build
-
-.PHONY: preview
-preview: ## Preview production build locally
-	npm run preview
-
-# ─── Quality ──────────────────────────────────────────────────────────────────
-.PHONY: lint
-lint: ## Run ESLint
-	npm run lint
-
-.PHONY: lint-fix
-lint-fix: ## Run ESLint with auto-fix
-	npm run lint:fix
-
-.PHONY: type-check
-type-check: ## Run TypeScript type check
-	npm run type-check
-
-.PHONY: test
-test: ## Run unit tests
-	npm run test
-
-.PHONY: test-coverage
-test-coverage: ## Run tests with coverage report
-	npm run test:coverage
-
-.PHONY: ci
-ci: lint type-check test build ## Run all CI checks locally
-
-# ─── Pre-commit ──────────────────────────────────────────────────────────────
-.PHONY: pre-commit-install
-pre-commit-install: ## Install pre-commit hooks
-	pip install pre-commit
-	pre-commit install
-
-.PHONY: pre-commit-run
-pre-commit-run: ## Run pre-commit on all files
-	pre-commit run --all-files
-
-.PHONY: pre-commit-update
-pre-commit-update: ## Update pre-commit hooks to latest revisions
-	pre-commit autoupdate --bleeding-edge
-
-# ─── Docker ───────────────────────────────────────────────────────────────────
-.PHONY: docker-dev
-docker-dev: ## Start dev container with file watching (COMPOSE_PROFILES=dev)
-	COMPOSE_PROFILES=dev docker compose up --watch
-
-.PHONY: docker-build
-docker-build: ## Build production Docker image
-	docker build --target prod -t $(IMAGE):local -f docker/Dockerfile .
-
-.PHONY: docker-run
-docker-run: ## Run production Docker image locally
-	docker run --rm -p $(PORT):3000 $(IMAGE):local
-
-.PHONY: docker-prod
-docker-prod: ## Start prod stack (COMPOSE_PROFILES=prod)
-	COMPOSE_PROFILES=prod docker compose up -d
-
-.PHONY: docker-down
-docker-down: ## Stop and remove containers
-	docker compose down
-
-.PHONY: docker-clean
-docker-clean: ## Remove containers, volumes and images
-	docker compose down -v --rmi local
-
-# ─── Help ─────────────────────────────────────────────────────────────────────
-.PHONY: help
-help: ## Show this help
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
-		| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-22s\033[0m %s\n", $$1, $$2}'
+help-%: ## Show detailed help for a specific command
+	@echo "Showing help for: $*"
+	@grep -A 5 -B 2 "^$*:" $(shell find makefiles -name "*.Makefile" -type f) || echo "Command '$*' not found"

@@ -14,13 +14,13 @@ ENV HOST=$HOST \
     PORT=$PORT
 
 # Install dependencies using only the manifest to leverage Docker cache
-COPY package.json ./
+COPY app/package.json ./
 
 RUN rm -f package-lock.json \
     && npm install
 
 # Copy the rest of the project (configs + sources)
-COPY . ./
+COPY app/ ./
 
 ENV PATH=/srv/app/node_modules/.bin:$PATH
 
@@ -35,15 +35,15 @@ FROM node:${NODE_VERSION} AS build
 WORKDIR /app
 
 # Copy only package manifests first to leverage Docker layer cache
-COPY package.json ./
-COPY package-lock.json ./
+COPY app/package.json ./
+COPY app/package-lock.json ./
 
 RUN npm ci || npm install
 
 ENV PATH=/app/node_modules/.bin:$PATH
 
 # Copy the rest of the application (configs + sources)
-COPY . ./
+COPY app/ ./
 
 # Build app
 RUN npm run build
