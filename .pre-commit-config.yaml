@@ -34,8 +34,8 @@ repos:
     hooks:
       - id: prettier
         name: Format code with Prettier
-        files: '\.(css|js|ts|tsx|json|md)$'
-        exclude: '^(dist/|coverage/|node_modules/)'
+        files: '^app/.*\.(css|js|ts|tsx|json|md)$'
+        exclude: '^(app/dist/|app/coverage/|app/node_modules/|dist/|coverage/|node_modules/)'
         args:
           - --print-width=120
           - --tab-width=2
@@ -52,7 +52,7 @@ repos:
     hooks:
       - id: csslint
         name: CSS Lint
-        files: '^src/.*\.css$'
+        files: '^app/src/.*\.css$'
         args: ['--config=.csslintrc']
         additional_dependencies:
           - csslint
@@ -63,8 +63,8 @@ repos:
     hooks:
       - id: eslint
         name: ESLint
-        files: '^src/.*\.(ts|tsx|js|jsx)$'
-        args: [--fix, --max-warnings=0]
+        files: '^app/.*\.(ts|tsx|js|jsx)$'
+        args: [--fix, --max-warnings=0, --config, app/eslint.config.js]
         additional_dependencies:
           - eslint@^9.37.0
           - '@eslint/js@^9.37.0'
@@ -89,7 +89,7 @@ repos:
         name: Validate YAML
       - id: check-json
         name: Validate JSON
-        exclude: '^(node_modules/|dist/)'
+        exclude: '^(app/node_modules/|app/dist/|node_modules/|dist/)'
       - id: check-added-large-files
         name: Check for large files
         args: ['--maxkb=500']
