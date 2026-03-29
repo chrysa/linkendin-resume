@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - about: Please read the documentation before opening an issue
+    name: Documentation
+    url: https://github.com/chrysa/linkendin-resume#readme
