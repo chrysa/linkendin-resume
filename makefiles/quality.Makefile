@@ -1,3 +1,8 @@
+pre-commit-install: ## Install pre-commit git hooks
+	@echo "$(COLOR_BLUE)🔒 Installing pre-commit hooks...$(COLOR_RESET)"
+	@pre-commit install
+	@echo "$(COLOR_GREEN)✓ pre-commit hooks installed$(COLOR_RESET)"
+
 format: ensure-container ## Format code with Prettier
 	@echo "$(COLOR_BLUE)✨ Formatting...$(COLOR_RESET)"
 	$(call npm_simple,lint:fix)
