@@ -3,6 +3,9 @@ ifneq (,)
 	$(error This Makefile requires GNU Make)
 endif
 
+# ─── Variables ────────────────────────────────────────────────────────────────
+PROJECT_NAME ?= Resume — CV Online Portfolio
+
 include $(shell find . -type f -name "*.[Mm]akefile" -not -path "*/\.*" -exec echo " {}" \;)
 
 .DEFAULT_GOAL := help
@@ -11,20 +14,25 @@ include $(shell find . -type f -name "*.[Mm]akefile" -not -path "*/\.*" -exec ec
 
 help: ## Display this help message
 	@echo "==================================================================="
-	@echo "Resume — CV Online Portfolio"
+	@echo "  $(PROJECT_NAME)"
 	@echo "==================================================================="
 	@echo ""
 	@echo "Available commands:"
 	@echo ""
-	@for file in $$(ls makefiles/*.Makefile 2>/dev/null | sort); do \
+	@for file in $(shell find . -type f -name "*.[Mm]akefile" -not -path "*/\.*" -exec echo " {}" \; 2>/dev/null | sort); do \
 		category=$$(basename $$file .Makefile); \
 		case $$category in \
 			gobal_rules|variables|functions) continue ;; \
 			development) icon="⚡" ;; \
-			docker) icon="🐳" ;; \
-			quality) icon="🔍" ;; \
-			tests) icon="🧪" ;; \
-			*) icon="📦" ;; \
+			docker)      icon="🐳" ;; \
+			quality)     icon="🔍" ;; \
+			tests)       icon="🧪" ;; \
+			tools)       icon="🔧" ;; \
+			project)     icon="🚀" ;; \
+			ci|cicd)     icon="⚙️"  ;; \
+			lint)        icon="🧹" ;; \
+			secrets)     icon="🔐" ;; \
+			*)           icon="📌" ;; \
 		esac; \
 		echo "$$icon $$(echo $$category | tr '[:lower:]' '[:upper:]'):"; \
 		grep -E '^[a-zA-Z_-]+(\([^)]*\))?:.*?## .*$$' $$file 2>/dev/null | sort | \
@@ -48,9 +56,9 @@ help: ## Display this help message
 	@echo "  make test             # Run unit tests"
 	@echo ""
 	@echo "Environment Variables:"
+	@echo "  PROJECT_NAME=$(PROJECT_NAME)"
 	@echo "  SERVICE=$(SERVICE)"
 	@echo "  PORT=$(PORT)"
-	@echo "  IMAGE=$(IMAGE)"
 	@echo ""
 	@echo "==================================================================="
 
