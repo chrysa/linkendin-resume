@@ -1,83 +1,82 @@
----
 version: 2
 updates:
-  # ─── npm (dependencies + devDependencies) ────────────────────────────────────
-  - package-ecosystem: npm
+  - allow:
+      - dependency-type: all
+    commit-message:
+      prefix: ci(actions)
     directory: /
+    labels:
+      - dependencies
+      - github-actions
+    open-pull-requests-limit: 5
+    package-ecosystem: github-actions
     schedule:
       interval: weekly
-      day: monday
-      time: '07:00'
-      timezone: Europe/Paris
-    open-pull-requests-limit: 10
+  - allow:
+      - dependency-type: all
+    commit-message:
+      prefix: ci(pre-commit)
+    directory: /
+    labels:
+      - dependencies
+    package-ecosystem: pre-commit
+    schedule:
+      interval: weekly
+  - allow:
+      - dependency-type: all
+    commit-message:
+      prefix: build(docker)
+    directory: /docker
+    labels:
+      - dependencies
+      - docker
+    package-ecosystem: docker
+    schedule:
+      interval: weekly
+  - allow:
+      - dependency-type: all
+    commit-message:
+      prefix: build(npm)
+    directory: /app
     groups:
+      eslint:
+        patterns:
+          - '@eslint/*'
+          - eslint
+          - eslint-*
       framer-motion:
         patterns:
           - framer-motion
       i18n:
         patterns:
           - i18next
-          - react-i18next
           - i18next-*
+          - react-i18next
       react:
         patterns:
-          - react
-          - react-dom
-          - react-*
           - '@types/react*'
-      vite:
-        patterns:
-          - vite
-          - '@vitejs/*'
-          - vitest
-          - '@vitest/*'
+          - react
+          - react-*
+          - react-dom
       typescript:
         patterns:
-          - typescript
-          - '@typescript-eslint/*'
           - '@types/*'
-      eslint:
+          - '@typescript-eslint/*'
+          - typescript
+      vite:
         patterns:
-          - eslint
-          - '@eslint/*'
-          - eslint-*
+          - '@vitejs/*'
+          - '@vitest/*'
+          - vite
+          - vitest
     labels:
       - dependencies
       - javascript
-
-  # ─── GitHub Actions ───────────────────────────────────────────────────────────
-  - package-ecosystem: github-actions
-    directory: /
+    open-pull-requests-limit: 10
+    package-ecosystem: npm
     schedule:
       interval: weekly
-      day: monday
-      time: '07:00'
-      timezone: Europe/Paris
-    open-pull-requests-limit: 5
-    labels:
-      - dependencies
-      - github-actions
 
-  # ─── Docker ───────────────────────────────────────────────────────────────────
-  - package-ecosystem: docker
-    directory: /docker
-    schedule:
-      interval: weekly
-      day: monday
-      time: '07:00'
-      timezone: Europe/Paris
-    labels:
-      - dependencies
-      - docker
-
-  # ─── pre-commit ───────────────────────────────────────────────────────────────
-  - package-ecosystem: pre-commit
-    directory: /
-    schedule:
-      interval: weekly
-      day: monday
-      time: '07:00'
-      timezone: Europe/Paris
     labels:
       - dependencies
       - pre-commit

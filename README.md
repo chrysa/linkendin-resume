@@ -1,67 +1,71 @@
 <div align="center">
 
-# CV Online — Portfolio Persuasif
+# linkendin-resume — Persuasive Online CV
 
-**Un CV qui se démarque. Dark theme · One-page · Animations · Contact GitHub Issues.**
+**A CV that stands out. Dark theme · One-page · Animations · Contact via GitHub Issues.**
 
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white&style=flat-square)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white&style=flat-square)](https://typescriptlang.org)
 [![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white&style=flat-square)](https://vitejs.dev)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-FF0055?logo=framer&logoColor=white&style=flat-square)](https://www.framer.com/motion)
 [![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white&style=flat-square)](https://hub.docker.com)
-[![CI](https://github.com/chrysa/resume/actions/workflows/ci.yml/badge.svg)](https://github.com/chrysa/resume/actions/workflows/ci.yml)
-[![Licence MIT](https://img.shields.io/badge/Licence-MIT-green?style=flat-square)](LICENSE)
+[![CI](https://github.com/chrysa/linkendin-resume/actions/workflows/ci.yml/badge.svg)](https://github.com/chrysa/linkendin-resume/actions/workflows/ci.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=chrysa_linkendin-resume&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=chrysa_linkendin-resume)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=chrysa_linkendin-resume&metric=coverage)](https://sonarcloud.io/summary/new_code?id=chrysa_linkendin-resume)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=chrysa_linkendin-resume&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=chrysa_linkendin-resume)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=chrysa_linkendin-resume&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=chrysa_linkendin-resume)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
-[Demo live →](https://resume.chrysa.dev) · [Signaler un bug](../../issues) · [Proposer une amélioration](../../issues/new)
+[Live demo →](https://resume.chrysa.dev) · [Report a bug](../../issues/new?template=bug_report.yml) · [Request a feature](../../issues/new?template=feature_request.yml)
 
 </div>
 
 ---
 
-## Pourquoi ce projet ?
+## Why this project?
 
-Les CV en ligne classiques ressemblent à des PDF en ligne. Ce projet prend le contre-pied :
+Traditional online CVs look like PDFs on a page. This project takes the opposite approach:
 
-| CV classique | Ce projet |
+| Classic CV | This project |
 |---|---|
-| Blanc, institutionnel | Dark theme, identité forte |
-| Liste de tâches | Résultats chiffrés, impact visible |
-| Navigation statique | Animations au scroll, micro-interactions |
-| Formulaire email → spam | Contact via GitHub Issues — traçable |
-| Source de données dispersée | Données centralisées dans `src/data/profile.ts` |
+| White, institutional | Dark theme, strong identity |
+| Task list | Quantified results, visible impact |
+| Static navigation | Scroll animations, micro-interactions |
+| Email form → spam | Contact via GitHub Issues — traceable |
+| Scattered data sources | All data in `src/data/profile.ts` |
 
-L'objectif : appliquer les **principes de persuasion de Cialdini** (autorité, preuve sociale, réciprocité) dans le design d'un portfolio.
+The goal: apply **Cialdini's persuasion principles** (authority, social proof, reciprocity) to portfolio design.
 
 ---
 
 ## Stack
 
-| Couche | Technologie |
+| Layer | Technology |
 |---|---|
 | Framework | React 19 + Vite 7 |
-| Langage | TypeScript 5.9 (strict) |
+| Language | TypeScript 5.9 (strict) |
 | Animations | Framer Motion 12 |
 | Validation | Zod 3 |
-| Style | CSS custom properties (100% vanilla, zéro framework) |
+| Styling | CSS custom properties (100% vanilla, zero framework) |
 | Tests | Vitest + Testing Library |
-| Hébergement | Vercel (recommandé) |
+| Hosting | Vercel (recommended) |
 
 ---
 
-## Démarrage rapide
+## Quick start
 
-### Prérequis
+### Prerequisites
 
-- Node.js ≥ 20 · npm ≥ 10 · Python ≥ 3.13 (pre-commit)
-- Docker ≥ 26 + Docker Compose ≥ 2.27 (optionnel)
+- Node.js ≥ 20 · npm ≥ 10 · Python ≥ 3.14 (pre-commit)
+- Docker ≥ 26 + Docker Compose ≥ 2.27 (optional)
 
 ### Installation
 
 ```bash
-git clone https://github.com/chrysa/resume.git
-cd resume
+git clone https://github.com/chrysa/linkendin-resume.git
+cd linkendin-resume
 make install
-make pre-commit-install  # installe les hooks git
+make pre-commit-install  # install git hooks
 ```
 
 ### Configuration
@@ -70,7 +74,7 @@ make pre-commit-install  # installe les hooks git
 cp .env.example .env
 ```
 
-Éditez `.env` avec vos valeurs :
+Edit `.env` with your values:
 
 ```env
 APP_PORT=3000
@@ -79,143 +83,124 @@ VITE_GITHUB_OWNER=chrysa
 VITE_GITHUB_REPO=contact
 ```
 
-> Le système de contact génère un lien pré-rempli vers GitHub Issues. Le visiteur doit être connecté à GitHub. Aucun token côté client.
+> The contact system generates a pre-filled link to GitHub Issues. The visitor must be logged in to GitHub. No client-side token required.
 
-### Développement local
+### Local development
 
 ```bash
 make dev          # Vite dev server → http://localhost:3000
-make test         # Tests unitaires
+make test         # Unit tests
 make ci           # lint + type-check + test + build
 ```
 
-### Développement via Docker
+### Docker development
 
 ```bash
-make docker-dev   # docker compose up --watch (hot-reload, override.yml auto-appliqué)
+make watch        # docker compose up --watch (hot-reload)
 ```
 
 ---
 
 ## Docker
 
-Le projet fournit trois stages dans [`docker/Dockerfile`](docker/Dockerfile) :
+The project provides three stages in [`docker/Dockerfile`](docker/Dockerfile):
 
-| Stage  | Base              | Usage                        |
-|--------|-------------------|------------------------------|
-| `dev`  | node:24-alpine    | Vite dev server              |
-| `build`| node:24-alpine    | Compilation TypeScript/Vite  |
-| `prod` | node:24-alpine    | `serve -s dist` (statique)   |
-
-La configuration Docker Compose est découpée en couches :
-
-| Fichier                      | Rôle                                          |
-|------------------------------|-----------------------------------------------|
-| `docker-compose.yml`         | Base commune (healthcheck, image)             |
-| `docker-compose.override.yml`| Dev — hot-reload, volumes bind (auto-appliqué)|
-| `docker-compose.prod.yml`    | Prod — labels Traefik, restart               |
-
-```bash
-# Dev
-make docker-dev
-
-# Prod (sur le serveur)
-make docker-prod
-# équivalent à :
-docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
-```
+| Stage  | Base              | Usage                      |
+|--------|-------------------|----------------------------|
+| `dev`  | node:24-alpine    | Vite dev server            |
+| `build`| node:24-alpine    | TypeScript/Vite compilation|
+| `prod` | node:24-alpine    | `serve -s dist` (static)   |
 
 ---
 
 ## CI/CD
 
-| Workflow      | Déclencheur        | Étapes                                            |
-|---------------|--------------------|---------------------------------------------------|
-| `ci.yml`      | push/PR main+dev   | pre-commit · lint · type-check · test · build · docker build check |
-| `cd.yml`      | push main          | Build + push GHCR · deploy SSH                   |
+| Workflow  | Trigger            | Steps                                                        |
+|-----------|--------------------|--------------------------------------------------------------|
+| `ci.yml`  | push/PR main+dev   | pre-commit · lint · type-check · test · build · SonarCloud  |
+| `cd.yml`  | push main + tags   | GitVersion · tag · GHCR push · SSH deploy                   |
 
-### Secrets requis dans GitHub
+### Required GitHub secrets
 
-| Secret           | Description                                   |
-|------------------|-----------------------------------------------|
-| `DEPLOY_HOST`    | IP ou hostname du serveur                    |
-| `DEPLOY_USER`    | Utilisateur SSH                              |
-| `DEPLOY_SSH_KEY` | Clé privée SSH (Ed25519 recommandé)          |
+| Secret           | Description                       |
+|------------------|-----------------------------------|
+| `SONAR_TOKEN`    | SonarCloud token                  |
+| `DEPLOY_HOST`    | Server IP or hostname             |
+| `DEPLOY_USER`    | SSH user                          |
+| `DEPLOY_SSH_KEY` | SSH private key (Ed25519)         |
 
 ### Dependabot
 
-Mises à jour automatiques configurées pour : `npm`, `github-actions`, `docker`, `pre-commit`.
+Automatic updates configured for: `npm`, `github-actions`, `docker`, `pre-commit`.
 
 ---
 
-## Déploiement sur le serveur (Traefik)
-
-Sur le serveur, cloner le repo et lancer :
+## Server deployment (Traefik)
 
 ```bash
-git clone https://github.com/chrysa/resume.git /srv/resume
+git clone https://github.com/chrysa/linkendin-resume.git /srv/resume
 cd /srv/resume
-cp .env.example .env  # éditer APP_DOMAIN, IMAGE_TAG
+cp .env.example .env  # edit APP_DOMAIN
 docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
 
-Traefik détecte automatiquement les labels et génère le certificat Let's Encrypt.
+Traefik automatically picks up the labels and generates the Let's Encrypt certificate.
 
 ---
 
-## Personnalisation
+## Customization
 
-Toutes les données du CV sont centralisées dans **un seul fichier** :
+All CV data is centralized in a **single file**:
 
 ```
 src/data/profile.ts
 ```
 
-Modifiez-y :
+Edit it to update:
 
-- `PROFILE` — vos infos, expériences, formations, compétences
-- `METRICS` — vos 4 métriques d'impact (les chiffres qui impressionnent)
-- `PROJECTS` — vos projets mis en avant
-- `SKILLS` — votre stack avec niveaux (1→5)
-- `AVAILABILITY` — votre badge de disponibilité
+- `PROFILE` — your info, experience, education, skills
+- `METRICS` — your 4 impact metrics (the numbers that impress)
+- `PROJECTS` — your featured projects
+- `SKILLS` — your stack with levels (1→5)
+- `AVAILABILITY` — your availability badge
 
-### Variables de design
+### Design tokens
 
-Tout le design system est dans `src/styles/tokens.css` :
+The entire design system lives in `src/styles/tokens.css`:
 
 ```css
---clr-accent-1: #7c3aed;   /* Couleur principale */
---clr-accent-2: #06b6d4;   /* Couleur secondaire */
+--clr-accent-1: #7c3aed;   /* Primary colour */
+--clr-accent-2: #06b6d4;   /* Secondary colour */
 ```
 
-Changez ces deux valeurs pour adapter l'identité visuelle en 30 secondes.
+Change these two values to adapt the visual identity in 30 seconds.
 
 ---
 
-## Structure du projet
+## Project structure
 
 ```
 src/
 ├── data/
-│   └── profile.ts          ← Toutes vos données CV ici
+│   └── profile.ts          ← All your CV data here
 ├── components/
 │   ├── cv/
-│   │   ├── Hero.tsx          Hero + badge disponibilité
-│   │   ├── ImpactMetrics.tsx 4 métriques chiffrées
+│   │   ├── Hero.tsx          Hero + availability badge
+│   │   ├── ImpactMetrics.tsx 4 quantified metrics
 │   │   ├── ExperienceTimeline.tsx
-│   │   ├── SkillsCloud.tsx   Stack interactif (hover = niveau)
-│   │   ├── ProjectsGrid.tsx  Projets avec impact
+│   │   ├── SkillsCloud.tsx   Interactive stack (hover = level)
+│   │   ├── ProjectsGrid.tsx  Projects with impact
 │   │   ├── EducationSection.tsx
-│   │   ├── ContactSection.tsx CTA final
-│   │   └── Navbar.tsx        Sticky, apparaît au scroll
+│   │   ├── ContactSection.tsx Final CTA
+│   │   └── Navbar.tsx        Sticky, appears on scroll
 │   └── contact/
-│       └── ContactModal.tsx  Formulaire → GitHub Issue
+│       └── ContactModal.tsx  Form → GitHub Issue
 ├── pages/
 │   └── CVPage.tsx
 ├── styles/
 │   ├── tokens.css            Design tokens
-│   ├── globals.css           Reset + utilitaires
-│   ├── sections.css          Styles par section
+│   ├── globals.css           Reset + utilities
+│   ├── sections.css          Per-section styles
 │   ├── modal.css
 │   └── responsive.css        Breakpoints + print
 └── types/
@@ -225,58 +210,51 @@ src/
 
 ---
 
-## Scripts disponibles
+## Available commands
 
 ```bash
 make dev            # Dev server (port 3000)
-make build          # Build production
+make build-prod     # Production build
 make lint           # ESLint
-make type-check     # Vérification TypeScript
-make test           # Tests unitaires (Vitest)
-make test-coverage  # Coverage
-make ci             # Tous les checks CI en local
-make docker-dev     # Dev container avec hot-reload
-make docker-prod    # Stack prod (base + prod overrides)
-make help           # Liste toutes les commandes
+make type-check     # TypeScript check
+make test           # Unit tests (Vitest)
+make test-coverage  # Coverage report
+make ci             # All CI checks locally
+make watch          # Dev container with hot-reload
+make help           # List all commands
 ```
 
 ---
 
-## Déploiement sur le serveur
+## Persuasion / UX principles applied
 
-Voir la section [CI/CD](#cicd) ci-dessus.
-
----
-
-## Principes UX/Persuasion appliqués
-
-- **Autorité** — chiffres d'impact bien visibles, logos d'entreprises connues
-- **Preuve sociale** — projets GitHub avec étoiles, témoignages
-- **Rareté** — badge "Disponible dès X" dynamique en hero
-- **Réciprocité** — projets open source accessibles directement
-- **Sympathie** — ton personnel, photo, ton à la 1ère personne
-- **Cohérence** — timeline narrative avec progression logique
+- **Authority** — visible impact numbers, well-known company logos
+- **Social proof** — GitHub projects with stars
+- **Scarcity** — dynamic "Available from X" badge in hero
+- **Reciprocity** — open source projects accessible directly
+- **Liking** — personal tone, photo, first-person voice
+- **Consistency** — narrative timeline with logical progression
 
 ---
 
-## Contribuer
+## Contributing
 
-1. Fork
-2. `git checkout -b feat/ma-feature`
+1. Fork the repo
+2. `git checkout -b feat/my-feature`
 3. `git commit -m 'feat: description'`
-4. `git push origin feat/ma-feature`
-5. Ouvrez une Pull Request
+4. `git push origin feat/my-feature`
+5. Open a Pull Request
 
 ---
 
-## Licence
+## License
 
-MIT — Libre d'utilisation, de modification et de distribution.
+MIT — Free to use, modify and distribute.
 
 ---
 
 <div align="center">
 
-Fait avec React & ☕ · [⭐ Stargazez si utile](../../stargazers)
+Built with React & ☕ · [⭐ Star if useful](../../stargazers)
 
 </div>
