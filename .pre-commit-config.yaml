@@ -30,7 +30,7 @@ repos:
         exclude: '^(app/dist/|app/coverage/|app/node_modules/|dist/|coverage/|node_modules/)'
         files: '^app/.*\.(css|js|ts|tsx|json|md)$'
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v9.31.0
+    rev: v10.1.0
     hooks:
       - id: eslint
         additional_dependencies:
@@ -45,15 +45,15 @@ repos:
         args: [--fix, --max-warnings=0, --config, app/eslint.config.js]
         files: '^app/.*\.(ts|tsx|js|jsx)$'
   - repo: https://github.com/rhysd/actionlint
-    rev: 0bdc95715fa58f64e3fd6e63b0f89be8733cbbab
+    rev: 0f908faf57a36443c34c8354708c7eaeafe706dd
     hooks:
       - id: actionlint
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.30.1
+    rev: 8863af47d64c3681422523e36837957c74d4af4b
     hooks:
       - id: gitleaks
   - repo: https://github.com/chrysa/pre-commit-tools
-    rev: 4462e85fc30aeec4bddb1728383c504626f1b9d2
+    rev: 0.1.0
     hooks:
       - id: console-debug-detection
         files: '\.(js|gs|ts|tsx|jsx)$'

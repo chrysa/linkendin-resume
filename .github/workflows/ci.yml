@@ -54,7 +54,7 @@ jobs:
                   fetch-depth: 0
             - name: Compute version
               id: gitversion
-              uses: chrysa/github-actions/gitversion@main
+              uses: chrysa/github-actions/gitversion@v1
             - name: Show version
               run: echo "Version ${{ steps.gitversion.outputs.fullSemVer }}"
               shell: bash
