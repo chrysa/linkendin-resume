@@ -48,10 +48,7 @@ export function CustomCursor() {
         className={`cursor-ring${hovering ? ' cursor-ring--hover' : ''}`}
         style={{ x: ringX, y: ringY, translateX: '-50%', translateY: '-50%' }}
       />
-      <motion.div
-        className="cursor-dot"
-        style={{ x: dotX, y: dotY, translateX: '-50%', translateY: '-50%' }}
-      />
+      <motion.div className="cursor-dot" style={{ x: dotX, y: dotY, translateX: '-50%', translateY: '-50%' }} />
     </>
   );
 }

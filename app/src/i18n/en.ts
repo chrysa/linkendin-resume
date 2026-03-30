@@ -19,7 +19,7 @@ const en: Translations = {
     },
     experience: {
       label: 'Career',
-      title: 'What I\'ve built.',
+      title: "What I've built.",
       present: 'present',
     },
     skills: {

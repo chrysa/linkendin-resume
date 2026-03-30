@@ -13,10 +13,9 @@ function pick<T>(fr: T, en: T | undefined, lang: string): T {
 export function getProfile(lang = 'fr', filter?: CvProfileFilter): LinkedInProfile {
   const b = cvData.basics;
 
-  const experiences =
-    filter?.experienceIndices?.length
-      ? filter.experienceIndices.map((i) => cvData.experience[i]).filter(Boolean)
-      : cvData.experience;
+  const experiences = filter?.experienceIndices?.length
+    ? filter.experienceIndices.map((i) => cvData.experience[i]).filter(Boolean)
+    : cvData.experience;
 
   return {
     id: 'local',
@@ -32,10 +31,7 @@ export function getProfile(lang = 'fr', filter?: CvProfileFilter): LinkedInProfi
       company: e.company,
       location: e.location,
       startDate: { month: e.startMonth, year: e.startYear },
-      endDate:
-        e.endMonth && e.endYear
-          ? { month: e.endMonth, year: e.endYear }
-          : undefined,
+      endDate: e.endMonth && e.endYear ? { month: e.endMonth, year: e.endYear } : undefined,
       description: pick(e.description, e.description_en, lang),
       technologies: e.technologies,
     })),
@@ -68,10 +64,9 @@ export function getMetrics(lang = 'fr'): MetricItem[] {
 }
 
 export function getProjects(lang = 'fr', filter?: CvProfileFilter): Project[] {
-  const projects =
-    filter?.projectIndices?.length
-      ? filter.projectIndices.map((i) => cvData.projects[i]).filter(Boolean)
-      : cvData.projects;
+  const projects = filter?.projectIndices?.length
+    ? filter.projectIndices.map((i) => cvData.projects[i]).filter(Boolean)
+    : cvData.projects;
 
   return projects.map((p) => ({
     title: pick(p.title, p.title_en, lang),
@@ -85,10 +80,9 @@ export function getProjects(lang = 'fr', filter?: CvProfileFilter): Project[] {
 }
 
 export function getSkills(filter?: CvProfileFilter): Skill[] {
-  const skills =
-    filter?.skillCategories?.length
-      ? cvData.skills.filter((s) => filter.skillCategories!.includes(s.category as Skill['category']))
-      : cvData.skills;
+  const skills = filter?.skillCategories?.length
+    ? cvData.skills.filter((s) => filter.skillCategories!.includes(s.category as Skill['category']))
+    : cvData.skills;
 
   return skills.map((s) => ({
     name: s.name,
@@ -126,4 +120,3 @@ export const CONTACT_CONFIG = {
       ? (_contact?.whatsappPrefill_en ?? _contact?.whatsappPrefill ?? '')
       : (_contact?.whatsappPrefill ?? ''),
 };
-
