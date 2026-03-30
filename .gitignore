@@ -39,3 +39,7 @@ Thumbs.db
 
 # Docker
 # Note: docker-compose.override.yml is intentionally committed (shared dev config)
+
+# Sonar
+sonar-project.properties
+.sonar/
