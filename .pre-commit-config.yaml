@@ -74,4 +74,5 @@ repos:
       - id: dockerfile-no-latest
       - id: env-file-check
       - id: yaml-sorter
+        exclude: ^\.github/workflows/
         exclude: '^(\.github/|changelog/)'
