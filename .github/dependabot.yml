@@ -21,6 +21,7 @@ updates:
       - dependencies
     package-ecosystem: pre-commit
     schedule:
+    open-pull-requests-limit: 5
       interval: weekly
   - allow:
       - dependency-type: all
@@ -32,6 +33,7 @@ updates:
       - docker
     package-ecosystem: docker
     schedule:
+    open-pull-requests-limit: 5
       interval: weekly
   - allow:
       - dependency-type: all
@@ -72,7 +74,7 @@ updates:
     labels:
       - dependencies
       - javascript
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 5
     package-ecosystem: npm
     schedule:
       interval: weekly
