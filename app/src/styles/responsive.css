@@ -49,7 +49,7 @@
 
   .exp-card__header {
     flex-direction: column;
-    gap: .4rem;
+    gap: 0.4rem;
   }
 
   .edu-card {
@@ -57,7 +57,9 @@
     align-items: flex-start;
     gap: var(--space-sm);
   }
-  .edu-card__years { min-width: unset; }
+  .edu-card__years {
+    min-width: unset;
+  }
 
   .hero__photo {
     width: 130px;

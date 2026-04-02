@@ -23,24 +23,24 @@ function SkillPill({ skill, lang }: { skill: Skill; lang: string }) {
       onHoverEnd={() => setHovered(false)}
       style={{ position: 'relative' }}
     >
-      <span className='skill-pill__name'>{skill.name}</span>
-      <div className='skill-pill__dots'>
-        {[1,2,3,4,5].map((d) => (
+      <span className="skill-pill__name">{skill.name}</span>
+      <div className="skill-pill__dots">
+        {[1, 2, 3, 4, 5].map((d) => (
           <span key={d} className={'skill-pill__dot' + (d <= skill.level ? ' skill-pill__dot--active' : '')} />
         ))}
       </div>
       <AnimatePresence>
         {hovered && (
           <motion.div
-            className='skill-tooltip'
+            className="skill-tooltip"
             initial={{ opacity: 0, y: 8, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.95 }}
             transition={{ duration: 0.18 }}
           >
-            <div className='skill-tooltip__level'>{levels[skill.level]}</div>
+            <div className="skill-tooltip__level">{levels[skill.level]}</div>
             {experiences.length > 0 && (
-              <ul className='skill-tooltip__list'>
+              <ul className="skill-tooltip__list">
                 {experiences.map((exp) => (
                   <li key={exp}>{exp}</li>
                 ))}
@@ -66,32 +66,37 @@ export function SkillsCloud() {
   const filtered = activeCategory === 'all' ? skills : skills.filter((s) => s.category === activeCategory);
 
   return (
-    <section id='stack' className='section section--dark' ref={ref}>
-      <div className='container'>
-        <motion.p className='section__label' initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}>
+    <section id="stack" className="section section--dark" ref={ref}>
+      <div className="container">
+        <motion.p className="section__label" initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}>
           {t('sections.skills.label')}
         </motion.p>
-        <motion.h2 className='section__title' initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.1 }}>
+        <motion.h2
+          className="section__title"
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.1 }}
+        >
           {t('sections.skills.title')}
         </motion.h2>
-        <div className='skills__filters'>
+        <div className="skills__filters">
           {categories.map((cat) => (
             <button
               key={cat}
               className={'filter-btn' + (activeCategory === cat ? ' filter-btn--active' : '')}
               onClick={() => setActiveCategory(cat)}
-              data-hover='true'
+              data-hover="true"
             >
               {cat === 'all' ? t('sections.skills.filters.all') : t('sections.skills.filters.' + cat)}
             </button>
           ))}
         </div>
-        <motion.div className='skills__cloud' variants={stagger} initial='hidden' animate={inView ? 'show' : 'hidden'}>
+        <motion.div className="skills__cloud" variants={stagger} initial="hidden" animate={inView ? 'show' : 'hidden'}>
           {filtered.map((skill) => (
             <SkillPill key={skill.name} skill={skill} lang={lang} />
           ))}
         </motion.div>
-        <p className='skills__hint'>{t('sections.skills.hint')}</p>
+        <p className="skills__hint">{t('sections.skills.hint')}</p>
       </div>
     </section>
   );
