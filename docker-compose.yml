@@ -1,92 +1,94 @@
----
-# Single compose file — COMPOSE_PROFILES drives the active environment.
-#
-# Local dev:   COMPOSE_PROFILES=dev  docker compose up --watch
-# Production:  COMPOSE_PROFILES=prod docker compose up -d
-#
-# Tip: set COMPOSE_PROFILES in your .env so you never have to type it.
-
-x-healthcheck-dev: &healthcheck-dev
-  test: ['CMD-SHELL', 'wget -qO- http://0.0.0.0:${APP_PORT:-3000} || exit 1']
-  interval: 10s
-  timeout: 3s
-  retries: 10
-
-x-healthcheck-prod: &healthcheck-prod
-  test: ['CMD-SHELL', 'wget -qO- http://0.0.0.0:${APP_PORT:-3000} || exit 1']
-  interval: 30s
-  timeout: 5s
-  retries: 3
-
 networks:
   resume:
     name: resume_resume
   traefik-public:
     external: true
-
-volumes:
-  node_modules:
-
 services:
-
-  # --- Development ------------------------------------------------------------
   resume:
-    profiles: [dev]
     build:
       context: .
       dockerfile: docker/Dockerfile
       target: dev
     container_name: resume-dev
-    image: resume:dev
-    env_file:
-      - .env
     develop:
       watch:
-        - action: sync
-          path: ./app
-          target: /srv/app
-          ignore:
-            - node_modules/
-        - action: restart
-          path: .env
-        - action: rebuild
-          path: app/package.json
-        - action: rebuild
-          path: docker/Dockerfile
-    healthcheck: *healthcheck-dev
-    ports:
-      - '${APP_PORT:-3000}:${APP_PORT:-3000}'
-    volumes:
-      - type: bind
-        source: ./app/
-        target: /srv/app/
-      - type: volume
-        source: node_modules
-        target: /srv/app/node_modules
-    tty: true
-    networks:
-      - resume
-
-  # --- Production -------------------------------------------------------------
-  resume-prod:
-    profiles: [prod]
-    image: ${IMAGE:-ghcr.io/chrysa/resume}:${IMAGE_TAG:-latest}
-    container_name: resume-prod
-    restart: unless-stopped
+      - action: sync
+        ignore:
+        - node_modules/
+        path: ./app
+        target: /srv/app
+      - action: restart
+        path: .env
+      - action: rebuild
+        path: app/package.json
+      - action: rebuild
+        path: docker/Dockerfile
     env_file:
-      - .env
-    healthcheck: *healthcheck-prod
+    - .env
+    healthcheck:
+      interval: 10s
+      retries: 10
+      test:
+      - CMD-SHELL
+      - wget -qO- http://0.0.0.0:${APP_PORT:-3000} || exit 1
+      timeout: 3s
+    image: resume:dev
     networks:
-      - traefik-public
-      - resume
+    - resume
+    ports:
+    - ${APP_PORT:-3000}:${APP_PORT:-3000}
+    profiles:
+    - dev
+    tty: true
+    volumes:
+    - source: ./app/
+      target: /srv/app/
+      type: bind
+    - source: node_modules
+      target: /srv/app/node_modules
+      type: volume
+  resume-prod:
+    container_name: resume-prod
+    env_file:
+    - .env
+    healthcheck:
+      interval: 30s
+      retries: 3
+      test:
+      - CMD-SHELL
+      - wget -qO- http://0.0.0.0:${APP_PORT:-3000} || exit 1
+      timeout: 5s
+    image: ${IMAGE:-ghcr.io/chrysa/resume}:${IMAGE_TAG:-latest}
     labels:
-      - 'traefik.enable=true'
-      - 'traefik.http.routers.resume.rule=Host(`${APP_DOMAIN:-resume.chrysa.dev}`)'
-      - 'traefik.http.routers.resume.entrypoints=websecure'
-      - 'traefik.http.routers.resume.tls=true'
-      - 'traefik.http.routers.resume.tls.certresolver=letsencrypt'
-      - 'traefik.http.services.resume.loadbalancer.server.port=${APP_PORT:-3000}'
-      - 'traefik.http.routers.resume-http.rule=Host(`${APP_DOMAIN:-resume.chrysa.dev}`)'
-      - 'traefik.http.routers.resume-http.entrypoints=web'
-      - 'traefik.http.routers.resume-http.middlewares=redirect-to-https'
-      - 'traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https'
+    - traefik.enable=true
+    - traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https
+    - traefik.http.routers.resume-http.entrypoints=web
+    - traefik.http.routers.resume-http.middlewares=redirect-to-https
+    - traefik.http.routers.resume-http.rule=Host(`${APP_DOMAIN:-resume.chrysa.dev}`)
+    - traefik.http.routers.resume.entrypoints=websecure
+    - traefik.http.routers.resume.rule=Host(`${APP_DOMAIN:-resume.chrysa.dev}`)
+    - traefik.http.routers.resume.tls.certresolver=letsencrypt
+    - traefik.http.routers.resume.tls=true
+    - traefik.http.services.resume.loadbalancer.server.port=${APP_PORT:-3000}
+    networks:
+    - resume
+    - traefik-public
+    profiles:
+    - prod
+    restart: unless-stopped
+volumes:
+  node_modules: null
+x-healthcheck-dev:
+  interval: 10s
+  retries: 10
+  test:
+  - CMD-SHELL
+  - wget -qO- http://0.0.0.0:${APP_PORT:-3000} || exit 1
+  timeout: 3s
+x-healthcheck-prod:
+  interval: 30s
+  retries: 3
+  test:
+  - CMD-SHELL
+  - wget -qO- http://0.0.0.0:${APP_PORT:-3000} || exit 1
+  timeout: 5s

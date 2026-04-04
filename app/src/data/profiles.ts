@@ -48,7 +48,7 @@ export const PROFILES: Record<string, CvProfile> = {
     label: 'Full Stack',
     label_en: 'Full Stack',
     hero: {
-      tagline: 'Full Stack — de l\'API au pixel, bout en bout',
+      tagline: "Full Stack — de l'API au pixel, bout en bout",
       tagline_en: 'Full Stack — from API to pixel, end to end',
     },
     filter: {

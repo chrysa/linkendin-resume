@@ -22,7 +22,10 @@
   border-radius: 50%;
   pointer-events: none;
   z-index: 9998;
-  transition: width 160ms ease, height 160ms ease, border-color 160ms ease;
+  transition:
+    width 160ms ease,
+    height 160ms ease,
+    border-color 160ms ease;
 }
 
 .cursor-ring--hover {
@@ -52,15 +55,15 @@
   z-index: 500;
   display: flex;
   align-items: center;
-  gap: .55rem;
-  padding: .75rem 1.35rem;
+  gap: 0.55rem;
+  padding: 0.75rem 1.35rem;
   background: linear-gradient(135deg, var(--clr-accent-1), var(--clr-accent-2));
   color: #fff;
   font-family: var(--font-sans);
   font-weight: 700;
-  font-size: .9rem;
+  font-size: 0.9rem;
   border-radius: var(--radius-full);
-  box-shadow: 0 8px 32px rgba(124,58,237,.45);
+  box-shadow: 0 8px 32px rgba(124, 58, 237, 0.45);
   cursor: pointer;
   transition: var(--transition);
 }
@@ -70,34 +73,41 @@
 }
 
 @media (max-width: 480px) {
-  .floating-cta span { display: none; }
-  .floating-cta { padding: .85rem; border-radius: 50%; }
+  .floating-cta span {
+    display: none;
+  }
+  .floating-cta {
+    padding: 0.85rem;
+    border-radius: 50%;
+  }
 }
 
 /* ─── Skill Tooltip ─────────────────────────────────────────────────────── */
 .skill-tooltip {
   position: absolute;
-  bottom: calc(100% + .6rem);
+  bottom: calc(100% + 0.6rem);
   left: 50%;
   transform: translateX(-50%);
   background: var(--clr-bg-card);
   border: 1px solid var(--clr-border);
   border-radius: var(--radius-md);
-  padding: .7rem .9rem;
+  padding: 0.7rem 0.9rem;
   min-width: 160px;
-  box-shadow: 0 12px 40px rgba(0,0,0,.5), var(--shadow-glow);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    var(--shadow-glow);
   z-index: 100;
   pointer-events: none;
   white-space: nowrap;
 }
 
 .skill-tooltip__level {
-  font-size: .72rem;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: .08em;
+  letter-spacing: 0.08em;
   color: var(--clr-accent-1);
-  margin-bottom: .4rem;
+  margin-bottom: 0.4rem;
   font-family: var(--font-mono);
 }
 
@@ -105,15 +115,15 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: .25rem;
+  gap: 0.25rem;
 }
 
 .skill-tooltip__list li {
-  font-size: .8rem;
+  font-size: 0.8rem;
   color: var(--clr-text-2);
   display: flex;
   align-items: center;
-  gap: .35rem;
+  gap: 0.35rem;
 }
 
 .skill-tooltip__list li::before {

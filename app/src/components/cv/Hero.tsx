@@ -6,7 +6,9 @@ import { getProfile, getAvailability } from '@/data/profile';
 import { useProfile } from '@/contexts/ProfileContext';
 import { stagger, fadeUp } from '@/utils/animations';
 
-interface HeroProps { onContactClick: () => void; }
+interface HeroProps {
+  onContactClick: () => void;
+}
 
 const scaleInDelayed: Variants = {
   hidden: { opacity: 0, scale: 0.8 },
@@ -22,9 +24,9 @@ export function Hero({ onContactClick }: HeroProps) {
 
   // Override du tagline si le profil actif en définit un
   const headline =
-    (lang === 'en' ? activeProfile.hero?.tagline_en : activeProfile.hero?.tagline)
-    ?? activeProfile.hero?.tagline
-    ?? profile.headline;
+    (lang === 'en' ? activeProfile.hero?.tagline_en : activeProfile.hero?.tagline) ??
+    activeProfile.hero?.tagline ??
+    profile.headline;
 
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
@@ -66,12 +68,7 @@ export function Hero({ onContactClick }: HeroProps) {
           </motion.div>
         )}
 
-        <motion.div
-          className="hero__content"
-          variants={stagger}
-          initial="hidden"
-          animate="show"
-        >
+        <motion.div className="hero__content" variants={stagger} initial="hidden" animate="show">
           <motion.div className="hero__photo-wrap" variants={scaleInDelayed}>
             <img
               src={profile.photoUrl}
@@ -86,29 +83,36 @@ export function Hero({ onContactClick }: HeroProps) {
           </motion.div>
 
           <div className="hero__text">
-            <motion.p className="hero__greeting" variants={fadeUp}>{t('hero.greeting')}</motion.p>
+            <motion.p className="hero__greeting" variants={fadeUp}>
+              {t('hero.greeting')}
+            </motion.p>
             <motion.h1 className="hero__name" variants={fadeUp}>
-              {profile.firstName}{' '}
-              <span className="gradient-text">{profile.lastName}</span>
+              {profile.firstName} <span className="gradient-text">{profile.lastName}</span>
             </motion.h1>
-            <motion.p className="hero__headline" variants={fadeUp}>{headline}</motion.p>
-            <motion.p className="hero__summary" variants={fadeUp}>{profile.summary}</motion.p>
+            <motion.p className="hero__headline" variants={fadeUp}>
+              {headline}
+            </motion.p>
+            <motion.p className="hero__summary" variants={fadeUp}>
+              {profile.summary}
+            </motion.p>
             <motion.div className="hero__actions" variants={fadeUp}>
               <button className="btn btn--primary" onClick={onContactClick} data-hover>
                 <i className="bi bi-chat-dots" /> {t('nav.contact')}
               </button>
-              <a href={profile.profileUrl} target="_blank" rel="noopener noreferrer" className="btn btn--ghost" data-hover>
+              <a
+                href={profile.profileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn--ghost"
+                data-hover
+              >
                 <i className="bi bi-linkedin" /> LinkedIn
               </a>
             </motion.div>
           </div>
         </motion.div>
 
-        <motion.div
-          className="hero__scroll"
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-        >
+        <motion.div className="hero__scroll" animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 2 }}>
           <i className="bi bi-chevron-double-down" />
         </motion.div>
       </div>
