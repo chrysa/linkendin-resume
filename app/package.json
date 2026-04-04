@@ -18,11 +18,11 @@
     "@tanstack/react-query": "^5.90.3",
     "bootstrap-icons": "^1.13.1",
     "framer-motion": "^12.6.3",
-    "i18next": "^25.8.18",
+    "i18next": "^26.0.3",
     "i18next-browser-languagedetector": "^8.2.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-i18next": "^16.5.8",
+    "react-i18next": "^17.0.2",
     "react-router-dom": "^7.9.4",
     "react-toastify": "^11.0.5",
     "zod": "^3.23.8"
