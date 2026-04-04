@@ -19,7 +19,7 @@ const fr: Translations = {
     },
     experience: {
       label: 'Parcours',
-      title: 'Ce que j\'ai construit.',
+      title: "Ce que j'ai construit.",
       present: "aujourd'hui",
     },
     skills: {
@@ -48,7 +48,7 @@ const fr: Translations = {
       label: 'On travaille ensemble ?',
       titleLine1: 'Une idée ? Un projet ?',
       titleLine2: 'Parlons-en.',
-      sub: "Je réponds à chaque message. Votre demande ouvre une conversation GitHub — traçable et transparente.",
+      sub: 'Je réponds à chaque message. Votre demande ouvre une conversation GitHub — traçable et transparente.',
       cta: 'Ouvrir une conversation',
       linkedin: 'Profil LinkedIn',
     },

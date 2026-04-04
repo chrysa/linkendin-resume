@@ -5,6 +5,7 @@ import { PROFILES, DEFAULT_PROFILE } from '@/data/profiles';
 const ProfileContext = createContext<CvProfile>(DEFAULT_PROFILE);
 
 /** Hook — retourne le profil actif (lu depuis ?profile=<slug> dans l'URL) */
+// eslint-disable-next-line react-refresh/only-export-components
 export function useProfile(): CvProfile {
   return useContext(ProfileContext);
 }

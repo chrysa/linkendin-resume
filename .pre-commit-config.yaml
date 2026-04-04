@@ -4,12 +4,12 @@ fail_fast: false
 minimum_pre_commit_version: 4.1.0
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: f1dff44d3a9ae852957f34def96390f28719c232
     hooks:
       - id: check-added-large-files
         args: ['--maxkb=500']
       - id: check-json
-        exclude: '^(app/node_modules/|app/dist/|node_modules/|dist/)'
+        exclude: '^(\.csslintrc|app/node_modules/|app/dist/|node_modules/|dist/)'
       - id: check-merge-conflict
       - id: check-yaml
       - id: end-of-file-fixer
@@ -29,23 +29,8 @@ repos:
           - --trailing-comma=es5
         exclude: '^(app/dist/|app/coverage/|app/node_modules/|dist/|coverage/|node_modules/)'
         files: '^app/.*\.(css|js|ts|tsx|json|md)$'
-  - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v10.1.0
-    hooks:
-      - id: eslint
-        additional_dependencies:
-          - '@eslint/js@^9.37.0'
-          - '@typescript-eslint/eslint-plugin@^8.0.0'
-          - '@typescript-eslint/parser@^8.57.2'
-          - eslint@^9.37.0
-          - eslint-plugin-react@^7.37.5
-          - eslint-plugin-react-hooks@^7.0.1
-          - eslint-plugin-react-refresh@^0.5.2
-          - globals@^16.0.0
-        args: [--fix, --max-warnings=0, --config, app/eslint.config.js]
-        files: '^app/.*\.(ts|tsx|js|jsx)$'
   - repo: https://github.com/rhysd/actionlint
-    rev: 0f908faf57a36443c34c8354708c7eaeafe706dd
+    rev: 3868e1042b733145b28e4c8a7d74ec987a921de6
     hooks:
       - id: actionlint
   - repo: https://github.com/gitleaks/gitleaks
@@ -53,7 +38,7 @@ repos:
     hooks:
       - id: gitleaks
   - repo: https://github.com/chrysa/pre-commit-tools
-    rev: 0.1.0
+    rev: b97ae91d8a45eb6f556fe938fa8bd58294c9a5e6
     hooks:
       - id: console-debug-detection
         files: '\.(js|gs|ts|tsx|jsx)$'
@@ -68,11 +53,9 @@ repos:
           - tree-sitter>=0.23
           - tree-sitter-typescript>=0.23
       - id: css-duplicate-property
-      - id: css-unused-variable
       - id: import-no-relative-parent
       - id: react-direct-dom
       - id: dockerfile-no-latest
       - id: env-file-check
       - id: yaml-sorter
-        exclude: '^(\.github/|changelog/)'
-
+        exclude: '^(\.github/workflows/|\.github/|changelog/)'

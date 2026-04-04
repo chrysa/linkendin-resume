@@ -1,9 +1,9 @@
 # Document de Conception Technique — CV en ligne
 
-**Version :** 3.0  
-**Date :** 17 mars 2026  
-**Statut :** Production  
-**Repo :** https://github.com/chrysa/resume  
+**Version :** 3.0
+**Date :** 17 mars 2026
+**Statut :** Production
+**Repo :** https://github.com/chrysa/resume
 **URL prod :** https://resume.chrysa.dev
 
 ---
@@ -386,4 +386,3 @@ Laisser vide pour masquer l'onglet WhatsApp dans le modal de contact.
 cp .env.example .env        # remplir APP_DOMAIN, VITE_GITHUB_OWNER/REPO
 make docker-prod            # ou : docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
-

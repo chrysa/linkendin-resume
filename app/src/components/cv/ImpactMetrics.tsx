@@ -9,7 +9,9 @@ function MetricCard({ value, label, sublabel }: { value: string; label: string; 
   const { ref, display } = useCountUp(value);
   return (
     <motion.div className="metric-card" variants={scaleIn} whileHover={{ y: -6, scale: 1.03 }}>
-      <span ref={ref} className="metric-card__value gradient-text">{display}</span>
+      <span ref={ref} className="metric-card__value gradient-text">
+        {display}
+      </span>
       <span className="metric-card__label">{label}</span>
       {sublabel && <span className="metric-card__sub">{sublabel}</span>}
     </motion.div>
