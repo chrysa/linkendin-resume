@@ -45,7 +45,7 @@ repos:
         args: [--fix, --max-warnings=0, --config, app/eslint.config.js]
         files: '^app/.*\.(ts|tsx|js|jsx)$'
   - repo: https://github.com/rhysd/actionlint
-    rev: 0f908faf57a36443c34c8354708c7eaeafe706dd
+    rev: 21e87230c0bac0ffe162da973b80bec9eac35191
     hooks:
       - id: actionlint
   - repo: https://github.com/gitleaks/gitleaks
