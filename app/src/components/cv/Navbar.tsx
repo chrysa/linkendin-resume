@@ -30,31 +30,36 @@ export function Navbar({ onContactClick }: { onContactClick: () => void }) {
     <AnimatePresence>
       {scrolled && (
         <motion.nav
-          className='navbar'
+          className="navbar"
           initial={{ y: -64, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -64, opacity: 0 }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
         >
-          <div className='navbar__inner'>
-            <span className='navbar__logo gradient-text'>@{profile.firstName.toLowerCase()}</span>
-            <ul className='navbar__links'>
+          <div className="navbar__inner">
+            <span className="navbar__logo gradient-text">@{profile.firstName.toLowerCase()}</span>
+            <ul className="navbar__links">
               {navKeys.map((key) => (
                 <li key={key}>
-                  <a href={'#' + key} className='navbar__link' onClick={(e) => handleAnchor(e, key)} data-hover='true'>
+                  <a href={'#' + key} className="navbar__link" onClick={(e) => handleAnchor(e, key)} data-hover="true">
                     {t('nav.' + key)}
                   </a>
                 </li>
               ))}
             </ul>
-            <div className='navbar__controls'>
-              <button className='ctrl-btn' onClick={switchLang} data-hover='true' title='Changer de langue'>
+            <div className="navbar__controls">
+              <button className="ctrl-btn" onClick={switchLang} data-hover="true" title="Changer de langue">
                 {lang === 'fr' ? 'EN' : 'FR'}
               </button>
-              <button className='ctrl-btn' onClick={toggle} data-hover='true' title={t('theme.' + (theme === 'dark' ? 'switchToLight' : 'switchToDark'))}>
+              <button
+                className="ctrl-btn"
+                onClick={toggle}
+                data-hover="true"
+                title={t('theme.' + (theme === 'dark' ? 'switchToLight' : 'switchToDark'))}
+              >
                 <i className={'bi bi-' + (theme === 'dark' ? 'sun' : 'moon-stars')} />
               </button>
-              <button className='btn btn--primary btn--sm' onClick={onContactClick} data-hover='true'>
+              <button className="btn btn--primary btn--sm" onClick={onContactClick} data-hover="true">
                 {t('nav.contact')}
               </button>
             </div>
