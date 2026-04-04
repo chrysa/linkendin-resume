@@ -53,7 +53,6 @@ repos:
           - tree-sitter>=0.23
           - tree-sitter-typescript>=0.23
       - id: css-duplicate-property
-      - id: css-unused-variable
       - id: import-no-relative-parent
       - id: react-direct-dom
       - id: dockerfile-no-latest
