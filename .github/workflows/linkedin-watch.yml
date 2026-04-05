@@ -1,0 +1,37 @@
+---
+name: LinkedIn API Watch
+
+on:
+    schedule:
+        - cron: '0 8 * * 1' # Chaque lundi à 8h UTC
+    workflow_dispatch:
+
+permissions:
+    contents: read
+    issues: write
+
+jobs:
+    watch:
+        name: Veille LinkedIn API
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v6
+
+            - name: Setup Python
+              uses: actions/setup-python@v5
+              with:
+                  python-version: '3.14'
+
+            - name: Install dependencies
+              run: pip install --quiet requests
+              shell: bash
+
+            - name: Run LinkedIn API watch
+              id: watch
+              run: python .github/scripts/linkedin_watch.py
+              shell: bash
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  GH_REPO: ${{ github.repository }}
