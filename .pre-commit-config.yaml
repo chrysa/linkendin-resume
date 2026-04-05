@@ -20,7 +20,7 @@ repos:
       - id: prettier
         additional_dependencies:
           - prettier@^3.0.0
-          - prettier-plugin-organize-imports@^3.2.0
+          - prettier-plugin-organize-imports@^4.3.0
         args:
           - --print-width=120
           - --tab-width=2
