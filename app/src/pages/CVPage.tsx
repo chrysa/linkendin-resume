@@ -12,11 +12,13 @@ import { ContactModal } from '@/components/contact/ContactModal';
 import { ScrollProgress } from '@/components/ui/ScrollProgress';
 import { CustomCursor } from '@/components/ui/CustomCursor';
 import { FloatingCTA } from '@/components/ui/FloatingCTA';
+import { useDocumentMeta } from '@/hooks/useDocumentMeta';
 
 export function CVPage() {
   const [modalOpen, setModalOpen] = useState(false);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const openModal = () => setModalOpen(true);
+  useDocumentMeta({ lang: i18n.language });
 
   return (
     <>
@@ -40,7 +42,7 @@ export function CVPage() {
             &copy; {new Date().getFullYear()} &middot; {t('footer.madeWith')} &#9749;
           </span>
           <a
-            href="https://github.com/chrysa/resume"
+            href="https://github.com/chrysa/linkendin-resume"
             target="_blank"
             rel="noopener noreferrer"
             className="footer__source"
