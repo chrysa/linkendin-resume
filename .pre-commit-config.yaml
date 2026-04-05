@@ -30,7 +30,7 @@ repos:
         exclude: '^(app/dist/|app/coverage/|app/node_modules/|dist/|coverage/|node_modules/)'
         files: '^app/.*\.(css|js|ts|tsx|json|md)$'
   - repo: https://github.com/rhysd/actionlint
-    rev: 3868e1042b733145b28e4c8a7d74ec987a921de6
+    rev: 21e87230c0bac0ffe162da973b80bec9eac35191
     hooks:
       - id: actionlint
   - repo: https://github.com/gitleaks/gitleaks
