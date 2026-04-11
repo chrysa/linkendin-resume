@@ -50,7 +50,7 @@ repos:
       - id: no-console-warn
       - id: ts-unreachable-code
         additional_dependencies:
-          - tree-sitter>=0.23
+          - tree-sitter>=0.25.2
           - tree-sitter-typescript>=0.23
       - id: css-duplicate-property
       - id: import-no-relative-parent
