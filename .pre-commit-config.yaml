@@ -38,7 +38,7 @@ repos:
     hooks:
       - id: gitleaks
   - repo: https://github.com/chrysa/pre-commit-tools
-    rev: b97ae91d8a45eb6f556fe938fa8bd58294c9a5e6
+    rev: 8d0825084df0e512ba655021190a5520c654e2ad
     hooks:
       - id: console-debug-detection
         files: '\.(js|gs|ts|tsx|jsx)$'
