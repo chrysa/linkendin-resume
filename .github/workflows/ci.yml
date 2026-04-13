@@ -166,6 +166,7 @@ jobs:
                   path: app/coverage/
               continue-on-error: true
             - name: SonarCloud Scan
+              if: github.actor != 'dependabot[bot]'
               uses: SonarSource/sonarqube-scan-action@v5
               with:
                   projectBaseDir: app
@@ -182,3 +183,6 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            - name: SonarCloud skipped
+              if: github.actor == 'dependabot[bot]'
+              run: echo "Skipping SonarCloud scan for Dependabot pull requests."
