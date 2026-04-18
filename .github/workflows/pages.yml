@@ -26,7 +26,7 @@ jobs:
             VITE_GITHUB_ISSUES_URL: https://github.com/chrysa/linkendin-resume/issues/new/choose
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
             - name: Setup Node.js
               uses: actions/setup-node@v6
               with:
