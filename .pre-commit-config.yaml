@@ -4,7 +4,7 @@ fail_fast: false
 minimum_pre_commit_version: 4.1.0
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: f1dff44d3a9ae852957f34def96390f28719c232
+    rev: d1283494cbdb854a9d6bbaa97275575a21d0e9e4
     hooks:
       - id: check-added-large-files
         args: ['--maxkb=500']
@@ -21,7 +21,7 @@ repos:
     hooks:
       - id: prettier
         additional_dependencies:
-          - prettier@^3.0.0
+          - prettier@^3.8.2
           - prettier-plugin-organize-imports@^4.3.0
         args:
           - --print-width=120
@@ -40,7 +40,7 @@ repos:
     hooks:
       - id: gitleaks
   - repo: https://github.com/chrysa/pre-commit-tools
-    rev: b97ae91d8a45eb6f556fe938fa8bd58294c9a5e6
+    rev: 8d0825084df0e512ba655021190a5520c654e2ad
     hooks:
       - id: console-debug-detection
         files: '\.(js|gs|ts|tsx|jsx)$'
@@ -52,7 +52,7 @@ repos:
       - id: no-console-warn
       - id: ts-unreachable-code
         additional_dependencies:
-          - tree-sitter>=0.23
+          - tree-sitter>=0.25.2
           - tree-sitter-typescript>=0.23
       - id: css-duplicate-property
       - id: import-no-relative-parent
