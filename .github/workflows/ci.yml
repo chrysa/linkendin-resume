@@ -167,7 +167,7 @@ jobs:
               continue-on-error: true
             - name: SonarCloud Scan
               if: github.actor != 'dependabot[bot]'
-              uses: SonarSource/sonarqube-scan-action@v5
+              uses: SonarSource/sonarqube-scan-action@v7
               with:
                   projectBaseDir: app
                   args: >
