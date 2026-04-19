@@ -11,9 +11,9 @@ repos:
       - id: check-json
         exclude: '^(\.csslintrc|app/node_modules/|app/dist/|node_modules/|dist/)'
       - id: check-merge-conflict
-      - args:
-    - --allow-multiple-documents
-    id: check-yaml
+      - id: check-yaml
+        args:
+          - --allow-multiple-documents
       - id: end-of-file-fixer
       - id: trailing-whitespace
   - repo: https://github.com/pre-commit/mirrors-prettier
