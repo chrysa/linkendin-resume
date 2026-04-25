@@ -26,9 +26,9 @@ jobs:
         timeout-minutes: 15
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
             - name: Setup Python
-              uses: actions/setup-python@v6
+              uses: actions/setup-python@v6.2.0
               with:
                   python-version: '3.14'
             - name: Install pre-commit
@@ -49,7 +49,7 @@ jobs:
             patch: ${{ steps.gitversion.outputs.patch }}
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
               with:
                   fetch-depth: 0
             - name: Compute version
@@ -65,9 +65,9 @@ jobs:
         timeout-minutes: 15
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
             - name: Setup Node.js
-              uses: actions/setup-node@v6
+              uses: actions/setup-node@v6.3.0
               with:
                   node-version: '24'
                   cache: npm
@@ -91,9 +91,9 @@ jobs:
         timeout-minutes: 15
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
             - name: Setup Node.js
-              uses: actions/setup-node@v6
+              uses: actions/setup-node@v6.3.0
               with:
                   node-version: '24'
                   cache: npm
@@ -123,9 +123,9 @@ jobs:
             - test
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
             - name: Setup Node.js
-              uses: actions/setup-node@v6
+              uses: actions/setup-node@v6.3.0
               with:
                   node-version: '24'
                   cache: npm
@@ -156,7 +156,7 @@ jobs:
             pull-requests: read
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
               with:
                   fetch-depth: 0
             - name: Download coverage report
