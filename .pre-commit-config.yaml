@@ -4,7 +4,7 @@ fail_fast: false
 minimum_pre_commit_version: 4.1.0
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: d1283494cbdb854a9d6bbaa97275575a21d0e9e4
+    rev: b89c5eef3ba3a74ecd506d968e63a8b80f697abf
     hooks:
       - id: check-added-large-files
         args: ['--maxkb=500']
