@@ -4,7 +4,7 @@ fail_fast: false
 minimum_pre_commit_version: 4.1.0
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: b89c5eef3ba3a74ecd506d968e63a8b80f697abf
+    rev: 803469bde8523f208d030ce33f575d7bee0ba9bf
     hooks:
       - id: check-added-large-files
         args: ['--maxkb=500']
@@ -32,7 +32,7 @@ repos:
         exclude: '^(app/dist/|app/coverage/|app/node_modules/|dist/|coverage/|node_modules/)'
         files: '^app/.*\.(css|js|ts|tsx|json|md)$'
   - repo: https://github.com/rhysd/actionlint
-    rev: 21e87230c0bac0ffe162da973b80bec9eac35191
+    rev: 011a6d15e749bb3f2d771eed9c7aa0e7e3e10ee7
     hooks:
       - id: actionlint
   - repo: https://github.com/gitleaks/gitleaks
