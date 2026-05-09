@@ -65,3 +65,11 @@ help: ## Display this help message
 help-%: ## Show detailed help for a specific command
 	@echo "Showing help for: $*"
 	@grep -A 5 -B 2 "^$*:" $(shell find makefiles -name "*.Makefile" -type f) || echo "Command '$*' not found"
+
+# ─── Standards compliance stubs ───────────────────────────────────────────────
+
+test-cov: ## Run tests with coverage (alias → test-coverage)
+	$(MAKE) test-coverage
+
+typecheck: ## Run type checking (alias → type-check)
+	$(MAKE) type-check
