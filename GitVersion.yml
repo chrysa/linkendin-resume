@@ -1,4 +1,10 @@
 branches:
+  feat:
+    regex: ^feat[/-]
+    increment: Minor
+    label: feat
+    source-branches:
+      - main
   fix:
     increment: Patch
     label: fix
