@@ -2,189 +2,189 @@
 name: CI
 
 on:
-    push:
-        branches:
-            - main
-            - develop
-            - "feat/**"
-            - "fix/**"
-            - "ci/**"
-            - "chore/**"
-    pull_request:
-        branches: [main, develop]
-    workflow_dispatch:
+  push:
+    branches:
+      - main
+      - develop
+      - "feat/**"
+      - "fix/**"
+      - "ci/**"
+      - "chore/**"
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
 
 permissions:
-    contents: read
+  contents: read
 
 concurrency:
-    group: ${{ github.workflow }}-${{ github.ref }}
-    cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-    pre-commit:
-        name: Pre-commit checks
-        runs-on: ubuntu-latest
-        timeout-minutes: 15
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v6
-            - name: Setup Python
-              uses: actions/setup-python@v6.2.0
-              with:
-                  python-version: '3.14'
-            - name: Install pre-commit
-              run: pip install --quiet pre-commit
-              shell: bash
-            - name: Run pre-commit
-              run: pre-commit run --all-files --show-diff-on-failure
-              shell: bash
+  pre-commit:
+    name: Pre-commit checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Python
+        uses: actions/setup-python@v6.2.0
+        with:
+          python-version: "3.14"
+      - name: Install pre-commit
+        run: pip install --quiet pre-commit
+        shell: bash
+      - name: Run pre-commit
+        run: pre-commit run --all-files --show-diff-on-failure
+        shell: bash
 
-    version:
-        name: Compute version (GitVersion)
-        runs-on: ubuntu-latest
-        timeout-minutes: 10
-        outputs:
-            semver: ${{ steps.gitversion.outputs.fullSemVer }}
-            major: ${{ steps.gitversion.outputs.major }}
-            minor: ${{ steps.gitversion.outputs.minor }}
-            patch: ${{ steps.gitversion.outputs.patch }}
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v6
-              with:
-                  fetch-depth: 0
-            - name: Compute version
-              id: gitversion
-              uses: chrysa/github-actions/gitversion@v1
-            - name: Show version
-              run: echo "Version ${{ steps.gitversion.outputs.fullSemVer }}"
-              shell: bash
+  version:
+    name: Compute version (GitVersion)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      semver: ${{ steps.gitversion.outputs.fullSemVer }}
+      major: ${{ steps.gitversion.outputs.major }}
+      minor: ${{ steps.gitversion.outputs.minor }}
+      patch: ${{ steps.gitversion.outputs.patch }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Compute version
+        id: gitversion
+        uses: chrysa/github-actions/gitversion@v1
+      - name: Show version
+        run: echo "Version ${{ steps.gitversion.outputs.fullSemVer }}"
+        shell: bash
 
-    lint:
-        name: Lint & Type Check
-        runs-on: ubuntu-latest
-        timeout-minutes: 15
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v6
-            - name: Setup Node.js
-              uses: actions/setup-node@v6.4.0
-              with:
-                  node-version: '24'
-                  cache: npm
-                  cache-dependency-path: app/package-lock.json
-            - name: Install dependencies
-              run: npm ci
-              working-directory: app
-              shell: bash
-            - name: ESLint
-              run: npm run lint
-              working-directory: app
-              shell: bash
-            - name: TypeScript type check
-              run: npm run type-check
-              working-directory: app
-              shell: bash
+  lint:
+    name: Lint & Type Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v6.4.0
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+        working-directory: app
+        shell: bash
+      - name: ESLint
+        run: npm run lint
+        working-directory: app
+        shell: bash
+      - name: TypeScript type check
+        run: npm run type-check
+        working-directory: app
+        shell: bash
 
-    test:
-        name: Unit Tests + Coverage
-        runs-on: ubuntu-latest
-        timeout-minutes: 15
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v6
-            - name: Setup Node.js
-              uses: actions/setup-node@v6.4.0
-              with:
-                  node-version: '24'
-                  cache: npm
-                  cache-dependency-path: app/package-lock.json
-            - name: Install dependencies
-              run: npm ci
-              working-directory: app
-              shell: bash
-            - name: Run tests with coverage
-              run: npm run test:coverage
-              working-directory: app
-              shell: bash
-            - name: Upload coverage report
-              uses: actions/upload-artifact@v7
-              if: always()
-              with:
-                  name: coverage-report
-                  path: app/coverage/
-                  retention-days: 14
+  test:
+    name: Unit Tests + Coverage
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v6.4.0
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+        working-directory: app
+        shell: bash
+      - name: Run tests with coverage
+        run: npm run test:coverage
+        working-directory: app
+        shell: bash
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: coverage-report
+          path: app/coverage/
+          retention-days: 14
 
-    build:
-        name: Build
-        runs-on: ubuntu-latest
-        timeout-minutes: 15
-        needs:
-            - lint
-            - test
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v6
-            - name: Setup Node.js
-              uses: actions/setup-node@v6.4.0
-              with:
-                  node-version: '24'
-                  cache: npm
-                  cache-dependency-path: app/package-lock.json
-            - name: Install dependencies
-              run: npm ci
-              working-directory: app
-              shell: bash
-            - name: Build
-              run: npm run build
-              working-directory: app
-              shell: bash
-            - name: Upload dist artifact
-              uses: actions/upload-artifact@v7
-              with:
-                  name: dist
-                  path: app/dist/
-                  retention-days: 1
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs:
+      - lint
+      - test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v6.4.0
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+        working-directory: app
+        shell: bash
+      - name: Build
+        run: npm run build
+        working-directory: app
+        shell: bash
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: dist
+          path: app/dist/
+          retention-days: 1
 
-    sonar:
-        name: SonarCloud Analysis
-        runs-on: ubuntu-latest
-        timeout-minutes: 15
-        needs:
-            - test
-        permissions:
-            contents: read
-            pull-requests: read
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v6
-              with:
-                  fetch-depth: 0
-            - name: Download coverage report
-              uses: actions/download-artifact@v8
-              with:
-                  name: coverage-report
-                  path: app/coverage/
-              continue-on-error: true
-            - name: SonarCloud Scan
-              if: github.actor != 'dependabot[bot]'
-              uses: SonarSource/sonarqube-scan-action@v8.0.0
-              with:
-                  projectBaseDir: app
-                  args: >
-                      -Dsonar.projectKey=chrysa_linkendin-resume
-                      -Dsonar.organization=chrysa
-                      -Dsonar.projectName=linkendin-resume
-                      -Dsonar.sourceEncoding=UTF-8
-                      -Dsonar.sources=src
-                      -Dsonar.tests=src
-                      -Dsonar.test.inclusions=src/**/*.test.ts,src/**/*.test.tsx,src/**/__tests__/**
-                      -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-                      -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/coverage/**
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-            - name: SonarCloud skipped
-              if: github.actor == 'dependabot[bot]'
-              run: echo "Skipping SonarCloud scan for Dependabot pull requests."
+  sonar:
+    name: SonarCloud Analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs:
+      - test
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Download coverage report
+        uses: actions/download-artifact@v8
+        with:
+          name: coverage-report
+          path: app/coverage/
+        continue-on-error: true
+      - name: SonarCloud Scan
+        if: github.actor != 'dependabot[bot]'
+        uses: SonarSource/sonarqube-scan-action@v8.0.0
+        with:
+          projectBaseDir: app
+          args: >
+            -Dsonar.projectKey=chrysa_linkendin-resume
+            -Dsonar.organization=chrysa
+            -Dsonar.projectName=linkendin-resume
+            -Dsonar.sourceEncoding=UTF-8
+            -Dsonar.sources=src
+            -Dsonar.tests=src
+            -Dsonar.test.inclusions=src/**/*.test.ts,src/**/*.test.tsx,src/**/__tests__/**
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/coverage/**
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: SonarCloud skipped
+        if: github.actor == 'dependabot[bot]'
+        run: echo "Skipping SonarCloud scan for Dependabot pull requests."
