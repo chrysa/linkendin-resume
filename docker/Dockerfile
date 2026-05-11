@@ -37,6 +37,7 @@ WORKDIR /app
 # Copy only package manifests first to leverage Docker layer cache
 COPY app/package.json ./
 COPY app/package-lock.json ./
+COPY app/.npmrc ./
 
 RUN npm ci || npm install
 
