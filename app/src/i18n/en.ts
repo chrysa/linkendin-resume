@@ -8,19 +8,24 @@ const en: Translations = {
     projects: 'Projects',
     education: 'Education',
     contact: 'Contact',
+    ariaLabel: 'Main navigation',
   },
   hero: {
     greeting: 'Hi, I am',
+    photoAlt: 'Profile picture of {{firstName}} {{lastName}}',
+    newTab: 'opens in new tab',
   },
   sections: {
     impact: {
       label: 'By the numbers',
       title: 'Impact, not just titles.',
+      ariaMetrics: 'Career key metrics',
     },
     experience: {
       label: 'Career',
       title: "What I've built.",
       present: 'present',
+      ariaTimeline: 'Professional experience timeline',
     },
     skills: {
       label: 'Tech stack',
@@ -35,10 +40,14 @@ const en: Translations = {
       },
       hint: 'Hover a skill to see where I used it',
       levels: ['', 'Learning', 'Familiar', 'Proficient', 'Advanced', 'Expert'],
+      ariaCloud: 'Technical skills list',
+      ariaSkillsFilter: 'Filter skills by category',
     },
     projects: {
       label: 'Projects',
       title: 'Shipped and used.',
+      githubLink: 'View {{title}} on GitHub (new tab)',
+      demoLink: 'View {{title}} demo (new tab)',
     },
     education: {
       label: 'Education',

@@ -63,7 +63,7 @@ export function Hero({ onContactClick }: HeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
           >
-            <span className="hero__badge-dot" />
+            <span className="hero__badge-dot" aria-hidden="true" />
             {availability.label} · {availability.type}
           </motion.div>
         )}
@@ -72,14 +72,14 @@ export function Hero({ onContactClick }: HeroProps) {
           <motion.div className="hero__photo-wrap" variants={scaleInDelayed}>
             <img
               src={profile.photoUrl}
-              alt={`${profile.firstName} ${profile.lastName}`}
+              alt={t('hero.photoAlt', { firstName: profile.firstName, lastName: profile.lastName })}
               className="hero__photo"
               onError={(e) => {
                 (e.target as HTMLImageElement).src =
                   `https://ui-avatars.com/api/?name=${profile.firstName}+${profile.lastName}&background=7c3aed&color=fff&size=200`;
               }}
             />
-            <div className="hero__photo-ring" />
+            <div className="hero__photo-ring" aria-hidden="true" />
           </motion.div>
 
           <div className="hero__text">
@@ -97,7 +97,7 @@ export function Hero({ onContactClick }: HeroProps) {
             </motion.p>
             <motion.div className="hero__actions" variants={fadeUp}>
               <button className="btn btn--primary" onClick={onContactClick} data-hover>
-                <i className="bi bi-chat-dots" /> {t('nav.contact')}
+                <i className="bi bi-chat-dots" aria-hidden="true" /> {t('nav.contact')}
               </button>
               <a
                 href={profile.profileUrl}
@@ -105,15 +105,21 @@ export function Hero({ onContactClick }: HeroProps) {
                 rel="noopener noreferrer"
                 className="btn btn--ghost"
                 data-hover
+                aria-label={`LinkedIn — ${t('hero.newTab')}`}
               >
-                <i className="bi bi-linkedin" /> LinkedIn
+                <i className="bi bi-linkedin" aria-hidden="true" /> LinkedIn
               </a>
             </motion.div>
           </div>
         </motion.div>
 
-        <motion.div className="hero__scroll" animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 2 }}>
-          <i className="bi bi-chevron-double-down" />
+        <motion.div
+          className="hero__scroll"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+          aria-hidden="true"
+        >
+          <i className="bi bi-chevron-double-down" aria-hidden="true" />
         </motion.div>
       </div>
     </section>

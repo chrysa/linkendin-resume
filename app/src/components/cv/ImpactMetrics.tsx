@@ -8,12 +8,24 @@ import { stagger, scaleIn } from '@/utils/animations';
 function MetricCard({ value, label, sublabel }: { value: string; label: string; sublabel?: string }) {
   const { ref, display } = useCountUp(value);
   return (
-    <motion.div className="metric-card" variants={scaleIn} whileHover={{ y: -6, scale: 1.03 }}>
-      <span ref={ref} className="metric-card__value gradient-text">
+    <motion.div
+      className="metric-card"
+      variants={scaleIn}
+      whileHover={{ y: -6, scale: 1.03 }}
+      role="listitem"
+      aria-label={`${display} ${label}${sublabel ? ' — ' + sublabel : ''}`}
+    >
+      <span ref={ref} className="metric-card__value gradient-text" aria-hidden="true">
         {display}
       </span>
-      <span className="metric-card__label">{label}</span>
-      {sublabel && <span className="metric-card__sub">{sublabel}</span>}
+      <span className="metric-card__label" aria-hidden="true">
+        {label}
+      </span>
+      {sublabel && (
+        <span className="metric-card__sub" aria-hidden="true">
+          {sublabel}
+        </span>
+      )}
     </motion.div>
   );
 }
@@ -39,7 +51,14 @@ export function ImpactMetrics() {
         >
           {t('sections.impact.title')}
         </motion.h2>
-        <motion.div className="metrics" variants={stagger} initial="hidden" animate={inView ? 'show' : 'hidden'}>
+        <motion.div
+          className="metrics"
+          variants={stagger}
+          initial="hidden"
+          animate={inView ? 'show' : 'hidden'}
+          role="list"
+          aria-label={t('sections.impact.ariaMetrics') as string}
+        >
           {metrics.map((m) => (
             <MetricCard key={m.label} value={m.value} label={m.label} sublabel={m.sublabel} />
           ))}

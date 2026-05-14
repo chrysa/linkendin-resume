@@ -10,7 +10,8 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html', 'lcov'],
-      exclude: ['node_modules/', 'src/__tests__/', '*.config.*'],
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: ['src/__tests__/**', 'src/types/**', 'src/vite-env.d.ts', '**/*.d.ts'],
     },
   },
   resolve: {
