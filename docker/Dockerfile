@@ -14,7 +14,7 @@ ENV HOST=$HOST \
     PORT=$PORT
 
 # Install dependencies using only the manifest to leverage Docker cache
-COPY app/package.json ./
+COPY app/package.json app/.npmrc ./
 
 RUN rm -f package-lock.json \
     && npm install

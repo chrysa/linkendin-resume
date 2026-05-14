@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { useTheme } from '@/hooks/useTheme';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { getProfile } from '@/data/profile';
 
 export function Navbar({ onContactClick }: { onContactClick: () => void }) {
   const { t, i18n } = useTranslation();
-  const { theme, toggle } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const lang = i18n.language.startsWith('en') ? 'en' : 'fr';
   const profile = getProfile(lang);
@@ -31,35 +30,51 @@ export function Navbar({ onContactClick }: { onContactClick: () => void }) {
       {scrolled && (
         <motion.nav
           className="navbar"
+          role="navigation"
+          aria-label={t('nav.ariaLabel') as string}
           initial={{ y: -64, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -64, opacity: 0 }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
         >
           <div className="navbar__inner">
-            <span className="navbar__logo gradient-text">@{profile.firstName.toLowerCase()}</span>
+            <span className="navbar__logo gradient-text" aria-label={`@${profile.firstName.toLowerCase()} — accueil`}>
+              @{profile.firstName.toLowerCase()}
+            </span>
             <ul className="navbar__links">
               {navKeys.map((key) => (
                 <li key={key}>
-                  <a href={'#' + key} className="navbar__link" onClick={(e) => handleAnchor(e, key)} data-hover="true">
+                  <a
+                    href={'#' + key}
+                    className="navbar__link"
+                    onClick={(e) => handleAnchor(e, key)}
+                    data-hover="true"
+                    aria-label={t('nav.' + key) as string}
+                  >
                     {t('nav.' + key)}
                   </a>
                 </li>
               ))}
             </ul>
             <div className="navbar__controls">
-              <button className="ctrl-btn" onClick={switchLang} data-hover="true" title="Changer de langue">
-                {lang === 'fr' ? 'EN' : 'FR'}
-              </button>
               <button
                 className="ctrl-btn"
-                onClick={toggle}
+                onClick={switchLang}
                 data-hover="true"
-                title={t('theme.' + (theme === 'dark' ? 'switchToLight' : 'switchToDark'))}
+                aria-label={lang === 'fr' ? 'Switch to English' : 'Passer en français'}
+                aria-pressed={lang === 'en' || undefined}
+                type="button"
               >
-                <i className={'bi bi-' + (theme === 'dark' ? 'sun' : 'moon-stars')} />
+                {lang === 'fr' ? 'EN' : 'FR'}
               </button>
-              <button className="btn btn--primary btn--sm" onClick={onContactClick} data-hover="true">
+              <ThemeToggle />
+              <button
+                className="btn btn--primary btn--sm"
+                onClick={onContactClick}
+                data-hover="true"
+                type="button"
+                aria-label={t('nav.contact') as string}
+              >
                 {t('nav.contact')}
               </button>
             </div>

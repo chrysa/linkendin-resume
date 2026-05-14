@@ -8,19 +8,24 @@ const fr: Translations = {
     projects: 'Projets',
     education: 'Formation',
     contact: 'Contact',
+    ariaLabel: 'Navigation principale',
   },
   hero: {
     greeting: 'Bonjour, je suis',
+    photoAlt: 'Photo de profil de {{firstName}} {{lastName}}',
+    newTab: 'ouvre dans un nouvel onglet',
   },
   sections: {
     impact: {
       label: 'En chiffres',
       title: "L'impact, pas les titres.",
+      ariaMetrics: 'Indicateurs clés de carrière',
     },
     experience: {
       label: 'Parcours',
       title: "Ce que j'ai construit.",
       present: "aujourd'hui",
+      ariaTimeline: 'Chronologie des expériences professionnelles',
     },
     skills: {
       label: 'Stack technique',
@@ -35,10 +40,14 @@ const fr: Translations = {
       },
       hint: 'Survolez une compétence pour voir les projets associés',
       levels: ['', 'Découverte', 'Familier', 'Opérationnel', 'Avancé', 'Expert'],
+      ariaCloud: 'Liste des compétences techniques',
+      ariaSkillsFilter: 'Filtrer les compétences par catégorie',
     },
     projects: {
       label: 'Projets',
       title: 'Concret, livré, utilisé.',
+      githubLink: 'Voir {{title}} sur GitHub (nouvel onglet)',
+      demoLink: 'Voir la démo de {{title}} (nouvel onglet)',
     },
     education: {
       label: 'Formation',

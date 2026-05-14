@@ -26,7 +26,7 @@ export function CVPage() {
       <CustomCursor />
       <Navbar onContactClick={openModal} />
 
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <Hero onContactClick={openModal} />
         <ImpactMetrics />
         <ExperienceTimeline />

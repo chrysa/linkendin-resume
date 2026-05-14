@@ -15,13 +15,17 @@ function SkillPill({ skill, lang }: { skill: Skill; lang: string }) {
   const experiences = getExperiencesForTech(skill.name, lang);
 
   return (
-    <motion.div
+    <motion.li
       className={'skill-pill skill-pill--l' + skill.level}
       variants={scaleIn}
       whileHover={{ scale: 1.1, y: -4 }}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
       style={{ position: 'relative' }}
+      tabIndex={0}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
+      aria-label={`${skill.name} — ${(t('sections.skills.levels', { returnObjects: true }) as string[])[skill.level]}`}
     >
       <span className="skill-pill__name">{skill.name}</span>
       <div className="skill-pill__dots">
@@ -33,6 +37,7 @@ function SkillPill({ skill, lang }: { skill: Skill; lang: string }) {
         {hovered && (
           <motion.div
             className="skill-tooltip"
+            role="tooltip"
             initial={{ opacity: 0, y: 8, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.95 }}
@@ -49,7 +54,7 @@ function SkillPill({ skill, lang }: { skill: Skill; lang: string }) {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </motion.li>
   );
 }
 
@@ -86,16 +91,24 @@ export function SkillsCloud() {
               className={'filter-btn' + (activeCategory === cat ? ' filter-btn--active' : '')}
               onClick={() => setActiveCategory(cat)}
               data-hover="true"
+              aria-pressed={activeCategory === cat ? 'true' : 'false'}
+              type="button"
             >
               {cat === 'all' ? t('sections.skills.filters.all') : t('sections.skills.filters.' + cat)}
             </button>
           ))}
         </div>
-        <motion.div className="skills__cloud" variants={stagger} initial="hidden" animate={inView ? 'show' : 'hidden'}>
+        <motion.ul
+          className="skills__cloud"
+          variants={stagger}
+          initial="hidden"
+          animate={inView ? 'show' : 'hidden'}
+          aria-label={t('sections.skills.ariaCloud') as string}
+        >
           {filtered.map((skill) => (
             <SkillPill key={skill.name} skill={skill} lang={lang} />
           ))}
-        </motion.div>
+        </motion.ul>
         <p className="skills__hint">{t('sections.skills.hint')}</p>
       </div>
     </section>

@@ -32,7 +32,7 @@ export function ContactSection({ onContactClick }: { onContactClick: () => void 
           </motion.p>
           <motion.div className="contact-section__cta" variants={fadeUp}>
             <button className="btn btn--primary btn--lg" onClick={onContactClick} data-hover="true">
-              <i className="bi bi-chat-dots-fill" /> {t('sections.contact.cta')}
+              <i className="bi bi-chat-dots-fill" aria-hidden="true" /> {t('sections.contact.cta')}
             </button>
             <a
               href={profile.profileUrl}
@@ -40,8 +40,9 @@ export function ContactSection({ onContactClick }: { onContactClick: () => void 
               rel="noopener noreferrer"
               className="btn btn--ghost btn--lg"
               data-hover="true"
+              aria-label={`LinkedIn — ${t('hero.newTab')}`}
             >
-              <i className="bi bi-linkedin" /> {t('sections.contact.linkedin')}
+              <i className="bi bi-linkedin" aria-hidden="true" /> {t('sections.contact.linkedin')}
             </a>
           </motion.div>
         </motion.div>
