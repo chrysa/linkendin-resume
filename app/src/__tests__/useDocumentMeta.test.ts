@@ -42,4 +42,9 @@ describe('useDocumentMeta', () => {
     renderHook(() => useDocumentMeta({ lang: 'en' }));
     expect(document.documentElement.getAttribute('lang')).toBe('en');
   });
+
+  it('does not throw when meta elements are absent', () => {
+    document.querySelectorAll('meta[name],meta[property]').forEach((el) => el.remove());
+    expect(() => renderHook(() => useDocumentMeta({ lang: 'fr' }))).not.toThrow();
+  });
 });
