@@ -31,8 +31,13 @@ export function EducationSection() {
           initial="hidden"
           animate={inView ? 'show' : 'hidden'}
         >
-          {profile.educations.map((edu, i) => (
-            <motion.div key={i} className="edu-card" variants={slideLeft} whileHover={{ x: 6 }}>
+          {profile.educations.map((edu) => (
+            <motion.div
+              key={`${edu.school}-${edu.startYear}`}
+              className="edu-card"
+              variants={slideLeft}
+              whileHover={{ x: 6 }}
+            >
               <div className="edu-card__years">
                 {edu.startYear} — {edu.endYear}
               </div>

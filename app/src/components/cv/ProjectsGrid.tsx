@@ -8,6 +8,7 @@ import type { Project } from '@/types';
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: '-40px' });
+  const { t } = useTranslation();
 
   const rotateX = useMotionValue(0);
   const rotateY = useMotionValue(0);
@@ -44,13 +45,14 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               rel="noopener noreferrer"
               className="project-card__link"
               data-hover="true"
+              aria-label={t('sections.projects.githubLink', { title: project.title })}
             >
               {project.stars && (
-                <span className="project-card__stars">
-                  <i className="bi bi-star-fill" /> {project.stars}
+                <span className="project-card__stars" aria-hidden="true">
+                  <i className="bi bi-star-fill" aria-hidden="true" /> {project.stars}
                 </span>
               )}
-              <i className="bi bi-github" />
+              <i className="bi bi-github" aria-hidden="true" />
             </a>
           )}
           {project.url && (
@@ -60,8 +62,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               rel="noopener noreferrer"
               className="project-card__link"
               data-hover="true"
+              aria-label={t('sections.projects.demoLink', { title: project.title })}
             >
-              <i className="bi bi-box-arrow-up-right" />
+              <i className="bi bi-box-arrow-up-right" aria-hidden="true" />
             </a>
           )}
         </div>
@@ -69,7 +72,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       <p className="project-card__desc">{project.description}</p>
       {project.impact && (
         <div className="project-card__impact">
-          <i className="bi bi-lightning-charge-fill" /> {project.impact}
+          <i className="bi bi-lightning-charge-fill" aria-hidden="true" /> {project.impact}
         </div>
       )}
       <div className="project-card__tags">

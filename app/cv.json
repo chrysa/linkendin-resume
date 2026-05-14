@@ -1,19 +1,14 @@
 {
-  "_comment": "Format standard d'import LinkedIn — à remplir depuis votre profil LinkedIn",
-  "_howto": [
-    "1. Allez sur linkedin.com → Moi → Voir le profil",
-    "2. Plus → Enregistrer en PDF (pour vérifier les données)",
-    "3. Remplissez les champs ci-dessous en copiant depuis votre profil",
-    "4. Le site lit ce fichier au démarrage"
-  ],
   "basics": {
     "firstName": "Anthony",
-    "lastName": "VOTRE_NOM",
-    "headline": "Votre titre professionnel LinkedIn (ex: Développeur Full Stack React · TypeScript)",
-    "summary": "Votre résumé LinkedIn — section 'Infos'. Copiez-collez directement depuis LinkedIn.",
+    "lastName": "Gréau",
+    "headline": "Ingénieur Backend Python · Architecte Systèmes Distribués · Open Source",
+    "headline_en": "Python Backend Engineer · Distributed Systems Architect · Open Source",
+    "summary": "Ingénieur logiciel avec 8+ ans d'expérience sur des systèmes critiques et distribués. Spécialisé Python / Django / FastAPI, Docker, Kubernetes, et écosystèmes React. Contributeur majeur à la plateforme de véhicules autonomes Padam Mobility (1 000+ commits), contributeur aux logiciels embarqués de la mission spatiale Solar Orbiter (ESA). Passionné de tooling, d'automatisation et d'architecture modulaire.",
+    "summary_en": "Software engineer with 8+ years on critical, distributed systems. Specialized in Python / Django / FastAPI, Docker, Kubernetes, and React ecosystems. Major contributor to the Padam Mobility autonomous vehicle platform (1,000+ commits) and ESA Solar Orbiter mission software. Passionate about tooling, automation, and modular architecture.",
     "photoUrl": "/assets/photo.jpg",
-    "location": "Paris, France",
-    "linkedinUrl": "https://linkedin.com/in/votre-profil",
+    "location": "Paris, Île-de-France",
+    "linkedinUrl": "https://www.linkedin.com/in/anthonygreau",
     "availability": {
       "available": true,
       "label": "Disponible dès mai 2026",
@@ -21,124 +16,187 @@
       "type": "Freelance · CDI"
     },
     "contact": {
-      "_howto": "Renseignez votre numéro WhatsApp au format international (ex: +33612345678). Laisser vide pour masquer l'option WhatsApp.",
       "whatsapp": "",
-      "whatsappPrefill": "Bonjour ! J'ai consulté votre CV en ligne et souhaite vous contacter. ",
-      "whatsappPrefill_en": "Hello! I saw your online CV and would like to reach out. "
+      "whatsappPrefill": "Bonjour ! J'ai consulté votre CV en ligne et souhaite vous contacter.",
+      "whatsappPrefill_en": "Hello! I saw your online CV and would like to reach out."
     }
   },
   "metrics": [
     {
-      "value": "×3",
-      "label": "Performance",
-      "label_en": "Performance",
-      "sublabel": "gain de vitesse de chargement",
-      "sublabel_en": "load time improvement"
+      "value": "1000+",
+      "label": "Commits",
+      "label_en": "Commits",
+      "sublabel": "sur la plateforme Padam AV",
+      "sublabel_en": "on the Padam AV platform"
     },
     {
-      "value": "+40%",
-      "label": "Conversion",
-      "label_en": "Conversion",
-      "sublabel": "après refonte onboarding",
-      "sublabel_en": "after onboarding redesign"
+      "value": "8+",
+      "label": "Ans d'expérience",
+      "label_en": "Years of experience",
+      "sublabel": "systèmes critiques & distribués",
+      "sublabel_en": "critical & distributed systems"
     },
     {
-      "value": "12",
+      "value": "30+",
       "label": "Projets livrés",
       "label_en": "Projects shipped",
-      "sublabel": "en 5 ans, 0 abandon",
-      "sublabel_en": "in 5 years, 0 dropped"
+      "sublabel": "OSS, pro & perso",
+      "sublabel_en": "OSS, pro & personal"
     },
     {
-      "value": "6",
-      "label": "Devs managés",
-      "label_en": "Devs managed",
-      "sublabel": "dont 2 juniors coachés",
-      "sublabel_en": "including 2 juniors coached"
+      "value": "3",
+      "label": "Domaines clés",
+      "label_en": "Core domains",
+      "sublabel": "mobilité, spatial, SaaS",
+      "sublabel_en": "mobility, space, SaaS"
     }
   ],
   "experience": [
     {
-      "title": "Lead Développeur Full Stack",
-      "title_en": "Lead Full Stack Developer",
-      "company": "Nom de l'entreprise",
+      "title": "Ingénieur Logiciel Backend",
+      "title_en": "Backend Software Engineer",
+      "company": "Padam Mobility (Optiways)",
       "location": "Paris",
-      "startMonth": 3,
-      "startYear": 2022,
+      "startMonth": 7,
+      "startYear": 2023,
       "endMonth": null,
       "endYear": null,
-      "description": "Copiez la description de votre poste depuis LinkedIn. Focalisez sur les résultats.",
-      "description_en": "English version of the description.",
-      "technologies": ["React", "TypeScript", "Node.js"]
+      "description": "Contributeur principal (1 000+ commits) sur padam-av, la plateforme de contrôle de véhicules autonomes. Développement de microservices Python/Django gérant la communication temps réel avec les véhicules via WebSockets et Redis Pub/Sub. Mise en place de l'architecture de tests (pytest, parametrize, fixtures) et amélioration de la couverture de code. CI/CD sur GitHub Actions, déploiements Kubernetes (Docker, AWS ECR). Participation active aux revues de code et à la définition des standards qualité (SonarCloud, pre-commit, ruff, mypy).",
+      "description_en": "Core contributor (1,000+ commits) on padam-av, the autonomous vehicle control platform. Built Python/Django microservices handling real-time vehicle communication via WebSockets and Redis Pub/Sub. Designed the test architecture (pytest, parametrize, fixtures) and significantly improved code coverage. CI/CD on GitHub Actions, Kubernetes deployments (Docker, AWS ECR). Active code reviewer and quality standards contributor (SonarCloud, pre-commit, ruff, mypy).",
+      "technologies": [
+        "Python",
+        "Django",
+        "WebSockets",
+        "Redis",
+        "Docker",
+        "Kubernetes",
+        "AWS",
+        "GitHub Actions",
+        "pytest",
+        "SonarCloud"
+      ]
     },
     {
-      "title": "Développeur Frontend Senior",
-      "title_en": "Senior Frontend Developer",
-      "company": "Autre entreprise",
-      "location": "Paris",
-      "startMonth": 6,
-      "startYear": 2020,
-      "endMonth": 2,
+      "title": "Développeur Logiciel — Mission Spatiale SPICE",
+      "title_en": "Software Developer — SPICE Space Mission",
+      "company": "IAS — Institut d'Astrophysique Spatiale",
+      "location": "Orsay",
+      "startMonth": 10,
+      "startYear": 2021,
+      "endMonth": 3,
       "endYear": 2022,
-      "description": "Description du poste...",
-      "description_en": "Job description...",
-      "technologies": ["Vue.js", "GraphQL", "Tailwind CSS"]
+      "description": "Développement et maintenance des outils de planification et de monitoring pour l'instrument SPICE du Solar Orbiter (mission ESA/NASA). Interface Django de visualisation des timelines d'opérations satellitaires (MISO), gestion des IOR (Instrument Operation Requests), intégration des fichiers télémétriques SOOP. Optimisation des workflows de migration de données entre versions logicielles.",
+      "description_en": "Development and maintenance of planning and monitoring tools for the SPICE instrument on Solar Orbiter (ESA/NASA mission). Django-based visualization interface for satellite operation timelines (MISO), handling of IOR (Instrument Operation Requests), integration of SOOP telemetry files. Optimization of data migration workflows between software versions.",
+      "technologies": ["Python", "Django", "PostgreSQL", "JavaScript", "ESA SPICE", "SOOP", "gunicorn"]
+    },
+    {
+      "title": "Développeur Python — Microservices VUI",
+      "title_en": "Python Developer — VUI Microservices",
+      "company": "FMM",
+      "location": "Paris",
+      "startMonth": 1,
+      "startYear": 2019,
+      "endMonth": 9,
+      "endYear": 2021,
+      "description": "Conception et développement d'une architecture microservices pour une interface vocale (VUI) intégrant Alexa SDK. Mise en place des services Python avec Redis pour la gestion de l'état et la communication inter-services. Déploiement via Docker Compose, gestion des environnements ngrok et configuration des webhooks Alexa.",
+      "description_en": "Design and development of a microservices architecture for a Voice User Interface (VUI) integrating the Alexa SDK. Built Python services with Redis for state management and inter-service communication. Deployment via Docker Compose, ngrok environment setup and Alexa webhook configuration.",
+      "technologies": ["Python", "Flask", "Redis", "Alexa SDK", "Docker", "uWSGI", "PostgreSQL"]
+    },
+    {
+      "title": "Développeur Full Stack — Projets Clients",
+      "title_en": "Full Stack Developer — Client Projects",
+      "company": "Freelance",
+      "location": "Paris",
+      "startMonth": 1,
+      "startYear": 2016,
+      "endMonth": 12,
+      "endYear": 2018,
+      "description": "Développement d'applications web sur mesure pour des PME. Plateforme CRA (Compte-Rendu d'Activité) avec gestion des congés, exports et authentification multi-rôles. Plateforme Bluteams de gestion d'équipes commerciales. Stack Django, PostgreSQL, Bootstrap. Déploiement Linux (LEMP), scripts d'installation automatisés.",
+      "description_en": "Custom web applications for SMBs. CRA (Activity Report) platform with leave management, exports, and multi-role authentication. Bluteams commercial team management platform. Django, PostgreSQL, Bootstrap stack. Linux deployments (LEMP), automated install scripts.",
+      "technologies": ["Python", "Django", "PostgreSQL", "JavaScript", "Bootstrap", "Linux", "Nginx"]
     }
   ],
   "education": [
     {
-      "school": "Nom de l'école",
-      "degree": "Diplôme",
-      "degree_en": "Degree name in English",
-      "fieldOfStudy": "Domaine d'étude",
-      "fieldOfStudy_en": "Field in English",
-      "startYear": 2017,
-      "endYear": 2018
+      "school": "École 42",
+      "degree": "Cursus Informatique — Peer-to-peer learning",
+      "degree_en": "Computer Science Curriculum — Peer-to-peer learning",
+      "fieldOfStudy": "Développement logiciel, algorithmique, systèmes Unix",
+      "fieldOfStudy_en": "Software development, algorithms, Unix systems",
+      "startYear": 2015,
+      "endYear": 2017
     }
   ],
   "skills": [
-    {
-      "name": "React",
-      "level": 5,
-      "category": "frontend"
-    },
-    {
-      "name": "TypeScript",
-      "level": 5,
-      "category": "frontend"
-    },
-    {
-      "name": "Node.js",
-      "level": 4,
-      "category": "backend"
-    },
-    {
-      "name": "CSS / Tailwind",
-      "level": 5,
-      "category": "frontend"
-    },
-    {
-      "name": "Docker",
-      "level": 4,
-      "category": "devops"
-    },
-    {
-      "name": "Git",
-      "level": 5,
-      "category": "tools"
-    }
+    { "name": "Python", "level": 5, "category": "backend" },
+    { "name": "Django", "level": 5, "category": "backend" },
+    { "name": "FastAPI", "level": 4, "category": "backend" },
+    { "name": "PostgreSQL", "level": 4, "category": "backend" },
+    { "name": "Redis", "level": 4, "category": "backend" },
+    { "name": "WebSockets", "level": 4, "category": "backend" },
+    { "name": "React 19", "level": 4, "category": "frontend" },
+    { "name": "TypeScript", "level": 4, "category": "frontend" },
+    { "name": "Tailwind CSS", "level": 4, "category": "frontend" },
+    { "name": "Docker", "level": 5, "category": "devops" },
+    { "name": "Kubernetes", "level": 4, "category": "devops" },
+    { "name": "GitHub Actions", "level": 5, "category": "devops" },
+    { "name": "Helm", "level": 3, "category": "devops" },
+    { "name": "AWS", "level": 3, "category": "devops" },
+    { "name": "ArgoCD", "level": 3, "category": "devops" },
+    { "name": "Git", "level": 5, "category": "tools" },
+    { "name": "pytest", "level": 5, "category": "tools" },
+    { "name": "pre-commit", "level": 4, "category": "tools" },
+    { "name": "ruff / mypy", "level": 4, "category": "tools" },
+    { "name": "SonarCloud", "level": 3, "category": "tools" },
+    { "name": "Linux / Bash", "level": 4, "category": "tools" }
   ],
   "projects": [
     {
-      "title": "Nom du projet",
-      "title_en": "Project name",
-      "description": "Description du projet en français.",
-      "description_en": "Project description in English.",
+      "title": "ai-aggregator",
+      "title_en": "ai-aggregator",
+      "description": "API FastAPI multi-fournisseurs IA (OpenAI, Anthropic, Gemini, Mistral) avec routage intelligent, suivi de coûts et fallback. Déployé sur Kubernetes (bjw-s/app-template, ArgoCD).",
+      "description_en": "Multi-provider AI API (OpenAI, Anthropic, Gemini, Mistral) with smart routing, cost tracking, and fallback logic. Deployed on Kubernetes (bjw-s/app-template, ArgoCD).",
       "url": null,
-      "githubUrl": "https://github.com/votre-username/projet",
-      "technologies": ["React", "TypeScript"],
-      "impact": "Impact chiffré du projet",
-      "impact_en": "Quantified impact",
+      "githubUrl": "https://github.com/chrysa/ai-aggregator",
+      "technologies": ["FastAPI", "Python", "PostgreSQL", "Docker", "Kubernetes", "ArgoCD"],
+      "impact": "Agrégation de 4 fournisseurs IA en une seule API unifiée",
+      "impact_en": "4 AI providers unified behind a single API",
+      "stars": null
+    },
+    {
+      "title": "dev-nexus",
+      "title_en": "dev-nexus",
+      "description": "Plateforme de gestion de projets dev avec PKs ULID, création de tickets via langage naturel (IA), scoring automatique, dark mode et tests E2E Playwright. 219 fichiers, 20 000+ lignes sur une seule PR.",
+      "description_en": "Dev project management platform with ULID PKs, AI-powered natural language ticket creation, automatic scoring, dark mode, and Playwright E2E tests. 219 files, 20,000+ lines in a single PR.",
+      "url": null,
+      "githubUrl": "https://github.com/chrysa/dev-nexus",
+      "technologies": ["React 19", "TypeScript", "FastAPI", "PostgreSQL", "ULID", "Playwright"],
+      "impact": "Full-stack, de zéro à prod en une PR — 112 commits",
+      "impact_en": "Full-stack, zero to prod in one PR — 112 commits",
+      "stars": null
+    },
+    {
+      "title": "chrysa/server",
+      "title_en": "chrysa/server",
+      "description": "Infrastructure Kubernetes sur serveur dédié Kimsufi. Helm (bjw-s/app-template v4.6.2), ArgoCD GitOps, SealedSecrets, 10+ services déployés. Terraform pour le bootstrap.",
+      "description_en": "Kubernetes infrastructure on a bare-metal Kimsufi server. Helm (bjw-s/app-template v4.6.2), ArgoCD GitOps, SealedSecrets, 10+ deployed services. Terraform for bootstrapping.",
+      "url": null,
+      "githubUrl": "https://github.com/chrysa/server",
+      "technologies": ["Kubernetes", "Helm", "ArgoCD", "Terraform", "SealedSecrets", "Docker"],
+      "impact": "Cluster bare-metal autogéré avec GitOps complet",
+      "impact_en": "Self-managed bare-metal cluster with full GitOps",
+      "stars": null
+    },
+    {
+      "title": "padam-av-guideline-checker",
+      "title_en": "padam-av-guideline-checker",
+      "description": "Outil Python de vérification statique des guidelines de code pour la plateforme AV. Hooks pre-commit et intégration CI/CD pour garantir les standards qualité de l'équipe.",
+      "description_en": "Python static code guideline checker for the AV platform. Pre-commit hooks and CI/CD integration to enforce team quality standards.",
+      "url": null,
+      "githubUrl": null,
+      "technologies": ["Python", "pre-commit", "GitHub Actions", "ruff", "mypy"],
+      "impact": "Zéro déviation de guidelines sur 100+ PRs",
+      "impact_en": "Zero guideline deviations across 100+ PRs",
       "stars": null
     }
   ]
