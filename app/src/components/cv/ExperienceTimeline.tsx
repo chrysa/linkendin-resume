@@ -78,10 +78,10 @@ export function ExperienceTimeline() {
         >
           {t('sections.experience.title')}
         </motion.h2>
-        <div className="timeline" ref={timelineRef}>
-          <motion.div className="timeline__line" style={{ scaleY: lineScaleY, originY: 0 }} />
+        <div className="timeline" ref={timelineRef} aria-label={t('sections.experience.ariaTimeline') as string}>
+          <motion.div className="timeline__line" style={{ scaleY: lineScaleY, originY: 0 }} aria-hidden="true" />
           {profile.positions.map((pos, i) => (
-            <ExpCard key={i} position={pos} index={i} lang={lang} />
+            <ExpCard key={`${pos.company}-${pos.startDate.year}`} position={pos} index={i} lang={lang} />
           ))}
         </div>
       </div>

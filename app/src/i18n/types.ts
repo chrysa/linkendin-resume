@@ -6,13 +6,16 @@ export interface Translations {
     projects: string;
     education: string;
     contact: string;
+    ariaLabel: string;
   };
   hero: {
     greeting: string;
+    photoAlt: string;
+    newTab: string;
   };
   sections: {
-    impact: { label: string; title: string };
-    experience: { label: string; title: string; present: string };
+    impact: { label: string; title: string; ariaMetrics: string };
+    experience: { label: string; title: string; present: string; ariaTimeline: string };
     skills: {
       label: string;
       title: string;
@@ -26,8 +29,10 @@ export interface Translations {
       };
       hint: string;
       levels: string[];
+      ariaCloud: string;
+      ariaSkillsFilter: string;
     };
-    projects: { label: string; title: string };
+    projects: { label: string; title: string; githubLink: string; demoLink: string };
     education: { label: string; title: string };
     contact: {
       label: string;
