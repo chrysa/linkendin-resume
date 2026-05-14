@@ -43,6 +43,8 @@ export default [
       'react/prop-types': 'off',
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      // React Compiler rule (react-hooks v7): these patterns are intentional in React 18/19 without compiler
+      'react-hooks/set-state-in-effect': 'off',
     },
   },
   {

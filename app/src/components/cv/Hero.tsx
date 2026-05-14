@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { getProfile, getAvailability } from '@/data/profile';
@@ -15,12 +15,51 @@ const scaleInDelayed: Variants = {
   show: { opacity: 1, scale: 1, transition: { delay: 0.1, type: 'spring' as const, stiffness: 120 } },
 };
 
+function GlitchHeadline({ text }: Readonly<{ text: string }>) {
+  const [glitching, setGlitching] = useState(false);
+  const [displayed, setDisplayed] = useState(text);
+
+  // Cycle every 5s with a 400ms glitch flash
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setGlitching(true);
+      setTimeout(() => {
+        setDisplayed(text);
+        setGlitching(false);
+      }, 400);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [text]);
+
+  // Update displayed when text prop changes (lang switch)
+  useEffect(() => {
+    setDisplayed(text);
+  }, [text]);
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.p
+        key={displayed}
+        className={`hero__headline${glitching ? ' hero__headline--glitch' : ''}`}
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -8 }}
+        transition={{ duration: 0.25 }}
+        aria-live="polite"
+      >
+        {displayed}
+      </motion.p>
+    </AnimatePresence>
+  );
+}
+
 export function Hero({ onContactClick }: HeroProps) {
   const { t, i18n } = useTranslation();
   const lang = i18n.language.startsWith('en') ? 'en' : 'fr';
   const activeProfile = useProfile();
   const profile = getProfile(lang);
   const availability = getAvailability(lang);
+  const switchLang = () => i18n.changeLanguage(lang === 'fr' ? 'en' : 'fr');
 
   // Override du tagline si le profil actif en définit un
   const headline =
@@ -89,9 +128,7 @@ export function Hero({ onContactClick }: HeroProps) {
             <motion.h1 className="hero__name" variants={fadeUp}>
               {profile.firstName} <span className="gradient-text">{profile.lastName}</span>
             </motion.h1>
-            <motion.p className="hero__headline" variants={fadeUp}>
-              {headline}
-            </motion.p>
+            <GlitchHeadline text={headline} />
             <motion.p className="hero__summary" variants={fadeUp}>
               {profile.summary}
             </motion.p>
@@ -109,6 +146,27 @@ export function Hero({ onContactClick }: HeroProps) {
               >
                 <i className="bi bi-linkedin" aria-hidden="true" /> LinkedIn
               </a>
+              {profile.githubUrl && (
+                <a
+                  href={profile.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn--ghost"
+                  data-hover
+                  aria-label={`GitHub — ${t('hero.newTab')}`}
+                >
+                  <i className="bi bi-github" aria-hidden="true" /> GitHub
+                </a>
+              )}
+              <button
+                className="ctrl-btn"
+                onClick={switchLang}
+                data-hover
+                type="button"
+                aria-label={lang === 'fr' ? 'Switch to English' : 'Passer en français'}
+              >
+                {lang === 'fr' ? 'EN' : 'FR'}
+              </button>
             </motion.div>
           </div>
         </motion.div>
