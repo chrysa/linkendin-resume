@@ -9,6 +9,7 @@
     "photoUrl": "/assets/photo.jpg",
     "location": "Paris, Île-de-France",
     "linkedinUrl": "https://www.linkedin.com/in/anthonygreau",
+    "githubUrl": "https://github.com/chrysa",
     "availability": {
       "available": true,
       "label": "Disponible dès mai 2026",
@@ -22,13 +23,6 @@
     }
   },
   "metrics": [
-    {
-      "value": "1000+",
-      "label": "Commits",
-      "label_en": "Commits",
-      "sublabel": "sur la plateforme Padam AV",
-      "sublabel_en": "on the Padam AV platform"
-    },
     {
       "value": "8+",
       "label": "Ans d'expérience",

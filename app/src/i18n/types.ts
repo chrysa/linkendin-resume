@@ -32,7 +32,14 @@ export interface Translations {
       ariaCloud: string;
       ariaSkillsFilter: string;
     };
-    projects: { label: string; title: string; githubLink: string; demoLink: string };
+    projects: {
+      label: string;
+      title: string;
+      githubLink: string;
+      demoLink: string;
+      liveTitle: string;
+      contributionGraph: string;
+    };
     education: { label: string; title: string };
     contact: {
       label: string;
@@ -59,4 +66,33 @@ export interface Translations {
   };
   footer: { madeWith: string; source: string };
   theme: { switchToDark: string; switchToLight: string };
+  a11y: {
+    panelLabel: string;
+    close: string;
+    fontSize: string;
+    increaseFontSize: string;
+    decreaseFontSize: string;
+    highContrast: string;
+    dyslexiaFont: string;
+    reducedMotion: string;
+    reset: string;
+  };
+  palette: {
+    label: string;
+    placeholder: string;
+    noResults: string;
+    navigate: string;
+    select: string;
+    close: string;
+    groupNav: string;
+    groupActions: string;
+    groupAppearance: string;
+    print: string;
+  };
+  askme: {
+    label: string;
+    placeholder: string;
+    send: string;
+    typing: string;
+  };
 }
