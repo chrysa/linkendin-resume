@@ -30,7 +30,7 @@ body {
   background-color: var(--clr-bg);
   color: var(--clr-text);
   font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: calc(1rem + var(--a11y-font-offset, 0px));
   line-height: 1.6;
   min-height: 100vh;
 }
