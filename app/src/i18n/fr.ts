@@ -48,6 +48,8 @@ const fr: Translations = {
       title: 'Concret, livré, utilisé.',
       githubLink: 'Voir {{title}} sur GitHub (nouvel onglet)',
       demoLink: 'Voir la démo de {{title}} (nouvel onglet)',
+      liveTitle: 'Repos GitHub publics',
+      contributionGraph: 'Graphique de contributions GitHub',
     },
     education: {
       label: 'Formation',
@@ -88,6 +90,35 @@ const fr: Translations = {
   theme: {
     switchToDark: 'Thème sombre',
     switchToLight: 'Thème clair',
+  },
+  a11y: {
+    panelLabel: "Options d'accessibilité",
+    close: 'Fermer',
+    fontSize: 'Taille du texte',
+    increaseFontSize: 'Augmenter la taille',
+    decreaseFontSize: 'Réduire la taille',
+    highContrast: 'Contraste élevé',
+    dyslexiaFont: 'Police dyslexie',
+    reducedMotion: 'Réduire les animations',
+    reset: 'Réinitialiser',
+  },
+  palette: {
+    label: 'Palette de commandes',
+    placeholder: 'Rechercher une action...',
+    noResults: 'Aucun résultat',
+    navigate: 'naviguer',
+    select: 'sélectionner',
+    close: 'fermer',
+    groupNav: 'Navigation',
+    groupActions: 'Actions',
+    groupAppearance: 'Apparence',
+    print: 'Imprimer / Télécharger PDF',
+  },
+  askme: {
+    label: 'Demandez-moi quelque chose',
+    placeholder: 'Posez votre question...',
+    send: 'Envoyer',
+    typing: 'Anthony réfléchit...',
   },
 };
 

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
@@ -22,6 +22,8 @@ vi.mock('framer-motion', () => ({
   useScroll: () => ({ scrollYProgress: { get: () => 0 } }),
   useSpring: (v: unknown) => v,
   useInView: () => false,
+  useMotionValue: () => ({ set: vi.fn(), get: () => 0 }),
+  useTransform: (_v: unknown, _from: unknown, to: unknown[]) => to[0],
 }));
 
 // Mock react-i18next
@@ -95,5 +97,79 @@ describe('ThemeToggle', () => {
     await user.click(button);
     // After toggle, data-theme should change (dark → light)
     expect(document.documentElement.getAttribute('data-theme')).toBe('light');
+  });
+});
+
+import { CustomCursor } from '@/components/ui/CustomCursor';
+
+describe('CustomCursor', () => {
+  beforeEach(() => {
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: (query: string) => ({
+        matches: false, // hover: none → false (so cursor is enabled)
+        media: query,
+        onchange: null,
+        addListener: () => {},
+        removeListener: () => {},
+        addEventListener: () => {},
+        removeEventListener: () => {},
+        dispatchEvent: () => false,
+      }),
+    });
+  });
+
+  it('renders nothing initially (not visible until mousemove)', () => {
+    const { container } = render(React.createElement(CustomCursor));
+    // Before mousemove, cursor is hidden → null
+    expect(container.firstChild).toBeNull();
+  });
+
+  it('becomes visible after mousemove event', () => {
+    const { container } = render(React.createElement(CustomCursor));
+    fireEvent.mouseMove(window, { clientX: 100, clientY: 200 });
+    // After mousemove, cursor elements should be visible
+    expect(container.firstChild).not.toBeNull();
+  });
+
+  it('hides cursor on mouseleave document', () => {
+    const { container } = render(React.createElement(CustomCursor));
+    fireEvent.mouseMove(window, { clientX: 50, clientY: 50 });
+    expect(container.firstChild).not.toBeNull();
+    fireEvent.mouseLeave(document);
+    expect(container.firstChild).toBeNull();
+  });
+
+  it('skips cursor on touch devices (hover: none)', () => {
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: () => ({
+        matches: true,
+        media: '',
+        onchange: null,
+        addListener: () => {},
+        removeListener: () => {},
+        addEventListener: () => {},
+        removeEventListener: () => {},
+        dispatchEvent: () => false,
+      }),
+    });
+    const { container } = render(React.createElement(CustomCursor));
+    fireEvent.mouseMove(window, { clientX: 100, clientY: 100 });
+    expect(container.firstChild).toBeNull();
+  });
+});
+
+describe('FloatingCTA visibility', () => {
+  it('becomes visible after scroll past 70% of window height', () => {
+    const onContactClick = vi.fn();
+    const { container } = render(React.createElement(FloatingCTA, { onContactClick }));
+    // Simulate scrollY > innerHeight * 0.7
+    Object.defineProperty(window, 'scrollY', { writable: true, value: 800 });
+    Object.defineProperty(window, 'innerHeight', { writable: true, value: 900 });
+    fireEvent.scroll(window);
+    // Button should now be rendered
+    const btn = container.querySelector('button');
+    expect(btn).not.toBeNull();
   });
 });

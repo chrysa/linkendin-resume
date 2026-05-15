@@ -67,6 +67,16 @@ export function Navbar({ onContactClick }: { onContactClick: () => void }) {
               >
                 {lang === 'fr' ? 'EN' : 'FR'}
               </button>
+              <button
+                className="ctrl-btn"
+                onClick={() => globalThis.print()}
+                data-hover="true"
+                aria-label={lang === 'fr' ? 'Télécharger en PDF' : 'Download as PDF'}
+                type="button"
+                title={lang === 'fr' ? 'Imprimer / PDF' : 'Print / PDF'}
+              >
+                <i className="bi bi-printer" aria-hidden="true" />
+              </button>
               <ThemeToggle />
               <button
                 className="btn btn--primary btn--sm"

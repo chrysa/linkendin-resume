@@ -26,6 +26,7 @@ export function getProfile(lang = 'fr', filter?: CvProfileFilter): LinkedInProfi
     photoUrl: b.photoUrl,
     location: b.location,
     profileUrl: b.linkedinUrl,
+    githubUrl: (b as unknown as Record<string, string>).githubUrl ?? '',
     positions: experiences.map((e) => ({
       title: pick(e.title, e.title_en, lang),
       company: e.company,

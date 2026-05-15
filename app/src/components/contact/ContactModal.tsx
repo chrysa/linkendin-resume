@@ -81,6 +81,16 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
     setStatus('loading');
 
+    const combined = (form.subject + ' ' + form.message).toLowerCase();
+    const labels: string[] = [];
+
+    if (/freelance|mission|prestation|contrat/.test(combined)) labels.push('freelance');
+    if (/cdi|emploi|poste|recrutement|recruteur|opportunit/.test(combined)) labels.push('job-offer');
+    if (/collaboration|partenariat|partner/.test(combined)) labels.push('collaboration');
+    if (/bug|erreur|probl[eè]me|issue/.test(combined)) labels.push('bug');
+    if (/question|info|renseignement/.test(combined)) labels.push('question');
+    if (labels.length === 0) labels.push('contact');
+
     const title = encodeURIComponent('[Contact] ' + form.subject);
     const body = encodeURIComponent('**De :** ' + form.senderName + '\n\n' + form.message + '\n\n---\n*CV en ligne*');
     const url =
@@ -92,7 +102,8 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
       title +
       '&body=' +
       body +
-      '&labels=contact';
+      '&labels=' +
+      encodeURIComponent(labels.join(','));
 
     await new Promise((r) => setTimeout(r, 800));
 
