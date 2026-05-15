@@ -6,7 +6,7 @@
 
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white&style=flat-square)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white&style=flat-square)](https://typescriptlang.org)
-[![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white&style=flat-square)](https://vitejs.dev)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white&style=flat-square)](https://vitejs.dev)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-FF0055?logo=framer&logoColor=white&style=flat-square)](https://www.framer.com/motion)
 [![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white&style=flat-square)](https://hub.docker.com)
 [![CI](https://github.com/chrysa/linkendin-resume/actions/workflows/ci.yml/badge.svg)](https://github.com/chrysa/linkendin-resume/actions/workflows/ci.yml)
@@ -31,10 +31,27 @@ Traditional online CVs look like PDFs on a page. This project takes the opposite
 | White, institutional | Dark theme, strong identity |
 | Task list | Quantified results, visible impact |
 | Static navigation | Scroll animations, micro-interactions |
-| Email form → spam | Contact via GitHub Issues — traceable |
-| Scattered data sources | All data in `src/data/profile.ts` |
+| Email form → spam | Contact via GitHub Issues — traceable, smart labels |
+| Scattered data sources | All data in `cv.json` — single source of truth |
+| Monolingual | FR + EN toggle, persisted in localStorage |
 
 The goal: apply **Cialdini's persuasion principles** (authority, social proof, reciprocity) to portfolio design.
+
+---
+
+## What makes this stand out
+
+| Feature | How |
+|---|---|
+| **Terminal easter egg** | Press `` ` `` — a macOS-style terminal opens with 9 commands (`whoami`, `git log`, `ls projects`, `skills`, `cat cv.json`, …) |
+| **Command palette** (⌘K / Ctrl+K) | VS Code-style palette — navigate sections, toggle theme, switch language, print PDF |
+| **Accessibility panel** | Floating panel: font size (+/−4 steps), high contrast, dyslexia font, reduced motion — persisted per visitor |
+| **AI Ask Me widget** | Chat button that answers questions about experience, skills, availability using `cv.json` as knowledge base |
+| **Role glitch cycling** | Hero headline fades/glitches every 5 s — subtle animation that draws attention |
+| **Print / PDF mode** | `@media print` hides all interactive chrome, clean A4 layout for `window.print()` |
+| **Live GitHub repos** | `useGitHubRepos` hook fetches public repos + skeleton loading + GitHub contribution graph |
+| **Smart contact labels** | Regex analysis of the contact message → auto-applies `freelance`, `job-offer`, `collaboration`, `bug`, `question` labels to the GitHub issue |
+| **Multi-profile URLs** | `/?profile=backend` filters skills/experience/projects for a targeted recruiter send |
 
 ---
 
@@ -42,13 +59,15 @@ The goal: apply **Cialdini's persuasion principles** (authority, social proof, r
 
 | Layer | Technology |
 |---|---|
-| Framework | React 19 + Vite 7 |
+| Framework | React 19 + Vite 8 |
 | Language | TypeScript 5.9 (strict) |
 | Animations | Framer Motion 12 |
+| i18n | i18next + react-i18next (FR/EN) |
 | Validation | Zod 3 |
 | Styling | CSS custom properties (100% vanilla, zero framework) |
-| Tests | Vitest + Testing Library |
-| Hosting | Vercel (recommended) |
+| Icons | Bootstrap Icons (CSS font) |
+| Tests | Vitest + Testing Library (116 tests) |
+| Hosting | Vercel (recommended) / Docker + Traefik |
 
 ---
 
@@ -79,17 +98,17 @@ Edit `.env` with your values:
 ```env
 APP_PORT=3000
 APP_DOMAIN=resume.chrysa.dev
-VITE_GITHUB_OWNER=chrysa
+VITE_GITHUB_OWNER=your-github-username
 VITE_GITHUB_REPO=contact
 ```
 
-> The contact system generates a pre-filled link to GitHub Issues. The visitor must be logged in to GitHub. No client-side token required.
+> The contact system generates a pre-filled link to GitHub Issues. Visitors must be logged into GitHub. No server token required — the app is fully static.
 
 ### Local development
 
 ```bash
 make dev          # Vite dev server → http://localhost:3000
-make test         # Unit tests
+make test         # Unit tests (116 tests)
 make ci           # lint + type-check + test + build
 ```
 
@@ -98,6 +117,15 @@ make ci           # lint + type-check + test + build
 ```bash
 make watch        # docker compose up --watch (hot-reload)
 ```
+
+---
+
+## Keyboard shortcuts
+
+| Shortcut | Action |
+|---|---|
+| `` ` `` | Open terminal easter egg |
+| ⌘K / Ctrl+K | Open command palette |
 
 ---
 
@@ -150,19 +178,21 @@ Traefik automatically picks up the labels and generates the Let's Encrypt certif
 
 ## Customization
 
-All CV data is centralized in a **single file**:
+### CV data
+
+All CV content lives in **`cv.json`** at the project root — it is the only file you need to edit:
 
 ```
-src/data/profile.ts
+cv.json
+├── basics          → name, headline, photo, location, availability, githubUrl
+├── metrics[]       → 3–4 impact numbers shown in the Impact section
+├── experience[]    → timeline entries (bilingual via _en suffix)
+├── education[]
+├── skills[]        → name + level (1–5) + category
+└── projects[]      → highlighted projects (static cards)
 ```
 
-Edit it to update:
-
-- `PROFILE` — your info, experience, education, skills
-- `METRICS` — your 4 impact metrics (the numbers that impress)
-- `PROJECTS` — your featured projects
-- `SKILLS` — your stack with levels (1→5)
-- `AVAILABILITY` — your availability badge
+Place your photo at `public/assets/photo.jpg`.
 
 ### Design tokens
 
@@ -175,37 +205,63 @@ The entire design system lives in `src/styles/tokens.css`:
 
 Change these two values to adapt the visual identity in 30 seconds.
 
+### Accessibility tokens
+
+Added automatically when the visitor uses the accessibility panel:
+
+```css
+[data-high-contrast='true']  { /* forced white-on-black palette */ }
+[data-dyslexia='true']       { --font-sans: 'OpenDyslexic', … }
+[data-reduced-motion='true'] { /* disables all animations */ }
+```
+
 ---
 
 ## Project structure
 
 ```
-src/
+app/src/
 ├── data/
-│   └── profile.ts          ← All your CV data here
+│   ├── profile.ts          ← Getters for cv.json + GITHUB_CONFIG
+│   └── profiles.ts         ← Multi-profile map (default/freelance/backend/fullstack)
 ├── components/
 │   ├── cv/
-│   │   ├── Hero.tsx          Hero + availability badge
-│   │   ├── ImpactMetrics.tsx 4 quantified metrics
+│   │   ├── Hero.tsx              Hero + glitch headline + GitHub/lang buttons
+│   │   ├── ImpactMetrics.tsx     Animated countUp metrics
 │   │   ├── ExperienceTimeline.tsx
-│   │   ├── SkillsCloud.tsx   Interactive stack (hover = level)
-│   │   ├── ProjectsGrid.tsx  Projects with impact
+│   │   ├── SkillsCloud.tsx       Filterable skill cloud
+│   │   ├── ProjectsGrid.tsx      Static cards + live GitHub repos + contribution graph
 │   │   ├── EducationSection.tsx
-│   │   ├── ContactSection.tsx Final CTA
-│   │   └── Navbar.tsx        Sticky, appears on scroll
-│   └── contact/
-│       └── ContactModal.tsx  Form → GitHub Issue
-├── pages/
-│   └── CVPage.tsx
-├── styles/
-│   ├── tokens.css            Design tokens
-│   ├── globals.css           Reset + utilities
-│   ├── sections.css          Per-section styles
-│   ├── modal.css
-│   └── responsive.css        Breakpoints + print
-└── types/
-    ├── linkedin.d.ts
-    └── github.d.ts
+│   │   ├── ContactSection.tsx    Final CTA
+│   │   └── Navbar.tsx            Sticky, lang + theme + print button
+│   ├── contact/
+│   │   └── ContactModal.tsx      GitHub Issues (smart labels) / WhatsApp
+│   └── ui/
+│       ├── CustomCursor.tsx      Custom dot cursor (desktop only)
+│       ├── ScrollProgress.tsx    Top progress bar
+│       ├── FloatingCTA.tsx       Floating contact button (after 70% scroll)
+│       ├── ThemeToggle.tsx
+│       ├── AccessibilityPanel.tsx  ← NEW: a11y options panel
+│       ├── TerminalEasterEgg.tsx   ← NEW: backtick terminal
+│       ├── CommandPalette.tsx      ← NEW: ⌘K command palette
+│       └── AskMeWidget.tsx         ← NEW: AI chat widget
+├── hooks/
+│   ├── useTheme.tsx
+│   ├── useCountUp.ts
+│   ├── useDocumentMeta.ts
+│   └── useGitHubRepos.ts         ← NEW: live public repos from GitHub API
+├── i18n/
+│   ├── fr.ts / en.ts             ← UI strings (a11y, palette, askme keys added)
+│   ├── types.ts                  ← Translations interface
+│   └── setup.ts
+└── styles/
+    ├── tokens.css                Design tokens + a11y dataset overrides
+    ├── globals.css               Reset + utilities + @a11y-font-offset
+    ├── components.css            Buttons + all new components CSS
+    ├── sections.css              Per-section styles
+    ├── modal.css
+    ├── animations.css            Cursor, progress bar, floating CTA
+    └── responsive.css            Breakpoints
 ```
 
 ---
@@ -217,7 +273,7 @@ make dev            # Dev server (port 3000)
 make build-prod     # Production build
 make lint           # ESLint
 make type-check     # TypeScript check
-make test           # Unit tests (Vitest)
+make test           # Unit tests (Vitest) — 116 tests
 make test-coverage  # Coverage report
 make ci             # All CI checks locally
 make watch          # Dev container with hot-reload
@@ -228,11 +284,11 @@ make help           # List all commands
 
 ## Persuasion / UX principles applied
 
-- **Authority** — visible impact numbers, well-known company logos
-- **Social proof** — GitHub projects with stars
+- **Authority** — visible impact numbers, well-known company logos, live GitHub contribution graph
+- **Social proof** — GitHub projects with stars, public repos count
 - **Scarcity** — dynamic "Available from X" badge in hero
 - **Reciprocity** — open source projects accessible directly
-- **Liking** — personal tone, photo, first-person voice
+- **Liking** — personal tone, photo, first-person voice, easter eggs
 - **Consistency** — narrative timeline with logical progression
 
 ---

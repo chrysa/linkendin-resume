@@ -145,4 +145,24 @@ describe('data/profile', () => {
       expect(NAV_SECTION_IDS).toContain('projects');
     });
   });
+
+  describe('CONTACT_CONFIG', () => {
+    it('exposes whatsapp and whatsappPrefill function', async () => {
+      const { CONTACT_CONFIG } = await import('@/data/profile');
+      expect(typeof CONTACT_CONFIG.whatsapp).toBe('string');
+      expect(typeof CONTACT_CONFIG.whatsappPrefill).toBe('function');
+    });
+
+    it('whatsappPrefill returns string for fr', async () => {
+      const { CONTACT_CONFIG } = await import('@/data/profile');
+      const result = CONTACT_CONFIG.whatsappPrefill('fr');
+      expect(typeof result).toBe('string');
+    });
+
+    it('whatsappPrefill returns string for en', async () => {
+      const { CONTACT_CONFIG } = await import('@/data/profile');
+      const result = CONTACT_CONFIG.whatsappPrefill('en');
+      expect(typeof result).toBe('string');
+    });
+  });
 });

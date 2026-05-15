@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import en from '@/i18n/en';
 import fr from '@/i18n/fr';
+// Import setup to cover the i18n initialization side-effect
+import '@/i18n/setup';
 
 describe('i18n translations', () => {
   it('en has all required nav keys', () => {
