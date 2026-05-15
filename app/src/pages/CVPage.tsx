@@ -12,6 +12,10 @@ import { ContactModal } from '@/components/contact/ContactModal';
 import { ScrollProgress } from '@/components/ui/ScrollProgress';
 import { CustomCursor } from '@/components/ui/CustomCursor';
 import { FloatingCTA } from '@/components/ui/FloatingCTA';
+import { AccessibilityPanel } from '@/components/ui/AccessibilityPanel';
+import { TerminalEasterEgg } from '@/components/ui/TerminalEasterEgg';
+import { CommandPalette } from '@/components/ui/CommandPalette';
+import { AskMeWidget } from '@/components/ui/AskMeWidget';
 import { useDocumentMeta } from '@/hooks/useDocumentMeta';
 
 export function CVPage() {
@@ -25,6 +29,8 @@ export function CVPage() {
       <ScrollProgress />
       <CustomCursor />
       <Navbar onContactClick={openModal} />
+      <CommandPalette onContactClick={openModal} />
+      <TerminalEasterEgg />
 
       <main id="main-content" tabIndex={-1}>
         <Hero onContactClick={openModal} />
@@ -53,6 +59,8 @@ export function CVPage() {
       </footer>
 
       <FloatingCTA onContactClick={openModal} />
+      <AccessibilityPanel />
+      <AskMeWidget />
       <ContactModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
     </>
   );

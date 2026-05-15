@@ -25,6 +25,7 @@ export interface LinkedInProfile {
   photoUrl: string;
   location: string;
   profileUrl: string;
+  githubUrl?: string;
   email?: string;
   positions: Position[];
   educations: Education[];

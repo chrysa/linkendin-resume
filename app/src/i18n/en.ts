@@ -48,6 +48,8 @@ const en: Translations = {
       title: 'Shipped and used.',
       githubLink: 'View {{title}} on GitHub (new tab)',
       demoLink: 'View {{title}} demo (new tab)',
+      liveTitle: 'Public GitHub repos',
+      contributionGraph: 'GitHub contribution graph',
     },
     education: {
       label: 'Education',
@@ -88,6 +90,35 @@ const en: Translations = {
   theme: {
     switchToDark: 'Dark mode',
     switchToLight: 'Light mode',
+  },
+  a11y: {
+    panelLabel: 'Accessibility options',
+    close: 'Close',
+    fontSize: 'Font size',
+    increaseFontSize: 'Increase font size',
+    decreaseFontSize: 'Decrease font size',
+    highContrast: 'High contrast',
+    dyslexiaFont: 'Dyslexia font',
+    reducedMotion: 'Reduce animations',
+    reset: 'Reset',
+  },
+  palette: {
+    label: 'Command palette',
+    placeholder: 'Search actions...',
+    noResults: 'No results',
+    navigate: 'navigate',
+    select: 'select',
+    close: 'close',
+    groupNav: 'Navigation',
+    groupActions: 'Actions',
+    groupAppearance: 'Appearance',
+    print: 'Print / Download PDF',
+  },
+  askme: {
+    label: 'Ask me anything',
+    placeholder: 'Ask a question...',
+    send: 'Send',
+    typing: 'Anthony is thinking...',
   },
 };
 
