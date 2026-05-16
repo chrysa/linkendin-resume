@@ -14,6 +14,12 @@ export default defineConfig({
       tempDir: '/tmp/vitest-coverage-tmp',
       include: ['src/**/*.{ts,tsx}'],
       exclude: ['src/__tests__/**', 'src/types/**', 'src/vite-env.d.ts', '**/*.d.ts'],
+      thresholds: {
+        lines: 65,
+        branches: 50,
+        functions: 55,
+        statements: 65,
+      },
     },
   },
   resolve: {
