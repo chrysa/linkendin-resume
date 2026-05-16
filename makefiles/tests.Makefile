@@ -3,6 +3,10 @@ test: ensure-container ## Run unit tests
 	$(call npm_simple,test)
 	@echo "$(COLOR_GREEN)✓ Tests passed$(COLOR_RESET)"
 
+docker-test: ## Run tests inside Docker (CI-compatible, no docker-compose needed)
+	docker build -f Dockerfile.test -t linkendin-resume-test .
+	docker run --rm linkendin-resume-test
+
 test-watch: ensure-container ## Run tests in watch mode
 	$(call npm_simple,test:watch)
 

@@ -1,0 +1,9 @@
+FROM node:24-alpine3.21 AS deps
+WORKDIR /app
+COPY app/package.json app/package-lock.json app/.npmrc ./
+RUN npm ci
+
+FROM deps AS test
+COPY app/ .
+ENV PATH=/app/node_modules/.bin:$PATH
+CMD ["npm", "run", "test:coverage"]
