@@ -1,5 +1,7 @@
 # linkendin-resume — Claude context
 
+> **Claude Code**: also read `.github/copilot-instructions.md` and `.github/instructions/*.instructions.md` for code specifications.
+
 ## What does this project do?
 
 Persuasive online CV / personal resume website. Dark-themed, one-page, animated React app that stands out visually from traditional static PDF-style CVs. Contact is handled by redirecting visitors to GitHub Issues (no backend email form). Live at **resume.chrysa.dev**.
