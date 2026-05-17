@@ -14,8 +14,8 @@ const schema = z.object({
 type FormErrors = Partial<Record<keyof ContactFormData, string>>;
 
 interface ContactModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+  readonly isOpen: boolean;
+  readonly onClose: () => void;
 }
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
