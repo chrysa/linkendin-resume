@@ -15,4 +15,3 @@ concurrency:
 jobs:
   call:
     uses: chrysa/github-actions/.github/workflows/detect-conflicts.yml@main
-    secrets: inherit
