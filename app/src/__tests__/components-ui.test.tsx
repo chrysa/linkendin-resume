@@ -53,8 +53,8 @@ describe('ScrollProgress', () => {
 describe('FloatingCTA', () => {
   it('renders without crashing', () => {
     const onContactClick = vi.fn();
-    render(React.createElement(FloatingCTA, { onContactClick }));
-    // Button not visible initially (scrollY = 0)
+    const { container } = render(React.createElement(FloatingCTA, { onContactClick }));
+    expect(container).toBeDefined();
   });
 
   it('calls onContactClick when button is clicked (when visible)', () => {

@@ -241,11 +241,13 @@ export function CommandPalette({ onContactClick }: CommandPaletteProps) {
                 role="combobox"
                 aria-expanded={true}
                 aria-autocomplete="list"
+                aria-controls="palette-listbox"
+                aria-haspopup="listbox"
               />
               <kbd className="palette__esc">Esc</kbd>
             </div>
 
-            <div className="palette__list" role="listbox" aria-label={t('palette.label')}>
+            <div id="palette-listbox" className="palette__list" role="listbox" aria-label={t('palette.label')}>
               {grouped.size === 0 ? (
                 <div className="palette__empty">{t('palette.noResults')}</div>
               ) : (

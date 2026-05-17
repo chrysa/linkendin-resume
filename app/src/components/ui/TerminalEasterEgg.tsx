@@ -4,11 +4,21 @@ import { useTranslation } from 'react-i18next';
 import cvData from '../../../cv.json';
 
 interface TerminalLine {
+  id: number;
   type: 'input' | 'output' | 'error';
   content: string;
 }
 
 const PROMPT = '~/cv $ ';
+
+// Render ANSI-like color codes minimally
+function renderLine(content: string) {
+  // Using dynamic RegExp to avoid no-control-regex linting for ESC (\x1b)
+  const esc = '\x1b';
+  return content
+    .replace(new RegExp(`${esc}\\[33m(.*?)${esc}\\[0m`, 'g'), '<span style="color:#f59e0b">$1</span>')
+    .replace(new RegExp(`${esc}\\[36m(.*?)${esc}\\[0m`, 'g'), '<span style="color:#06b6d4">$1</span>');
+}
 
 function buildCommands(lang: string) {
   const t = (fr: string, en: string) => (lang.startsWith('en') ? en : fr);
@@ -75,6 +85,7 @@ function buildCommands(lang: string) {
 export function TerminalEasterEgg() {
   const [open, setOpen] = useState(false);
   const [lines, setLines] = useState<TerminalLine[]>([]);
+  const lineIdRef = useRef(0);
   const [input, setInput] = useState('');
   const [history, setHistory] = useState<string[]>([]);
   const [histIdx, setHistIdx] = useState(-1);
@@ -101,10 +112,10 @@ export function TerminalEasterEgg() {
     if (open) {
       if (lines.length === 0) {
         setLines([
-          { type: 'output', content: `Welcome to ${cvData.basics.firstName}'s terminal 👋` },
-          { type: 'output', content: 'Type \x1b[36mhelp\x1b[0m to see available commands.' },
-          { type: 'output', content: 'Press \x1b[33m`\x1b[0m or \x1b[33mEsc\x1b[0m to close.' },
-          { type: 'output', content: '' },
+          { id: lineIdRef.current++, type: 'output', content: `Welcome to ${cvData.basics.firstName}'s terminal 👋` },
+          { id: lineIdRef.current++, type: 'output', content: 'Type \x1b[36mhelp\x1b[0m to see available commands.' },
+          { id: lineIdRef.current++, type: 'output', content: 'Press \x1b[33m`\x1b[0m or \x1b[33mEsc\x1b[0m to close.' },
+          { id: lineIdRef.current++, type: 'output', content: '' },
         ]);
       }
       setTimeout(() => inputRef.current?.focus(), 80);
@@ -120,7 +131,7 @@ export function TerminalEasterEgg() {
       const cmd = raw.trim();
       if (!cmd) return;
 
-      setLines((prev) => [...prev, { type: 'input', content: PROMPT + cmd }]);
+      setLines((prev) => [...prev, { id: lineIdRef.current++, type: 'input', content: PROMPT + cmd }]);
       setHistory((h) => [cmd, ...h]);
       setHistIdx(-1);
 
@@ -138,14 +149,14 @@ export function TerminalEasterEgg() {
         const output = handler();
         setLines((prev) => [
           ...prev,
-          ...output.map((l) => ({ type: 'output' as const, content: l })),
-          { type: 'output', content: '' },
+          ...output.map((l) => ({ id: lineIdRef.current++, type: 'output' as const, content: l })),
+          { id: lineIdRef.current++, type: 'output', content: '' },
         ]);
       } else {
         setLines((prev) => [
           ...prev,
-          { type: 'error', content: `command not found: ${cmd}. Type \x1b[36mhelp\x1b[0m.` },
-          { type: 'output', content: '' },
+          { id: lineIdRef.current++, type: 'error', content: `command not found: ${cmd}. Type \x1b[36mhelp\x1b[0m.` },
+          { id: lineIdRef.current++, type: 'output', content: '' },
         ]);
       }
     },
@@ -169,14 +180,7 @@ export function TerminalEasterEgg() {
     }
   };
 
-  // Render ANSI-like color codes minimally
-  function renderLine(content: string) {
-    // Using dynamic RegExp to avoid no-control-regex linting for ESC (\x1b)
-    const esc = '\x1b';
-    return content
-      .replace(new RegExp(`${esc}\\[33m(.*?)${esc}\\[0m`, 'g'), '<span style="color:#f59e0b">$1</span>')
-      .replace(new RegExp(`${esc}\\[36m(.*?)${esc}\\[0m`, 'g'), '<span style="color:#06b6d4">$1</span>');
-  }
+  // Render ANSI-like color codes minimally — defined at module scope above
 
   return (
     <AnimatePresence>
@@ -205,9 +209,9 @@ export function TerminalEasterEgg() {
 
           {/* Output */}
           <div className="terminal__output" aria-live="polite" aria-atomic="false">
-            {lines.map((line, i) => (
+            {lines.map((line) => (
               <div
-                key={i}
+                key={line.id}
                 className={`terminal__line terminal__line--${line.type}`}
                 dangerouslySetInnerHTML={{ __html: renderLine(line.content) || '&nbsp;' }}
               />
