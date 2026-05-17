@@ -21,6 +21,17 @@ interface ContactModalProps {
 type Status = 'idle' | 'loading' | 'success' | 'error';
 type Tab = 'github' | 'whatsapp';
 
+function inferLabels(form: ContactFormData): string[] {
+  const combined = (form.subject + ' ' + form.message).toLowerCase();
+  const labels: string[] = [];
+  if (/freelance|mission|prestation|contrat/.test(combined)) labels.push('freelance');
+  if (/cdi|emploi|poste|recrutement|recruteur|opportunit/.test(combined)) labels.push('job-offer');
+  if (/collaboration|partenariat|partner/.test(combined)) labels.push('collaboration');
+  if (/bug|erreur|probl[eè]me|issue/.test(combined)) labels.push('bug');
+  if (/question|info|renseignement/.test(combined)) labels.push('question');
+  return labels.length > 0 ? labels : ['contact'];
+}
+
 export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const { t, i18n } = useTranslation();
   const lang = i18n.language.startsWith('en') ? 'en' : 'fr';
@@ -81,15 +92,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
     setStatus('loading');
 
-    const combined = (form.subject + ' ' + form.message).toLowerCase();
-    const labels: string[] = [];
-
-    if (/freelance|mission|prestation|contrat/.test(combined)) labels.push('freelance');
-    if (/cdi|emploi|poste|recrutement|recruteur|opportunit/.test(combined)) labels.push('job-offer');
-    if (/collaboration|partenariat|partner/.test(combined)) labels.push('collaboration');
-    if (/bug|erreur|probl[eè]me|issue/.test(combined)) labels.push('bug');
-    if (/question|info|renseignement/.test(combined)) labels.push('question');
-    if (labels.length === 0) labels.push('contact');
+    const labels = inferLabels(form);
 
     const title = encodeURIComponent('[Contact] ' + form.subject);
     const body = encodeURIComponent('**De :** ' + form.senderName + '\n\n' + form.message + '\n\n---\n*CV en ligne*');
