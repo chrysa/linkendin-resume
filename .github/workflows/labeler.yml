@@ -12,4 +12,3 @@ on:
 jobs:
   call:
     uses: chrysa/github-actions/.github/workflows/labeler.yml@main
-    secrets: inherit
