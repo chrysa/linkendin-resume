@@ -20,7 +20,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   });
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.dataset['theme'] = theme;
     localStorage.setItem('theme', theme);
   }, [theme]);
 
