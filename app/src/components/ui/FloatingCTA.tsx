@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
-export function FloatingCTA({ onContactClick }: { onContactClick: () => void }) {
+export function FloatingCTA({ onContactClick }: { readonly onContactClick: () => void }) {
   const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
 
