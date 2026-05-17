@@ -21,8 +21,8 @@ describe('i18n translations', () => {
   });
 
   it('en and fr have the same top-level keys', () => {
-    const enKeys = Object.keys(en).sort();
-    const frKeys = Object.keys(fr).sort();
+    const enKeys = Object.keys(en).sort((a, b) => a.localeCompare(b));
+    const frKeys = Object.keys(fr).sort((a, b) => a.localeCompare(b));
     expect(enKeys).toEqual(frKeys);
   });
 
