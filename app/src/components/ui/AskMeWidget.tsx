@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import cvData from '../../../cv.json';
 
 interface Message {
+  id: number;
   role: 'user' | 'assistant';
   content: string;
 }
@@ -84,6 +85,7 @@ function buildAnswer(question: string, lang: string): string {
 export function AskMeWidget() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
+  const msgIdRef = useRef(0);
   const [input, setInput] = useState('');
   const [typing, setTyping] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -94,6 +96,7 @@ export function AskMeWidget() {
     if (open && messages.length === 0) {
       setMessages([
         {
+          id: msgIdRef.current++,
           role: 'assistant',
           content: i18n.language.startsWith('en')
             ? `Hi! I'm Anthony's CV assistant. Ask me anything about his experience, skills, or availability! 👋`
@@ -112,7 +115,7 @@ export function AskMeWidget() {
     const trimmed = input.trim();
     if (!trimmed) return;
 
-    setMessages((m) => [...m, { role: 'user', content: trimmed }]);
+    setMessages((m) => [...m, { id: msgIdRef.current++, role: 'user', content: trimmed }]);
     setInput('');
     setTyping(true);
 
@@ -120,7 +123,7 @@ export function AskMeWidget() {
     await new Promise((r) => setTimeout(r, 600 + Math.random() * 400));
 
     const answer = buildAnswer(trimmed, i18n.language);
-    setMessages((m) => [...m, { role: 'assistant', content: answer }]);
+    setMessages((m) => [...m, { id: msgIdRef.current++, role: 'assistant', content: answer }]);
     setTyping(false);
   };
 
@@ -197,9 +200,9 @@ export function AskMeWidget() {
             </div>
 
             <div className="askme-panel__messages" aria-live="polite" aria-atomic="false">
-              {messages.map((msg, i) => (
+              {messages.map((msg) => (
                 <motion.div
-                  key={i}
+                  key={msg.id}
                   className={`askme-msg askme-msg--${msg.role}`}
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
