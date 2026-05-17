@@ -19,9 +19,9 @@ export function useProfile(): CvProfile {
  *   /?profile=backend    → profil Backend
  *   /                    → profil default (CV complet)
  */
-export function ProfileProvider({ children }: { children: React.ReactNode }) {
+export function ProfileProvider({ children }: { readonly children: React.ReactNode }) {
   const profile = useMemo(() => {
-    const slug = new URLSearchParams(window.location.search).get('profile') ?? 'default';
+    const slug = new URLSearchParams(globalThis.location.search).get('profile') ?? 'default';
     return PROFILES[slug] ?? DEFAULT_PROFILE;
   }, []);
 
