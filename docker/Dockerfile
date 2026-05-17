@@ -58,10 +58,15 @@ WORKDIR /srv/app
 
 RUN npm install -g serve
 
-COPY --from=build /app/dist ./dist
+COPY --from=build --chown=node:node /app/dist ./dist
 
 ENV PORT=$PORT
 
 EXPOSE $PORT
+
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 --start-period=15s \
+    CMD wget -q --spider http://localhost:${PORT}/ || exit 1
+
+USER node
 
 CMD ["sh", "-c", "serve -s dist -l ${PORT}"]
