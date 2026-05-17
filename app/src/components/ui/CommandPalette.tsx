@@ -242,7 +242,6 @@ export function CommandPalette({ onContactClick }: CommandPaletteProps) {
                 aria-expanded={true}
                 aria-autocomplete="list"
                 aria-controls="palette-listbox"
-                aria-haspopup="listbox"
               />
               <kbd className="palette__esc">Esc</kbd>
             </div>
