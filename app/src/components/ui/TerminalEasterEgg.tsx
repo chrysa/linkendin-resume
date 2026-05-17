@@ -16,8 +16,8 @@ function renderLine(content: string) {
   // Using dynamic RegExp to avoid no-control-regex linting for ESC (\x1b)
   const esc = '\x1b';
   return content
-    .replace(new RegExp(`${esc}\\[33m(.*?)${esc}\\[0m`, 'g'), '<span style="color:#f59e0b">$1</span>')
-    .replace(new RegExp(`${esc}\\[36m(.*?)${esc}\\[0m`, 'g'), '<span style="color:#06b6d4">$1</span>');
+    .replace(new RegExp(String.raw`${esc}\[33m(.*?)${esc}\[0m`, 'g'), '<span style="color:#f59e0b">$1</span>')
+    .replace(new RegExp(String.raw`${esc}\[36m(.*?)${esc}\[0m`, 'g'), '<span style="color:#06b6d4">$1</span>');
 }
 
 function buildCommands(lang: string) {
@@ -104,8 +104,8 @@ export function TerminalEasterEgg() {
       }
       if (e.key === 'Escape' && open) setOpen(false);
     };
-    window.addEventListener('keydown', handler);
-    return () => window.removeEventListener('keydown', handler);
+    globalThis.addEventListener('keydown', handler);
+    return () => globalThis.removeEventListener('keydown', handler);
   }, [open]);
 
   useEffect(() => {

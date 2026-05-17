@@ -12,7 +12,7 @@ interface PaletteAction {
 }
 
 interface CommandPaletteProps {
-  onContactClick: () => void;
+  readonly onContactClick: () => void;
 }
 
 export function CommandPalette({ onContactClick }: CommandPaletteProps) {
@@ -97,7 +97,7 @@ export function CommandPalette({ onContactClick }: CommandPaletteProps) {
         label: t('palette.print'),
         icon: 'bi-printer',
         group: t('palette.groupActions'),
-        action: () => window.print(),
+        action: () => globalThis.print(),
         keywords: 'pdf print télécharger download',
       },
       // Appearance
@@ -175,8 +175,8 @@ export function CommandPalette({ onContactClick }: CommandPaletteProps) {
         setOpen(false);
       }
     };
-    window.addEventListener('keydown', handler);
-    return () => window.removeEventListener('keydown', handler);
+    globalThis.addEventListener('keydown', handler);
+    return () => globalThis.removeEventListener('keydown', handler);
   }, [open]);
 
   useEffect(() => {
