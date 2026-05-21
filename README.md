@@ -18,6 +18,8 @@
 
 [Live demo →](https://resume.chrysa.dev) · [Report a bug](../../issues/new?template=bug_report.yml) · [Request a feature](../../issues/new?template=feature_request.yml)
 
+![Preview](docs/screenshots/preview.png)
+
 </div>
 
 ---
