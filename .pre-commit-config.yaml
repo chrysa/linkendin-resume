@@ -40,7 +40,7 @@ repos:
     hooks:
       - id: gitleaks
   - repo: https://github.com/chrysa/pre-commit-tools
-    rev: v0.1.1-75
+    rev: v0.1.1-76
     hooks:
       - id: console-debug-detection
         files: '\.(js|gs|ts|tsx|jsx)$'
@@ -60,4 +60,6 @@ repos:
       - id: dockerfile-no-latest
       - id: env-file-check
       - id: yaml-sorter
+      - id: regression-gate
+        stages: [pre-push]
         exclude: '^(\.github/workflows/|\.github/|changelog/|GitVersion\.yml)'
