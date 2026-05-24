@@ -60,4 +60,13 @@ repos:
       - id: dockerfile-no-latest
       - id: env-file-check
       - id: yaml-sorter
-        exclude: '^(\.github/workflows/|\.github/|changelog/|GitVersion\.yml)'
+        exclude: ^(\.github/(workflows|ISSUE_TEMPLATE)/|GitVersion\.yml)
+      - id: regression-gate
+        stages: [pre-push]
+
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v4.4.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+        args: [feat, fix, docs, style, refactor, test, chore, perf, revert, ci]
