@@ -114,11 +114,7 @@ export function TerminalEasterEgg() {
         setLines([
           { id: lineIdRef.current++, type: 'output', content: `Welcome to ${cvData.basics.firstName}'s terminal 👋` },
           { id: lineIdRef.current++, type: 'output', content: 'Type \x1b[36mhelp\x1b[0m to see available commands.' },
-          {
-            id: lineIdRef.current++,
-            type: 'output',
-            content: 'Press \x1b[33m`\x1b[0m or \x1b[33mEsc\x1b[0m to close.',
-          },
+          { id: lineIdRef.current++, type: 'output', content: 'Press \x1b[33m`\x1b[0m or \x1b[33mEsc\x1b[0m to close.' },
           { id: lineIdRef.current++, type: 'output', content: '' },
         ]);
       }
