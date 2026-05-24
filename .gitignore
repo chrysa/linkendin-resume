@@ -43,3 +43,6 @@ Thumbs.db
 # Sonar
 sonar-project.properties
 .sonar/
+
+# CodeGraph (local index — never commit)
+.codegraph/

@@ -5,7 +5,15 @@ import { getMetrics } from '@/data/profile';
 import { useCountUp } from '@/hooks/useCountUp';
 import { stagger, scaleIn } from '@/utils/animations';
 
-function MetricCard({ value, label, sublabel }: { readonly value: string; readonly label: string; readonly sublabel?: string }) {
+function MetricCard({
+  value,
+  label,
+  sublabel,
+}: {
+  readonly value: string;
+  readonly label: string;
+  readonly sublabel?: string;
+}) {
   const { ref, display } = useCountUp(value);
   return (
     <motion.div
