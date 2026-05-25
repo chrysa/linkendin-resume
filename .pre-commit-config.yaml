@@ -61,6 +61,14 @@ repos:
       - id: env-file-check
       - id: yaml-sorter
         exclude: ^(\.github/(workflows|ISSUE_TEMPLATE)/|GitVersion\.yml)
+      - id: adr-gate
+      - id: env-example-sync
+      - id: python-print-detection
+      - id: python-pprint-detection
+      - id: no-bare-except
+      - id: python-logger-detection
+      - id: no-sync-in-async
+      - id: debugger-detection
       - id: regression-gate
         stages: [pre-push]
 
