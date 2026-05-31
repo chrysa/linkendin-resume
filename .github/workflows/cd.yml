@@ -6,12 +6,11 @@ on:
         branches:
             - main
         tags:
-            - 'v*'
+            - "v*"
     workflow_dispatch:
 
 permissions:
     contents: write
-    packages: write
 
 jobs:
     release:
@@ -49,51 +48,3 @@ jobs:
                       --title "Release $REF_NAME" \
                       --generate-notes
               shell: bash
-
-    deploy:
-        name: Build & Deploy
-        runs-on: ubuntu-latest
-        timeout-minutes: 30
-        needs:
-            - release
-        env:
-            REGISTRY: ghcr.io
-            IMAGE: ghcr.io/chrysa/linkendin-resume
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v6
-
-            - name: Set up Docker Buildx
-              uses: docker/setup-buildx-action@v4
-
-            - name: Log in to GitHub Container Registry
-              uses: docker/login-action@v4
-              with:
-                  registry: ${{ env.REGISTRY }}
-                  username: ${{ github.actor }}
-                  password: ${{ secrets.GITHUB_TOKEN }}
-
-            - name: Build and push Docker image
-              uses: docker/build-push-action@v7
-              with:
-                  context: .
-                  file: docker/Dockerfile
-                  target: prod
-                  push: true
-                  tags: |
-                      ${{ env.IMAGE }}:latest
-                      ${{ env.IMAGE }}:${{ needs.release.outputs.semver }}
-                  cache-from: type=gha
-                  cache-to: type=gha,mode=max
-
-            - name: Deploy to server via SSH
-              uses: appleboy/ssh-action@v1
-              with:
-                  host: ${{ secrets.DEPLOY_HOST }}
-                  username: ${{ secrets.DEPLOY_USER }}
-                  key: ${{ secrets.DEPLOY_SSH_KEY }}
-                  script: |
-                      cd /srv/resume
-                      COMPOSE_PROFILES=prod docker compose pull
-                      COMPOSE_PROFILES=prod docker compose up -d --remove-orphans
-                      docker image prune -f
