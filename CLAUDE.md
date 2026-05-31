@@ -79,3 +79,9 @@ npm run lint       # ESLint
 - Framer Motion 12 requires React 18+ — confirm compatibility with React 19
 - `context.md` contains editorial notes on tone and positioning
 - Live URL: https://resume.chrysa.dev
+
+## Skills
+
+Shared skills from `shared-standards/.claude/skills/`:
+
+- `ui-ux/SKILL.md` — UX/UI/ergonomics across ALL surfaces (web, CLI, VS Code, Discord, desktop, game, agent) + WCAG 2.1 AA + dark mode + i18n FR+EN (load when building any human-facing surface)
