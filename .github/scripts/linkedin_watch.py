@@ -29,7 +29,7 @@ ISSUE_LABEL = "veille"
 def fetch_json(url: str, headers: dict[str, str] | None = None) -> dict | list | None:
     req = Request(url, headers=headers or {})
     try:
-        with urlopen(req, timeout=10) as resp:  # noqa: S310
+        with urlopen(req, timeout=10) as resp:
             return json.loads(resp.read().decode())
     except (HTTPError, URLError, json.JSONDecodeError):
         return None
@@ -89,7 +89,7 @@ def search_pypi(query: str) -> list[dict]:
     rss_url = f"https://pypi.org/rss/search/?q={quote(query)}&classifier=Topic+%3A%3A+Internet"
     req = Request(rss_url)
     try:
-        with urlopen(req, timeout=10) as resp:  # noqa: S310
+        with urlopen(req, timeout=10) as resp:
             content = resp.read().decode()
     except (HTTPError, URLError):
         return []
@@ -135,7 +135,7 @@ def find_or_create_issue(repo: str, token: str, title: str, body: str) -> str:
         url = f"https://api.github.com/repos/{repo}/issues/{issue_number}/comments"
         payload = json.dumps({"body": body}).encode()
         req = Request(url, data=payload, headers={**headers, "Content-Type": "application/json"})
-        with urlopen(req, timeout=10) as resp:  # noqa: S310
+        with urlopen(req, timeout=10) as resp:
             data = json.loads(resp.read().decode())
         return data.get("html_url", "")
     else:
@@ -144,13 +144,13 @@ def find_or_create_issue(repo: str, token: str, title: str, body: str) -> str:
         payload = json.dumps({"title": title, "body": body, "labels": [ISSUE_LABEL]}).encode()
         req = Request(url, data=payload, headers={**headers, "Content-Type": "application/json"})
         try:
-            with urlopen(req, timeout=10) as resp:  # noqa: S310
+            with urlopen(req, timeout=10) as resp:
                 data = json.loads(resp.read().decode())
         except HTTPError:
             # Retry sans label si le label n'existe pas
             payload = json.dumps({"title": title, "body": body}).encode()
             req = Request(url, data=payload, headers={**headers, "Content-Type": "application/json"})
-            with urlopen(req, timeout=10) as resp:  # noqa: S310
+            with urlopen(req, timeout=10) as resp:
                 data = json.loads(resp.read().decode())
         return data.get("html_url", "")
 
