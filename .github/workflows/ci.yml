@@ -162,7 +162,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: SonarCloud Scan
-        uses: chrysa/github-actions/sonar-scan-node@v1.0.12
+        uses: chrysa/github-actions/sonar-scan-node@v1
         with:
           sonar-token: ${{ secrets.SONAR_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
