@@ -71,7 +71,7 @@ export function SkillsCloud() {
   const filtered = activeCategory === 'all' ? skills : skills.filter((s) => s.category === activeCategory);
 
   return (
-    <section id="stack" className="section section--dark" ref={ref}>
+    <section id="stack" data-testid="skills-cloud" className="section section--dark" ref={ref}>
       <div className="container">
         <motion.p className="section__label" initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}>
           {t('sections.skills.label')}

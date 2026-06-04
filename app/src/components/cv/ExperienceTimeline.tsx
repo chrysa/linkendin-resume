@@ -65,7 +65,7 @@ export function ExperienceTimeline() {
   const lineScaleY = useSpring(scrollYProgress, { stiffness: 80, damping: 22 });
 
   return (
-    <section id="experiences" className="section" ref={sectionRef}>
+    <section id="experiences" data-testid="experience-timeline" className="section" ref={sectionRef}>
       <div className="container">
         <motion.p className="section__label" initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}>
           {t('sections.experience.label')}
