@@ -87,7 +87,7 @@ export function Hero({ onContactClick }: HeroProps) {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <section id="hero" className="hero">
+    <section id="hero" data-testid="hero" className="hero">
       <div className="hero__bg" aria-hidden="true">
         <motion.div className="hero__orb hero__orb--1" style={{ x: orb1X, y: orb1Y }} />
         <motion.div className="hero__orb hero__orb--2" style={{ x: orb2X, y: orb2Y }} />

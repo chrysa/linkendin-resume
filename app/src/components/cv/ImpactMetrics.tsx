@@ -46,7 +46,7 @@ export function ImpactMetrics() {
   const metrics = getMetrics(lang);
 
   return (
-    <section id="impact" className="section section--dark" ref={ref}>
+    <section id="impact" data-testid="impact-metrics" className="section section--dark" ref={ref}>
       <div className="container">
         <motion.p className="section__label" initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}>
           {t('sections.impact.label')}

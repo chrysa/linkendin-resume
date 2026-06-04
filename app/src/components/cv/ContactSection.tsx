@@ -12,7 +12,7 @@ export function ContactSection({ onContactClick }: { onContactClick: () => void 
   const profile = getProfile(lang);
 
   return (
-    <section id="contact" className="section contact-section" ref={ref}>
+    <section id="contact" data-testid="contact-section" className="section contact-section" ref={ref}>
       <div className="contact-section__bg" aria-hidden="true">
         <div className="hero__orb hero__orb--1" style={{ opacity: 0.25 }} />
         <div className="hero__orb hero__orb--2" style={{ opacity: 0.15 }} />
