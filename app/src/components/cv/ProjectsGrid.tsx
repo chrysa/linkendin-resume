@@ -172,7 +172,7 @@ export function ProjectsGrid() {
   const graphUrl = `https://ghchart.rshah.org/7c3aed/${GITHUB_CONFIG.owner}`;
 
   return (
-    <section id="projects" className="section" ref={ref}>
+    <section id="projects" data-testid="projects-grid" className="section" ref={ref}>
       <div className="container">
         <motion.p className="section__label" initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}>
           {t('sections.projects.label')}
