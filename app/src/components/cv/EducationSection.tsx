@@ -12,7 +12,7 @@ export function EducationSection() {
   const profile = getProfile(lang);
 
   return (
-    <section id="education" className="section section--dark" ref={ref}>
+    <section id="education" data-testid="education-section" className="section section--dark" ref={ref}>
       <div className="container">
         <motion.p className="section__label" initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}>
           {t('sections.education.label')}
