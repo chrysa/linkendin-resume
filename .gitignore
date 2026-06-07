@@ -33,6 +33,12 @@ yarn-error.log*
 coverage/
 .nyc_output/
 
+# Playwright E2E
+playwright-report/
+test-results/
+blob-report/
+playwright/.cache/
+
 # Système
 .DS_Store
 Thumbs.db
@@ -50,3 +56,7 @@ sonar-project.properties
 # Playwright
 playwright-report/
 test-results/
+
+graphify
+sys
+graphify-out/
