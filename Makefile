@@ -22,7 +22,7 @@ help: ## Display this help message
 	@for file in $(shell find . -type f -name "*.[Mm]akefile" -not -path "*/\.*" -exec echo " {}" \; 2>/dev/null | sort); do \
 		category=$$(basename $$file .Makefile); \
 		case $$category in \
-			gobal_rules|variables|functions) continue ;; \
+			global_rules|variables|functions) continue ;; \
 			development) icon="⚡" ;; \
 			docker)      icon="🐳" ;; \
 			quality)     icon="🔍" ;; \
