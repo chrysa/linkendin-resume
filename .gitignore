@@ -52,6 +52,11 @@ sonar-project.properties
 
 # CodeGraph (local index — never commit)
 .codegraph/
+
+# Playwright
+playwright-report/
+test-results/
+
 graphify
 sys
 graphify-out/
