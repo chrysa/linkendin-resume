@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { isDemoMode } from '@/utils/demoMode';
+import { DEMO_REPOS } from '@/data/demoRepos';
 
 export interface GitHubRepo {
   id: number;
@@ -30,6 +32,14 @@ export function useGitHubRepos({ owner, perPage = 12 }: UseGitHubReposOptions): 
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    // Demo mode: serve inline fixtures, never touch the real GitHub API.
+    if (isDemoMode()) {
+      setRepos(DEMO_REPOS.filter((r) => !r.archived).slice(0, perPage));
+      setError(null);
+      setLoading(false);
+      return;
+    }
+
     if (!owner || owner === 'votre-username') {
       setLoading(false);
       return;
