@@ -12,7 +12,7 @@ lint: ensure-container ## Run ESLint
 	@echo "$(COLOR_BLUE)🔍 Linting...$(COLOR_RESET)"
 	$(call npm_simple,lint)
 
-type-check: ensure-container ## Run TypeScript type check
+typecheck: ensure-container ## Run TypeScript type check
 	@echo "$(COLOR_BLUE)📝 Type checking...$(COLOR_RESET)"
 	$(call npm_simple,type-check)
 	@echo "$(COLOR_GREEN)✓ Passed$(COLOR_RESET)"
@@ -24,7 +24,7 @@ pre-commit: ## Run pre-commit on all files
 
 ci: ensure-container ## Run all CI checks (type-check + lint + test + build)
 	@echo "$(COLOR_BLUE)🔄 Running CI checks...$(COLOR_RESET)"
-	@$(MAKE) --no-print-directory type-check
+	@$(MAKE) --no-print-directory typecheck
 	@$(MAKE) --no-print-directory lint
 	@$(MAKE) --no-print-directory test
 	@$(MAKE) --no-print-directory build-prod
