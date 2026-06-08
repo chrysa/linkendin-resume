@@ -16,6 +16,7 @@ import { AccessibilityPanel } from '@/components/ui/AccessibilityPanel';
 import { TerminalEasterEgg } from '@/components/ui/TerminalEasterEgg';
 import { CommandPalette } from '@/components/ui/CommandPalette';
 import { AskMeWidget } from '@/components/ui/AskMeWidget';
+import { DemoBanner } from '@/components/ui/DemoBanner';
 import { useDocumentMeta } from '@/hooks/useDocumentMeta';
 
 export function CVPage() {
@@ -26,6 +27,7 @@ export function CVPage() {
 
   return (
     <>
+      <DemoBanner />
       <ScrollProgress />
       <CustomCursor />
       <Navbar onContactClick={openModal} />
