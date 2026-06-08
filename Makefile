@@ -1,4 +1,5 @@
 #!make
+# makefile-tier: infra
 ifneq (,)
 	$(error This Makefile requires GNU Make)
 endif
@@ -70,6 +71,3 @@ help-%: ## Show detailed help for a specific command
 
 test-cov: ## Run tests with coverage (alias → test-coverage)
 	$(MAKE) test-coverage
-
-typecheck: ## Run type checking (alias → type-check)
-	$(MAKE) type-check
