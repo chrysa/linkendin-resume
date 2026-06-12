@@ -3,7 +3,7 @@
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.75);
 }
 
 .modal {
@@ -19,13 +19,14 @@
   pointer-events: none;
 }
 
+/* Editorial modal box: soft rounded, 1px hairline */
 .modal__box {
   width: 90%;
   max-width: 520px;
   max-height: 90dvh;
   overflow-y: auto;
   background: var(--clr-bg-card);
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   border-radius: var(--radius-lg);
   padding: var(--space-2xl);
   box-shadow: var(--shadow-card);
@@ -51,9 +52,11 @@
 .modal__header {
   margin-bottom: var(--space-xl);
 }
+/* Editorial modal title: serif */
 .modal__title {
   font-size: 1.8rem;
-  font-weight: 800;
+  font-weight: 700;
+  font-family: var(--font-display);
   margin-bottom: 0.5rem;
 }
 .modal__subtitle {
@@ -75,17 +78,17 @@
   gap: 0.4rem;
 }
 
+/* Editorial form label: normal case, Inter — no uppercase shouting */
 .form-field__label {
   font-size: 0.82rem;
   font-weight: 600;
   color: var(--clr-text-2);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
 }
 
+/* Editorial input: soft radius, 1px hairline */
 .form-field__input {
   background: var(--clr-bg-2);
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   border-radius: var(--radius-md);
   padding: 0.7rem 1rem;
   color: var(--clr-text);
@@ -97,13 +100,13 @@
 }
 .form-field__input:focus {
   border-color: var(--clr-accent-1);
-  box-shadow: 0 0 0 2px var(--clr-accent-1);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--clr-accent-1) 20%, transparent);
 }
 .form-field__input--error {
   border-color: #ef4444;
 }
 .form-field__input--error:focus {
-  box-shadow: 0 0 0 2px #ef4444;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
 }
 .form-field__textarea {
   resize: vertical;
@@ -138,9 +141,11 @@
 .modal__success-icon {
   font-size: 3rem;
 }
+/* Editorial success heading: serif */
 .modal__success h3 {
   font-size: 1.5rem;
-  font-weight: 800;
+  font-weight: 700;
+  font-family: var(--font-display);
 }
 .modal__success p {
   color: var(--clr-text-2);
@@ -158,16 +163,18 @@
 }
 
 /* ─── Tabs (GitHub / WhatsApp) ──────────────────────────────────────────── */
+/* Editorial tabs: soft rounded track, 1px hairline */
 .modal__tabs {
   display: flex;
   gap: 0.5rem;
   margin: var(--space-lg) 0 var(--space-md);
   background: var(--clr-bg-2);
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   border-radius: var(--radius-md);
   padding: 0.3rem;
 }
 
+/* Editorial tab: soft radius, normal case, Inter */
 .modal__tab {
   flex: 1;
   display: flex;
@@ -175,24 +182,27 @@
   justify-content: center;
   gap: 0.45rem;
   padding: 0.55rem 0.75rem;
-  border-radius: 0;
+  border-radius: var(--radius-sm);
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--clr-text-2);
   font-family: var(--font-sans);
   transition: var(--transition);
 }
 .modal__tab:hover {
   color: var(--clr-text);
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--clr-bg-card-hover);
 }
+/* Active tab: surface + amber text, NOT a full amber fill */
 .modal__tab--active {
-  background: var(--clr-accent-1);
-  color: var(--accent-ink);
+  background: var(--clr-bg-card);
+  color: var(--clr-accent-text);
+  font-weight: 600;
+  box-shadow: var(--shadow-card);
 }
 .modal__tab--active:hover {
-  background: var(--clr-accent-2);
-  color: var(--accent-ink);
+  background: var(--clr-bg-card);
+  color: var(--clr-accent-text);
 }
 
 /* ─── WhatsApp panel ────────────────────────────────────────────────────── */
@@ -205,12 +215,16 @@
   padding: var(--space-xl) 0;
 }
 
+/* WhatsApp button: green fill (brand color); given a soft radius in Editorial */
 .btn--whatsapp {
   background: #25d366;
   color: #fff;
   gap: 0.6rem;
+  border-radius: var(--radius-md);
+  border-color: transparent;
 }
 .btn--whatsapp:hover {
   background: #1ebe5d;
+  filter: brightness(1.05);
   box-shadow: var(--shadow-card);
 }
