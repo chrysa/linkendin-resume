@@ -1,38 +1,47 @@
-/* ─── Design Tokens ─────────────────────────────────────────────────────── */
+/* ─── Design Tokens — Neon Brutalist (yellow accent) ─────────────────────── */
+/* Canonical contract: chrysa/shared-standards/docs/DESIGN-SYSTEM.md          */
+/* Per-app accent: acid yellow — dark #ffe600 / light #e0c400                  */
 
-/* Thème sombre (défaut) */
+/* Dark theme (default) */
 :root,
 [data-theme='dark'] {
-  /* Couleurs */
-  --clr-bg: #0a0a0f;
-  --clr-bg-2: #111118;
-  --clr-bg-card: #16161f;
-  --clr-bg-card-hover: #1e1e2e;
-  --clr-border: rgba(255, 255, 255, 0.07);
-  --clr-border-hover: rgba(124, 58, 237, 0.5);
+  /* Surfaces */
+  --clr-bg: #0e0e10;
+  --clr-bg-2: #18181b;
+  --clr-bg-card: #18181b;
+  --clr-bg-card-hover: #242428;
 
-  /* Accent gradient */
-  --clr-accent-1: #7c3aed; /* violet */
-  --clr-accent-2: #06b6d4; /* cyan  */
-  --gradient: linear-gradient(135deg, var(--clr-accent-1), var(--clr-accent-2));
-  --gradient-text: linear-gradient(90deg, var(--clr-accent-1), var(--clr-accent-2));
+  /* Borders — opaque, FG-colored (white on dark) */
+  --clr-border: #fafafa;
+  --clr-border-hover: var(--clr-accent-1);
 
-  /* Texte */
-  --clr-text: #e8e8f0;
-  --clr-text-2: #a0a0b8;
-  --clr-text-3: #8080a0; /* 4.8:1 on dark bg — WCAG AA large text */
+  /* Acid yellow accent — single colour, no gradient */
+  --clr-accent-1: #ffe600;
+  --clr-accent-2: #ffe600;
 
-  /* Accent text (higher contrast than decorative accent) */
-  --clr-accent-text: #a78bfa; /* 6.6:1 on dark bg — WCAG AA ✓ */
+  /* Flat accent tokens (replaces linear-gradient) */
+  --gradient: var(--clr-accent-1);
+  --gradient-text: var(--clr-accent-1);
 
-  /* Typographie */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  /* Text */
+  --clr-text: #fafafa;
+  --clr-text-2: #a1a1aa;
+  --clr-text-3: #71717a;
+
+  /* Accent-text: body text colour (acid is a FILL, not text) */
+  --clr-accent-text: var(--clr-text);
+
+  /* Ink on acid-yellow fills */
+  --accent-ink: #0e0e10;
+
+  /* Typography */
+  --font-sans: 'Space Grotesk', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
   /* A11y offset */
   --a11y-font-offset: 0px;
 
-  /* Spacing */
+  /* Spacing (4/8pt scale) */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
@@ -40,42 +49,52 @@
   --space-xl: 2.5rem;
   --space-2xl: 5rem;
 
-  /* Radius */
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
+  /* Radius — brutalist: 0 everywhere; 9999px only for genuine circles */
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
   --radius-full: 9999px;
 
-  /* Shadows */
-  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
-  --shadow-glow: 0 0 32px rgba(124, 58, 237, 0.25);
+  /* Shadows — hard offset, no blur, no glow */
+  --shadow-card: 4px 4px 0 #000000;
+  --shadow-glow: 4px 4px 0 var(--clr-accent-1);
 
   /* Transitions */
-  --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: 0.15s ease;
 
   /* Layout */
   --max-width: 1100px;
   --section-py: 6rem;
 }
 
-/* Thème clair */
+/* Light theme */
 [data-theme='light'] {
-  --clr-bg: #f8f8fc;
-  --clr-bg-2: #f0f0f8;
+  --clr-bg: #fafafa;
+  --clr-bg-2: #f0f0f0;
   --clr-bg-card: #ffffff;
-  --clr-bg-card-hover: #f5f3ff;
-  --clr-border: rgba(0, 0, 0, 0.08);
-  --clr-border-hover: rgba(124, 58, 237, 0.4);
+  --clr-bg-card-hover: #f0f0f0;
 
-  --clr-text: #1a1a2e;
-  --clr-text-2: #4a4a6a;
-  --clr-text-3: #6a6a8a; /* 4.6:1 on light bg — WCAG AA ✓ */
+  /* Borders — solid black on light */
+  --clr-border: #0e0e10;
+  --clr-border-hover: var(--clr-accent-1);
 
-  /* Accent text light mode */
-  --clr-accent-text: #6d28d9; /* 10.5:1 on light bg — WCAG AAA ✓ */
+  /* Acid yellow — darker variant for fill contrast */
+  --clr-accent-1: #e0c400;
+  --clr-accent-2: #e0c400;
 
-  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.08);
-  --shadow-glow: 0 0 32px rgba(124, 58, 237, 0.15);
+  --gradient: var(--clr-accent-1);
+  --gradient-text: var(--clr-accent-1);
+
+  --clr-text: #0e0e10;
+  --clr-text-2: #52525b;
+  --clr-text-3: #71717a;
+
+  --clr-accent-text: var(--clr-text);
+
+  --accent-ink: #0e0e10;
+
+  --shadow-card: 4px 4px 0 #0e0e10;
+  --shadow-glow: 4px 4px 0 var(--clr-accent-1);
 }
 
 /* ─── A11y dataset overrides ─────────────────────────────────────────────── */
@@ -87,7 +106,7 @@
   --clr-text: #ffffff;
   --clr-text-2: #dddddd;
   --clr-text-3: #bbbbbb;
-  --clr-border: rgba(255, 255, 255, 0.4);
+  --clr-border: #ffffff;
   --clr-accent-text: #ffffff;
 }
 
