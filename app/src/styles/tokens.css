@@ -1,25 +1,28 @@
-/* ─── Design Tokens — Neon Brutalist (yellow accent) ─────────────────────── */
-/* Canonical contract: chrysa/shared-standards/docs/DESIGN-SYSTEM.md          */
-/* Per-app accent: acid yellow — dark #ffe600 / light #e0c400                  */
+/* ─── Design Tokens — Editorial persona (warm amber accent) ──────────────── */
+/* Canonical contract: chrysa/shared-standards/docs/DESIGN-SYSTEM.md (§1 Editorial) */
+/* Persona: Editorial — serif display, comfortable density, soft depth, 10px radius. */
+/* Per-app accent: warm amber — dark #f0a830 / light #b45309 (used sparingly:      */
+/* links + one CTA, never large acid blocks).                                      */
 
-/* Dark theme (default) */
+/* Dark theme (default) — html also carries data-persona="editorial" */
 :root,
 [data-theme='dark'] {
-  /* Surfaces */
+  /* Surfaces (shared neutral frame) */
   --clr-bg: #0e0e10;
   --clr-bg-2: #18181b;
   --clr-bg-card: #18181b;
   --clr-bg-card-hover: #242428;
 
-  /* Borders — opaque, FG-colored (white on dark) */
-  --clr-border: #fafafa;
+  /* Borders — hairline (Editorial 1px, neutral; NOT a loud FG border) */
+  --clr-border: #2e2e33;
   --clr-border-hover: var(--clr-accent-1);
+  --border-weight: 1px;
 
-  /* Acid yellow accent — single colour, no gradient */
-  --clr-accent-1: #ffe600;
-  --clr-accent-2: #ffe600;
+  /* Warm amber accent — restrained (links / one CTA) */
+  --clr-accent-1: #f0a830;
+  --clr-accent-2: #d98e1f;
 
-  /* Flat accent tokens (replaces linear-gradient) */
+  /* Accent helpers (names kept; no gradients in Editorial) */
   --gradient: var(--clr-accent-1);
   --gradient-text: var(--clr-accent-1);
 
@@ -28,20 +31,21 @@
   --clr-text-2: #a1a1aa;
   --clr-text-3: #71717a;
 
-  /* Accent-text: body text colour (acid is a FILL, not text) */
-  --clr-accent-text: var(--clr-text);
+  /* Accent-text: amber, for links/inline emphasis (8:1 on --clr-bg) */
+  --clr-accent-text: var(--clr-accent-1);
 
-  /* Ink on acid-yellow fills */
+  /* Ink on an amber fill (the one CTA) */
   --accent-ink: #0e0e10;
 
-  /* Typography */
-  --font-sans: 'Space Grotesk', system-ui, sans-serif;
+  /* Typography — serif display + sans body (Editorial) */
+  --font-display: 'Fraunces', 'Newsreader', Georgia, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
   /* A11y offset */
   --a11y-font-offset: 0px;
 
-  /* Spacing (4/8pt scale) */
+  /* Spacing (4/8pt scale; Editorial breathes — generous section rhythm) */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
@@ -49,18 +53,18 @@
   --space-xl: 2.5rem;
   --space-2xl: 5rem;
 
-  /* Radius — brutalist: 0 everywhere; 9999px only for genuine circles */
-  --radius-sm: 0;
-  --radius-md: 0;
-  --radius-lg: 0;
+  /* Radius — Editorial: soft 10px scale; 9999px for genuine circles */
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
   --radius-full: 9999px;
 
-  /* Shadows — hard offset, no blur, no glow */
-  --shadow-card: 4px 4px 0 #000000;
-  --shadow-glow: 4px 4px 0 var(--clr-accent-1);
+  /* Shadows — soft blurred elevation (no hard offset, no glow) */
+  --shadow-card: 0 4px 24px rgb(0 0 0 / 0.18);
+  --shadow-glow: 0 4px 24px rgb(0 0 0 / 0.18);
 
-  /* Transitions */
-  --transition: 0.15s ease;
+  /* Transitions — calm (Editorial motion 220ms) */
+  --transition: 0.22s ease;
 
   /* Layout */
   --max-width: 1100px;
@@ -74,13 +78,13 @@
   --clr-bg-card: #ffffff;
   --clr-bg-card-hover: #f0f0f0;
 
-  /* Borders — solid black on light */
-  --clr-border: #0e0e10;
+  /* Borders — light hairline */
+  --clr-border: #d4d4d8;
   --clr-border-hover: var(--clr-accent-1);
 
-  /* Acid yellow — darker variant for fill contrast */
-  --clr-accent-1: #e0c400;
-  --clr-accent-2: #e0c400;
+  /* Warm amber — darker variant for contrast on light */
+  --clr-accent-1: #b45309;
+  --clr-accent-2: #92400e;
 
   --gradient: var(--clr-accent-1);
   --gradient-text: var(--clr-accent-1);
@@ -89,12 +93,12 @@
   --clr-text-2: #52525b;
   --clr-text-3: #71717a;
 
-  --clr-accent-text: var(--clr-text);
+  --clr-accent-text: var(--clr-accent-1);
 
-  --accent-ink: #0e0e10;
+  --accent-ink: #ffffff;
 
-  --shadow-card: 4px 4px 0 #0e0e10;
-  --shadow-glow: 4px 4px 0 var(--clr-accent-1);
+  --shadow-card: 0 4px 24px rgb(0 0 0 / 0.1);
+  --shadow-glow: 0 4px 24px rgb(0 0 0 / 0.1);
 }
 
 /* ─── A11y dataset overrides ─────────────────────────────────────────────── */

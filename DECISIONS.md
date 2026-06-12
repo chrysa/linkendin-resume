@@ -32,7 +32,7 @@ No active deviation is in effect. Any future deviation must be added as a new AD
 ## D-0002 — Adopt Neon Brutalist design system (yellow accent)
 
 - **Date:** 2026-06-12
-- **Status:** Accepted
+- **Status:** Superseded by D-0003
 - **Context:** linkendin-resume's turn in the 17-repo design campaign rolling out
   the shared-standards Neon Brutalist system. The prior look was soft (violet→cyan
   gradient accent, glow shadows, rounded) — the opposite of the chosen DNA.
@@ -47,3 +47,28 @@ No active deviation is in effect. Any future deviation must be added as a new AD
   `data-reduced-motion` accessibility datasets are all preserved. All Vitest +
   Playwright test selectors are unchanged; `cv.json` and component logic untouched.
   See `app/DESIGN.md`.
+
+---
+
+## D-0003 — Adopt Editorial persona (supersedes brutalist D-0002; persona-migration pilot)
+
+- **Date:** 2026-06-12
+- **Status:** Accepted
+- **Context:** linkendin-resume selected as the pilot for the chrysa persona
+  migration to the Editorial system defined in `shared-standards/docs/DESIGN-SYSTEM.md
+  §1 Editorial` and accent-restraint rules `§4`. The Neon Brutalist look (D-0002 —
+  radius 0, 2px FG borders, hard offset shadows, acid fill blocks, mono-only type,
+  Space Grotesk) was reversed in favour of a crafted, readable résumé aesthetic.
+- **Decision:** Tokens updated to warm amber accent (`#f0a830` dark / `#b45309`
+  light), Fraunces serif display + Inter body, soft `10px` radius, `0 4px 24px`
+  blurred shadows, 1px hairline borders, calm 0.22s transitions. Swept all six
+  consuming stylesheets (`globals`, `components`, `sections`, `modal`,
+  `animations`, `responsive`) — serif headings, soft rounded cards/buttons,
+  1px hairline borders, normal case labels, amber restrained to one CTA fill +
+  amber-text links. Press-translate hover effects replaced by calm `translateY`
+  lifts or `brightness` filters.
+- **Consequences:** `data-theme` dark/light mechanism, FOUC guard, and the
+  `data-high-contrast` / `data-dyslexia` / `data-reduced-motion` a11y datasets
+  all preserved and working. All Vitest + Playwright test selectors (`data-testid`,
+  `role`, `aria-*`) are unchanged. `cv.json` and component logic untouched. See
+  `app/DESIGN.md`.
