@@ -57,14 +57,14 @@ button {
   font-family: inherit;
 }
 
-/* ─── Accessibilité — Focus visible ─────────────────────────────────────── */
+/* ─── Accessibility — Focus visible ─────────────────────────────────────── */
 :focus-visible {
   outline: 2px solid var(--clr-accent-1);
   outline-offset: 3px;
   border-radius: var(--radius-sm);
 }
 
-/* ─── Accessibilité — Skip Nav ──────────────────────────────────────────── */
+/* ─── Accessibility — Skip nav ──────────────────────────────────────────── */
 .skip-nav {
   position: fixed;
   top: -100%;
@@ -85,7 +85,7 @@ button {
   outline-offset: 2px;
 }
 
-/* ─── Utilitaires ───────────────────────────────────────────────────────── */
+/* ─── Utilities ─────────────────────────────────────────────────────────── */
 .container {
   width: 100%;
   max-width: var(--max-width);
@@ -112,7 +112,7 @@ button {
   white-space: nowrap;
 }
 
-/* ─── Boutons ───────────────────────────────────────────────────────────── */
+/* ─── Buttons ───────────────────────────────────────────────────────────── */
 .btn {
   display: inline-flex;
   align-items: center;
