@@ -115,7 +115,7 @@ export function Hero({ onContactClick }: HeroProps) {
               className="hero__photo"
               onError={(e) => {
                 (e.target as HTMLImageElement).src =
-                  `https://ui-avatars.com/api/?name=${profile.firstName}+${profile.lastName}&background=7c3aed&color=fff&size=200`;
+                  `https://ui-avatars.com/api/?name=${profile.firstName}+${profile.lastName}&background=f0a830&color=1a160f&size=200`;
               }}
             />
             <div className="hero__photo-ring" aria-hidden="true" />

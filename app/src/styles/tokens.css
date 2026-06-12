@@ -1,47 +1,49 @@
-/* ─── Design Tokens — Neon Brutalist (yellow accent) ─────────────────────── */
-/* Canonical contract: chrysa/shared-standards/docs/DESIGN-SYSTEM.md          */
-/* Per-app accent: acid yellow — dark #ffe600 / light #e0c400                  */
+/* ─── Design Tokens — Editorial persona (warm amber) ─────────────────────── */
+/* Canonical contract: chrysa/shared-standards/docs/DESIGN-SYSTEM.md §1 §3      */
+/* Persona: Editorial — serif display, readable sans body, soft depth, rounded, */
+/* accent used sparingly. Per-app accent: warm amber — dark #f0a830 / light #b4690e */
 
 /* Dark theme (default) */
 :root,
 [data-theme='dark'] {
-  /* Surfaces */
-  --clr-bg: #0e0e10;
-  --clr-bg-2: #18181b;
-  --clr-bg-card: #18181b;
-  --clr-bg-card-hover: #242428;
+  /* Surfaces — warm near-black */
+  --clr-bg: #100f0d;
+  --clr-bg-2: #16140f;
+  --clr-bg-card: #1a1814;
+  --clr-bg-card-hover: #221f19;
 
-  /* Borders — opaque, FG-colored (white on dark) */
-  --clr-border: #fafafa;
+  /* Borders — hairline, warm neutral (subtle, not structural) */
+  --clr-border: #2e2b25;
   --clr-border-hover: var(--clr-accent-1);
 
-  /* Acid yellow accent — single colour, no gradient */
-  --clr-accent-1: #ffe600;
-  --clr-accent-2: #ffe600;
+  /* Warm amber accent — used sparingly (links, one CTA, key figures) */
+  --clr-accent-1: #f0a830;
+  --clr-accent-2: #f6c66b;
 
-  /* Flat accent tokens (replaces linear-gradient) */
+  /* Editorial accent tokens (solid; no gradient) */
   --gradient: var(--clr-accent-1);
   --gradient-text: var(--clr-accent-1);
 
-  /* Text */
-  --clr-text: #fafafa;
-  --clr-text-2: #a1a1aa;
-  --clr-text-3: #71717a;
+  /* Text — warm off-white ramp */
+  --clr-text: #f7f5f2;
+  --clr-text-2: #b6b0a6;
+  --clr-text-3: #8a8478;
 
-  /* Accent-text: body text colour (acid is a FILL, not text) */
-  --clr-accent-text: var(--clr-text);
+  /* Accent-text: amber is legible as text on this bg (~8:1) — links/eyebrows */
+  --clr-accent-text: #f0a830;
 
-  /* Ink on acid-yellow fills */
-  --accent-ink: #0e0e10;
+  /* Ink on amber fills (amber is light → dark ink) */
+  --accent-ink: #1a160f;
 
-  /* Typography */
-  --font-sans: 'Space Grotesk', system-ui, sans-serif;
+  /* Typography — serif display + readable sans body; mono for data only */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
   /* A11y offset */
   --a11y-font-offset: 0px;
 
-  /* Spacing (4/8pt scale) */
+  /* Spacing (4/8pt scale) — generous for editorial reading */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
@@ -49,52 +51,53 @@
   --space-xl: 2.5rem;
   --space-2xl: 5rem;
 
-  /* Radius — brutalist: 0 everywhere; 9999px only for genuine circles */
-  --radius-sm: 0;
-  --radius-md: 0;
-  --radius-lg: 0;
+  /* Radius — editorial: soft rounded; 9999px for genuine circles */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
   --radius-full: 9999px;
 
-  /* Shadows — hard offset, no blur, no glow */
-  --shadow-card: 4px 4px 0 #000000;
-  --shadow-glow: 4px 4px 0 var(--clr-accent-1);
+  /* Shadows — soft blurred depth, no hard offset */
+  --shadow-card: 0 6px 28px rgb(0 0 0 / 0.32);
+  --shadow-glow: 0 8px 30px rgb(240 168 48 / 0.16);
 
-  /* Transitions */
-  --transition: 0.15s ease;
+  /* Transitions — calm */
+  --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
 
   /* Layout */
   --max-width: 1100px;
   --section-py: 6rem;
 }
 
-/* Light theme */
+/* Light theme — warm paper */
 [data-theme='light'] {
-  --clr-bg: #fafafa;
-  --clr-bg-2: #f0f0f0;
-  --clr-bg-card: #ffffff;
-  --clr-bg-card-hover: #f0f0f0;
+  --clr-bg: #f7f4ee;
+  --clr-bg-2: #efeae1;
+  --clr-bg-card: #fffdf9;
+  --clr-bg-card-hover: #f3eee4;
 
-  /* Borders — solid black on light */
-  --clr-border: #0e0e10;
+  /* Borders — warm hairline */
+  --clr-border: #ddd6ca;
   --clr-border-hover: var(--clr-accent-1);
 
-  /* Acid yellow — darker variant for fill contrast */
-  --clr-accent-1: #e0c400;
-  --clr-accent-2: #e0c400;
+  /* Amber — darker variant for legibility on paper */
+  --clr-accent-1: #b4690e;
+  --clr-accent-2: #c8821f;
 
   --gradient: var(--clr-accent-1);
   --gradient-text: var(--clr-accent-1);
 
-  --clr-text: #0e0e10;
-  --clr-text-2: #52525b;
-  --clr-text-3: #71717a;
+  --clr-text: #1c1813;
+  --clr-text-2: #5c5447;
+  --clr-text-3: #8a8276;
 
-  --clr-accent-text: var(--clr-text);
+  --clr-accent-text: #a85d09;
 
-  --accent-ink: #0e0e10;
+  /* Ink on amber fills (light-theme amber is dark → light ink) */
+  --accent-ink: #fffdf9;
 
-  --shadow-card: 4px 4px 0 #0e0e10;
-  --shadow-glow: 4px 4px 0 var(--clr-accent-1);
+  --shadow-card: 0 6px 24px rgb(60 40 10 / 0.12);
+  --shadow-glow: 0 8px 26px rgb(180 105 14 / 0.18);
 }
 
 /* ─── A11y dataset overrides ─────────────────────────────────────────────── */
@@ -107,7 +110,7 @@
   --clr-text-2: #dddddd;
   --clr-text-3: #bbbbbb;
   --clr-border: #ffffff;
-  --clr-accent-text: #ffffff;
+  --clr-accent-text: #ffd479;
 }
 
 [data-dyslexia='true'] {

@@ -106,3 +106,100 @@
     break-inside: avoid;
   }
 }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Editorial persona layer — chrysa DESIGN-SYSTEM §1 (Editorial).
+   Serif display, sparing amber, readable sans body, soft rounded corners.
+   Lives in the LAST-imported stylesheet so it wins the cascade over the base
+   rules in globals/sections (which also define some of these selectors).
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* Serif display for headings + brand name (grotesk → Fraunces) */
+.hero__name,
+.section__title,
+.modal__title,
+.contact-section__title,
+.modal__success h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.hero__name {
+  font-weight: 700;
+}
+
+/* Body / nav text off mono → readable sans (mono reserved for data) */
+.hero__greeting,
+.hero__headline,
+.navbar__link {
+  font-family: var(--font-sans);
+}
+.hero__headline {
+  font-weight: 400;
+}
+
+/* Eyebrow label: understated amber text, not an acid fill block */
+.section__label {
+  background: transparent;
+  color: var(--clr-accent-text);
+  border: none;
+  padding: 0;
+  font-family: var(--font-sans);
+}
+
+/* Skill / meta tag: soft chip, not an acid fill */
+.tag {
+  background: var(--clr-bg-2);
+  color: var(--clr-text-2);
+  border: 1px solid var(--clr-border);
+  font-family: var(--font-sans);
+}
+
+/* Logo mark: amber wordmark, no fill block */
+.navbar__logo {
+  background: transparent;
+  color: var(--clr-accent-text);
+  padding: 0;
+}
+
+/* Availability badge: subtle surface pill, amber dot */
+.hero__badge {
+  background: var(--clr-bg-card);
+  color: var(--clr-text);
+  border: 1px solid var(--clr-border);
+  font-family: var(--font-sans);
+}
+.hero__badge-dot {
+  background: var(--clr-accent-1);
+}
+
+/* Soft rounded corners on the formerly square components */
+.btn,
+.filter-btn,
+.skill-pill,
+.skill-pill__level {
+  border-radius: var(--radius-sm);
+}
+.metric-card,
+.exp-card__body,
+.project-card,
+.edu-card,
+.a11y-panel,
+.askme-panel,
+.askme-panel__input,
+.askme-msg,
+.palette,
+.terminal,
+.github-graph,
+.hero__badge,
+.navbar__logo,
+.tag,
+kbd,
+.palette__esc,
+.a11y-trigger,
+.askme-trigger {
+  border-radius: var(--radius-md);
+}
+.exp-card__dot {
+  border-radius: var(--radius-full);
+}

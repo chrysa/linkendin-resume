@@ -7,7 +7,7 @@
   z-index: 100;
   padding: 0.75rem var(--space-xl);
   background: var(--clr-bg);
-  border-bottom: 2px solid var(--clr-border);
+  border-bottom: 1px solid var(--clr-border);
 }
 .navbar__inner {
   max-width: var(--max-width);
@@ -129,7 +129,7 @@
   padding: 0.35rem 0.9rem;
   /* Brutalist: accent fill block */
   background: var(--clr-accent-1);
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   font-size: 0.8rem;
   font-weight: 700;
   font-family: var(--font-mono);
@@ -236,7 +236,7 @@
   text-align: center;
   padding: var(--space-xl) var(--space-lg);
   background: var(--clr-bg-card);
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   box-shadow: var(--shadow-card);
   cursor: default;
   transition: var(--transition);
@@ -244,7 +244,7 @@
 .metric-card:hover {
   border-color: var(--clr-accent-1);
   box-shadow: var(--shadow-glow);
-  transform: translate(-2px, -2px);
+  transform: translateY(-3px);
 }
 .metric-card__value {
   font-size: clamp(2.2rem, 4vw, 3rem);
@@ -299,11 +299,11 @@
   width: 18px;
   height: 18px;
   background: var(--clr-accent-1);
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
 }
 .exp-card__body {
   background: var(--clr-bg-card);
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   box-shadow: var(--shadow-card);
   padding: var(--space-xl);
   transition: var(--transition);
@@ -311,7 +311,7 @@
 .exp-card__body:hover {
   border-color: var(--clr-accent-1);
   background: var(--clr-bg-card-hover);
-  transform: translate(-2px, -2px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-glow);
 }
 .exp-card__header {
@@ -363,7 +363,7 @@
   font-weight: 700;
   font-family: var(--font-mono);
   color: var(--clr-text-2);
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   background: transparent;
   transition: var(--transition);
 }
@@ -398,7 +398,7 @@
   font-weight: 600;
   font-family: var(--font-mono);
   cursor: default;
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   background: var(--clr-bg-card);
   transition: var(--transition);
   min-width: 80px;
@@ -412,7 +412,7 @@
   left: 50%;
   transform: translateX(-50%);
   background: var(--clr-accent-1);
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   padding: 2px 8px;
   font-size: 0.72rem;
   font-family: var(--font-mono);
@@ -463,7 +463,7 @@
   display: flex;
   flex-direction: column;
   background: var(--clr-bg-card);
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   box-shadow: var(--shadow-card);
   padding: var(--space-xl);
   transition: var(--transition);
@@ -471,7 +471,7 @@
 .project-card:hover {
   border-color: var(--clr-accent-1);
   box-shadow: var(--shadow-glow);
-  transform: translate(-2px, -2px);
+  transform: translateY(-3px);
 }
 .project-card__header {
   display: flex;
@@ -542,13 +542,13 @@
   gap: var(--space-xl);
   padding: var(--space-lg) var(--space-xl);
   background: var(--clr-bg-card);
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   box-shadow: var(--shadow-card);
   transition: var(--transition);
 }
 .edu-card:hover {
   border-color: var(--clr-accent-1);
-  transform: translate(-2px, -2px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-glow);
 }
 .edu-card__years {

@@ -169,7 +169,7 @@ export function ProjectsGrid() {
   const { repos, loading } = useGitHubRepos({ owner: GITHUB_CONFIG.owner });
 
   // GitHub contribution graph URL (ghchart service — public SVG embed)
-  const graphUrl = `https://ghchart.rshah.org/7c3aed/${GITHUB_CONFIG.owner}`;
+  const graphUrl = `https://ghchart.rshah.org/f0a830/${GITHUB_CONFIG.owner}`;
 
   return (
     <section id="projects" data-testid="projects-grid" className="section" ref={ref}>

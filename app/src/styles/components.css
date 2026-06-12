@@ -23,7 +23,7 @@
   height: 2.8rem;
   /* Brutalist: square, 2px border, hard shadow */
   background: var(--clr-bg-card);
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   color: var(--clr-text-2);
   display: flex;
   align-items: center;
@@ -54,7 +54,7 @@
   z-index: 200;
   width: 280px;
   background: var(--clr-bg-card);
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   box-shadow: var(--shadow-card);
   padding: 1.25rem;
   display: flex;
@@ -103,7 +103,7 @@
   height: 1.6rem;
   /* Brutalist: square, 2px border */
   background: var(--clr-bg-2);
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   color: var(--clr-text);
   cursor: pointer;
   display: flex;
@@ -138,7 +138,7 @@
   height: 1.35rem;
   /* Brutalist: square track */
   background: var(--clr-bg-2);
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   position: relative;
   transition: background var(--transition);
   flex-shrink: 0;
@@ -177,7 +177,7 @@
   width: 100%;
   padding: 0.45rem 0.75rem;
   background: var(--clr-bg-2);
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   color: var(--clr-text-2);
   font-size: 0.82rem;
   cursor: pointer;
@@ -216,7 +216,7 @@
   height: min(400px, 85vh);
   background: #0d1117;
   /* Brutalist: 2px border, hard shadow */
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
@@ -230,7 +230,7 @@
   gap: 0.5rem;
   padding: 0.6rem 1rem;
   background: #161b22;
-  border-bottom: 2px solid var(--clr-border);
+  border-bottom: 1px solid var(--clr-border);
   user-select: none;
   flex-shrink: 0;
 }
@@ -290,7 +290,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.6rem 1rem;
-  border-top: 2px solid var(--clr-border);
+  border-top: 1px solid var(--clr-border);
   background: #0d1117;
   flex-shrink: 0;
 }
@@ -331,7 +331,7 @@
   width: min(600px, 96vw);
   max-height: 70vh;
   background: var(--clr-bg-card);
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   box-shadow: var(--shadow-card);
   overflow: hidden;
   display: flex;
@@ -343,7 +343,7 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.9rem 1rem;
-  border-bottom: 2px solid var(--clr-border);
+  border-bottom: 1px solid var(--clr-border);
   flex-shrink: 0;
 }
 
@@ -371,7 +371,7 @@
   font-size: 0.7rem;
   color: var(--clr-text-3);
   background: var(--clr-bg-2);
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   padding: 0.15rem 0.4rem;
   font-family: var(--font-mono);
   flex-shrink: 0;
@@ -447,7 +447,7 @@
   align-items: center;
   gap: 1.25rem;
   padding: 0.55rem 1rem;
-  border-top: 2px solid var(--clr-border);
+  border-top: 1px solid var(--clr-border);
   font-size: 0.72rem;
   color: var(--clr-text-3);
   flex-shrink: 0;
@@ -458,7 +458,7 @@ kbd {
   display: inline-block;
   padding: 0.1em 0.35em;
   background: var(--clr-bg-card);
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   font-family: var(--font-mono);
   font-size: 0.72rem;
   line-height: 1.4;
@@ -470,7 +470,7 @@ kbd {
 .github-graph {
   margin: 2rem 0;
   overflow: hidden;
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   background: var(--clr-bg-card);
   padding: 1rem;
   text-align: center;
@@ -542,7 +542,7 @@ kbd {
   height: 3rem;
   /* Brutalist: square, accent fill, 2px border */
   background: var(--clr-accent-1);
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   color: var(--accent-ink);
   font-size: 1.3rem;
   display: flex;
@@ -563,7 +563,7 @@ kbd {
   z-index: 200;
   width: min(340px, 96vw);
   background: var(--clr-bg-card);
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
@@ -574,7 +574,7 @@ kbd {
   display: flex;
   align-items: center;
   padding: 0.75rem 1rem;
-  border-bottom: 2px solid var(--clr-border);
+  border-bottom: 1px solid var(--clr-border);
   background: var(--clr-bg-2);
   flex-shrink: 0;
 }
@@ -625,7 +625,7 @@ kbd {
   line-height: 1.5;
   word-break: break-word;
   /* Brutalist: sharp corner */
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
 }
 
 .askme-msg--user {
@@ -679,14 +679,14 @@ kbd {
   align-items: center;
   gap: 0.5rem;
   padding: 0.6rem 0.75rem;
-  border-top: 2px solid var(--clr-border);
+  border-top: 1px solid var(--clr-border);
   flex-shrink: 0;
 }
 
 .askme-panel__input {
   flex: 1;
   background: var(--clr-bg-2);
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   padding: 0.45rem 0.75rem;
   color: var(--clr-text);
   font-size: 0.85rem;
@@ -705,7 +705,7 @@ kbd {
   width: 2rem;
   height: 2rem;
   background: var(--clr-accent-1);
-  border: 2px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
   color: var(--accent-ink);
   font-size: 0.9rem;
   display: flex;
