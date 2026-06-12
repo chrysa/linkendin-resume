@@ -57,14 +57,14 @@ button {
   font-family: inherit;
 }
 
-/* ─── Accessibilité — Focus visible ─────────────────────────────────────── */
+/* ─── Accessibilite — Focus visible ─────────────────────────────────────── */
+/* Brutalist focus: 2px offset outline in accent, no radius */
 :focus-visible {
   outline: 2px solid var(--clr-accent-1);
   outline-offset: 3px;
-  border-radius: var(--radius-sm);
 }
 
-/* ─── Accessibilité — Skip Nav ──────────────────────────────────────────── */
+/* ─── Accessibilite — Skip Nav ──────────────────────────────────────────── */
 .skip-nav {
   position: fixed;
   top: -100%;
@@ -72,16 +72,17 @@ button {
   z-index: 9999;
   padding: 0.75rem 1.25rem;
   background: var(--clr-accent-1);
-  color: #fff;
+  color: var(--accent-ink);
   font-weight: 700;
   font-size: 0.9rem;
-  border-radius: var(--radius-md);
   text-decoration: none;
   transition: top 0.2s;
+  /* Brutalist: no radius, 2px border */
+  border: 2px solid var(--clr-border);
 }
 .skip-nav:focus {
   top: var(--space-md);
-  outline: 2px solid #fff;
+  outline: 2px solid var(--accent-ink);
   outline-offset: 2px;
 }
 
@@ -93,20 +94,17 @@ button {
   padding: 0 var(--space-xl);
 }
 
+/* gradient-text: brutalist — solid accent colour, no background-clip trick */
 .gradient-text {
-  background: var(--gradient-text);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--clr-accent-1);
 }
 
 .tag {
   display: inline-block;
   padding: 2px 10px;
-  background: rgba(124, 58, 237, 0.15);
-  color: var(--clr-accent-2);
-  border: 1px solid rgba(124, 58, 237, 0.3);
-  border-radius: var(--radius-full);
+  background: var(--clr-accent-1);
+  color: var(--accent-ink);
+  border: 2px solid var(--clr-border);
   font-size: 0.75rem;
   font-family: var(--font-mono);
   white-space: nowrap;
@@ -118,33 +116,36 @@ button {
   align-items: center;
   gap: var(--space-sm);
   padding: 0.65rem 1.4rem;
-  border-radius: var(--radius-full);
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 700;
   transition: var(--transition);
   font-family: var(--font-sans);
+  cursor: pointer;
+  /* Brutalist: no radius, 2px border */
+  border: 2px solid var(--clr-border);
 }
 
 .btn--primary {
-  background: var(--gradient);
-  color: #fff;
+  background: var(--clr-accent-1);
+  color: var(--accent-ink);
+  border-color: var(--clr-border);
   box-shadow: var(--shadow-glow);
 }
 .btn--primary:hover {
-  filter: brightness(1.12);
-  box-shadow: 0 0 40px rgba(124, 58, 237, 0.45);
-  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+  transform: translate(-2px, -2px);
 }
 
 .btn--ghost {
   background: transparent;
   color: var(--clr-text);
-  border: 1px solid var(--clr-border);
+  border: 2px solid var(--clr-border);
 }
 .btn--ghost:hover {
-  border-color: var(--clr-border-hover);
-  background: rgba(124, 58, 237, 0.08);
-  transform: translateY(-2px);
+  border-color: var(--clr-accent-1);
+  background: var(--clr-bg-card-hover);
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-card);
 }
 
 .btn--sm {
@@ -192,11 +193,16 @@ button {
 }
 
 .section__label {
-  font-size: 0.8rem;
+  display: inline-block;
+  font-size: 0.75rem;
   font-weight: 700;
+  font-family: var(--font-mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--clr-accent-text);
+  /* Brutalist label: accent fill block */
+  background: var(--clr-accent-1);
+  color: var(--accent-ink);
+  padding: 2px 8px;
   margin-bottom: var(--space-sm);
 }
 
@@ -217,7 +223,6 @@ button {
   background: none;
   border: none;
   cursor: pointer;
-  /* accessible click target */
   min-width: 44px;
   min-height: 44px;
   justify-content: center;
@@ -229,23 +234,23 @@ button {
   align-items: center;
   width: 56px;
   height: 28px;
-  border-radius: var(--radius-full);
+  /* Brutalist: no radius on track */
   background: var(--clr-bg-card);
-  border: 1px solid var(--clr-border);
+  border: 2px solid var(--clr-border);
   overflow: hidden;
   transition:
-    background 0.4s,
-    border-color 0.4s;
+    background var(--transition),
+    border-color var(--transition);
 }
 
 [data-theme='dark'] .theme-toggle__track {
-  background: linear-gradient(135deg, #1a1035 0%, #0f1535 100%);
-  border-color: rgba(124, 58, 237, 0.3);
+  background: var(--clr-bg-2);
+  border-color: var(--clr-border);
 }
 
 [data-theme='light'] .theme-toggle__track {
-  background: linear-gradient(135deg, #d0e8ff 0%, #fffbe6 100%);
-  border-color: rgba(250, 180, 50, 0.5);
+  background: var(--clr-bg-2);
+  border-color: var(--clr-border);
 }
 
 .theme-toggle__thumb {
@@ -254,18 +259,17 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: var(--gradient);
-  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.4);
-  color: #fff;
+  width: 20px;
+  height: 20px;
+  /* Brutalist: square thumb, accent fill */
+  background: var(--clr-accent-1);
+  color: var(--accent-ink);
   z-index: 2;
 }
 
 [data-theme='light'] .theme-toggle__thumb {
-  background: linear-gradient(135deg, #f97316, #facc15);
-  box-shadow: 0 2px 8px rgba(249, 115, 22, 0.4);
+  background: var(--clr-accent-1);
+  color: var(--accent-ink);
 }
 
 .theme-toggle__icon {
@@ -273,7 +277,7 @@ button {
   height: 14px;
 }
 
-/* Stars decoration (dark mode) */
+/* Stars decoration (dark mode) — kept, animations are functional (state signal) */
 .theme-toggle__stars {
   position: absolute;
   inset: 0;
@@ -327,7 +331,7 @@ button {
 
 /* ─── Footer ────────────────────────────────────────────────────────────── */
 .footer {
-  border-top: 1px solid var(--clr-border);
+  border-top: 2px solid var(--clr-border);
   padding: var(--space-xl) 0;
 }
 .footer__inner {
@@ -348,5 +352,5 @@ button {
   transition: var(--transition);
 }
 .footer__source:hover {
-  color: var(--clr-accent-2);
+  color: var(--clr-text);
 }

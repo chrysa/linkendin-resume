@@ -3,8 +3,7 @@
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, 0.85);
 }
 
 .modal {
@@ -26,12 +25,10 @@
   max-height: 90dvh;
   overflow-y: auto;
   background: var(--clr-bg-card);
-  border: 1px solid var(--clr-border);
+  border: 2px solid var(--clr-border);
   border-radius: var(--radius-lg);
   padding: var(--space-2xl);
-  box-shadow:
-    0 24px 80px rgba(0, 0, 0, 0.6),
-    var(--shadow-glow);
+  box-shadow: var(--shadow-card);
   position: relative;
   pointer-events: all;
 }
@@ -88,7 +85,7 @@
 
 .form-field__input {
   background: var(--clr-bg-2);
-  border: 1px solid var(--clr-border);
+  border: 2px solid var(--clr-border);
   border-radius: var(--radius-md);
   padding: 0.7rem 1rem;
   color: var(--clr-text);
@@ -100,13 +97,13 @@
 }
 .form-field__input:focus {
   border-color: var(--clr-accent-1);
-  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+  box-shadow: 0 0 0 2px var(--clr-accent-1);
 }
 .form-field__input--error {
   border-color: #ef4444;
 }
 .form-field__input--error:focus {
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+  box-shadow: 0 0 0 2px #ef4444;
 }
 .form-field__textarea {
   resize: vertical;
@@ -166,7 +163,7 @@
   gap: 0.5rem;
   margin: var(--space-lg) 0 var(--space-md);
   background: var(--clr-bg-2);
-  border: 1px solid var(--clr-border);
+  border: 2px solid var(--clr-border);
   border-radius: var(--radius-md);
   padding: 0.3rem;
 }
@@ -178,7 +175,7 @@
   justify-content: center;
   gap: 0.45rem;
   padding: 0.55rem 0.75rem;
-  border-radius: calc(var(--radius-md) - 2px);
+  border-radius: 0;
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--clr-text-2);
@@ -191,11 +188,11 @@
 }
 .modal__tab--active {
   background: var(--clr-accent-1);
-  color: #fff;
+  color: var(--accent-ink);
 }
 .modal__tab--active:hover {
   background: var(--clr-accent-2);
-  color: #fff;
+  color: var(--accent-ink);
 }
 
 /* ─── WhatsApp panel ────────────────────────────────────────────────────── */
@@ -215,6 +212,5 @@
 }
 .btn--whatsapp:hover {
   background: #1ebe5d;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(37, 211, 102, 0.4);
+  box-shadow: var(--shadow-card);
 }
