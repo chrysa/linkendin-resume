@@ -43,6 +43,15 @@ RUN npm ci || npm install
 
 ENV PATH=/app/node_modules/.bin:$PATH
 
+# Build-time Vite configuration (baked into the static bundle). Defaults target
+# the chrysa contact repo; override via --build-arg in CI.
+ARG VITE_GITHUB_OWNER=chrysa
+ARG VITE_GITHUB_REPO=contact
+ARG VITE_DEMO_MODE=false
+ENV VITE_GITHUB_OWNER=$VITE_GITHUB_OWNER \
+    VITE_GITHUB_REPO=$VITE_GITHUB_REPO \
+    VITE_DEMO_MODE=$VITE_DEMO_MODE
+
 # Copy the rest of the application (configs + sources)
 COPY app/ ./
 
