@@ -47,7 +47,7 @@ repos:
   hooks:
   - id: gitleaks
 - repo: https://github.com/chrysa/pre-commit-tools
-  rev: v0.1.1-94
+  rev: v0.1.1-95
   hooks:
   - id: makefile-check
   - id: console-debug-detection
