@@ -35,8 +35,7 @@ repos:
     - --use-tabs=false
     - --single-quote
     - --trailing-comma=es5
-    exclude: 
-      ^(app/dist/|app/coverage/|app/node_modules/|dist/|coverage/|node_modules/)
+    exclude: ^(app/dist/|app/coverage/|app/node_modules/|dist/|coverage/|node_modules/)
     files: ^app/.*\.(css|js|ts|tsx|json|md)$
 - repo: https://github.com/rhysd/actionlint
   rev: v1.7.12
@@ -47,7 +46,7 @@ repos:
   hooks:
   - id: gitleaks
 - repo: https://github.com/chrysa/pre-commit-tools
-  rev: v0.1.1-95
+  rev: v0.1.1-94
   hooks:
   - id: makefile-check
   - id: console-debug-detection
