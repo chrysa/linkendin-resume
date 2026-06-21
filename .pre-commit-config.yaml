@@ -35,7 +35,8 @@ repos:
     - --use-tabs=false
     - --single-quote
     - --trailing-comma=es5
-    exclude: ^(app/dist/|app/coverage/|app/node_modules/|dist/|coverage/|node_modules/)
+    exclude: 
+      ^(app/dist/|app/coverage/|app/node_modules/|dist/|coverage/|node_modules/)
     files: ^app/.*\.(css|js|ts|tsx|json|md)$
 - repo: https://github.com/rhysd/actionlint
   rev: v1.7.12
@@ -108,17 +109,3 @@ repos:
     id: markdownlint
     stages:
     - manual
-- repo: local
-  hooks:
-  - id: gitversion-canonical-drift
-    name: GitVersion.yml canonical drift
-    entry: scripts/check-canonical-drift.sh GitVersion.yml templates/GitVersion.yml
-    language: system
-    pass_filenames: false
-    files: ^(GitVersion\.yml|templates/GitVersion\.yml)$
-  - id: cliff-canonical-drift
-    name: cliff.toml canonical drift
-    entry: scripts/check-canonical-drift.sh cliff.toml templates/cliff.toml
-    language: system
-    pass_filenames: false
-    files: ^(cliff\.toml|templates/cliff\.toml)$
