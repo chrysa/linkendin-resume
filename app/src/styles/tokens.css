@@ -1,51 +1,72 @@
-/* ─── Design Tokens — Editorial persona (warm amber accent) ──────────────── */
-/* Canonical contract: chrysa/shared-standards/docs/DESIGN-SYSTEM.md (§1 Editorial) */
-/* Persona: Editorial — serif display, comfortable density, soft depth, 10px radius. */
-/* Per-app accent: warm amber — dark #f0a830 / light #b45309 (used sparingly:      */
-/* links + one CTA, never large acid blocks).                                      */
+/* ─── Design Tokens — Logbook brand theme (signal-teal accent) ───────────── */
+/* Brand: "Engineering logbook / technical monograph" — precise, crafted,     */
+/* quiet authority. See app/BRAND-BRIEF.md and app/DESIGN.md.                  */
+/*                                                                            */
+/* Architecture: this file is the single source of brand VALUES.             */
+/*   1. import contract.css — the shared SEMANTIC token registry (--bg, --fg, */
+/*      --accent, --radius, --font-display … fixed names the audit checks).   */
+/*   2. assign the brand values to those semantic names (dark + light).       */
+/*   3. alias the app's local --clr-*/component token names to the semantic   */
+/*      ones, so existing components inherit the brand with zero churn.       */
 
-/* Dark theme (default) — html also carries data-persona="editorial" */
+@import './contract.css';
+
+/* ─── Dark theme (default) ────────────────────────────────────────────────── */
 :root,
 [data-theme='dark'] {
-  /* Surfaces (shared neutral frame) */
-  --clr-bg: #0e0e10;
-  --clr-bg-2: #18181b;
-  --clr-bg-card: #18181b;
-  --clr-bg-card-hover: #242428;
-
-  /* Borders — hairline (Editorial 1px, neutral; NOT a loud FG border) */
-  --clr-border: #2e2e33;
-  --clr-border-hover: var(--clr-accent-1);
+  /* ── Semantic contract values (brand) ── */
+  --bg: #0e0e10; /* graphite page — never warm */
+  --surface: #18181b;
+  --surface-2: #242428;
+  --fg: #fafafa; /* 18.48:1 on --bg */
+  --muted: #a1a1aa; /* 7.52:1 on --bg */
+  --border: #2e2e33; /* structural hairline (the rule grid) */
+  --accent: #3bd6c6; /* signal teal — instrument-readout hue */
+  --accent-ink: #0e0e10; /* graphite ink on a teal fill — 10.67:1 */
+  --signal: #22c55e;
+  --warning: #fbbf24;
+  --danger: #ff4d4d;
+  --ring: var(--accent);
+  /* Squarer/flatter — drafted, not pillowy */
+  --radius: 6px;
   --border-weight: 1px;
+  /* Near-flat depth: a hairline edge, not a soft glow */
+  --shadow: 0 1px 0 rgb(0 0 0 / 0.4);
+  /* Typeset monograph: Spectral display + Inter body + JetBrains Mono data */
+  --font-display: 'Spectral', 'Newsreader', Georgia, serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  /* App-local alias: existing components reference --font-sans */
+  --font-sans: var(--font-body);
+  --density: 2.5rem;
+  --motion: 180ms; /* calm: short, ease-out, no spring */
 
-  /* Warm amber accent — restrained (links / one CTA) */
-  --clr-accent-1: #f0a830;
-  --clr-accent-2: #d98e1f;
+  /* ── App-local aliases → semantic tokens (no component churn) ── */
+  --clr-bg: var(--bg);
+  --clr-bg-2: var(--surface);
+  --clr-bg-card: var(--surface);
+  --clr-bg-card-hover: var(--surface-2);
 
-  /* Accent helpers (names kept; no gradients in Editorial) */
-  --gradient: var(--clr-accent-1);
-  --gradient-text: var(--clr-accent-1);
+  --clr-border: var(--border);
+  --clr-border-hover: var(--accent);
 
-  /* Text */
-  --clr-text: #fafafa;
-  --clr-text-2: #a1a1aa;
+  --clr-accent-1: var(--accent);
+  --clr-accent-2: var(--accent);
+
+  /* No gradients in the logbook brand — solid signal-teal */
+  --gradient: var(--accent);
+  --gradient-text: var(--accent);
+
+  --clr-text: var(--fg);
+  --clr-text-2: var(--muted);
   --clr-text-3: #71717a;
 
-  /* Accent-text: amber, for links/inline emphasis (8:1 on --clr-bg) */
-  --clr-accent-text: var(--clr-accent-1);
-
-  /* Ink on an amber fill (the one CTA) */
-  --accent-ink: #0e0e10;
-
-  /* Typography — serif display + sans body (Editorial) */
-  --font-display: 'Fraunces', 'Newsreader', Georgia, serif;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --clr-accent-text: var(--accent);
 
   /* A11y offset */
   --a11y-font-offset: 0px;
 
-  /* Spacing (4/8pt scale; Editorial breathes — generous section rhythm) */
+  /* Spacing (4/8pt scale; the page breathes like a typeset book) */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
@@ -53,57 +74,62 @@
   --space-xl: 2.5rem;
   --space-2xl: 5rem;
 
-  /* Radius — Editorial: soft 10px scale; 9999px for genuine circles */
-  --radius-sm: 8px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
+  /* Radius — tight, ruled scale (sm 4 / md 6 / lg 8); full only for circles */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
   --radius-full: 9999px;
 
-  /* Shadows — soft blurred elevation (no hard offset, no glow) */
-  --shadow-card: 0 4px 24px rgb(0 0 0 / 0.18);
-  --shadow-glow: 0 4px 24px rgb(0 0 0 / 0.18);
+  /* Shadows — near-flat: hairline edge only, depth comes from the rules */
+  --shadow-card: var(--shadow);
+  --shadow-glow: var(--shadow);
 
-  /* Transitions — calm (Editorial motion 220ms) */
-  --transition: 0.22s ease;
+  /* Transition — calm, linear/ease-out, no bounce */
+  --transition: var(--motion) ease-out;
 
   /* Layout */
   --max-width: 1100px;
   --section-py: 6rem;
+
+  /* ── Index-rail / logbook spine (signature element) ── */
+  --rail-width: 3.25rem; /* reserved left measure for the spine */
+  --rail-tick: var(--border); /* baseline tick colour */
+  --rail-num: var(--muted); /* zero-padded entry numbers */
+  --rail-prompt: var(--accent); /* terminal-prompt section marker (▸ §) */
+  --rail-prompt-glyph: '\25B8\00A0\00A7'; /* ▸ § */
 }
 
-/* Light theme */
+/* ─── Light theme ─────────────────────────────────────────────────────────── */
 [data-theme='light'] {
-  --clr-bg: #fafafa;
-  --clr-bg-2: #f0f0f0;
-  --clr-bg-card: #ffffff;
-  --clr-bg-card-hover: #f0f0f0;
+  --bg: #fafafa; /* paper */
+  --surface: #ffffff;
+  --surface-2: #f0f0f0;
+  --fg: #0e0e10; /* 18.48:1 on --bg */
+  --muted: #52525b; /* 7.41:1 on --bg */
+  --border: #d4d4d8;
+  --accent: #0e7c70; /* darker teal for contrast on paper */
+  --accent-ink: #ffffff; /* white ink on teal fill — 5.08:1 */
+  --signal: #15803d;
+  --warning: #b45309;
+  --danger: #dc2626;
+  --shadow: 0 1px 0 rgb(0 0 0 / 0.12);
 
-  /* Borders — light hairline */
-  --clr-border: #d4d4d8;
-  --clr-border-hover: var(--clr-accent-1);
-
-  /* Warm amber — darker variant for contrast on light */
-  --clr-accent-1: #b45309;
-  --clr-accent-2: #92400e;
-
-  --gradient: var(--clr-accent-1);
-  --gradient-text: var(--clr-accent-1);
-
-  --clr-text: #0e0e10;
-  --clr-text-2: #52525b;
+  /* Local aliases follow the semantic values automatically, except the few
+     that need a light-specific literal. */
   --clr-text-3: #71717a;
-
-  --clr-accent-text: var(--clr-accent-1);
-
-  --accent-ink: #ffffff;
-
-  --shadow-card: 0 4px 24px rgb(0 0 0 / 0.1);
-  --shadow-glow: 0 4px 24px rgb(0 0 0 / 0.1);
+  --shadow-card: var(--shadow);
+  --shadow-glow: var(--shadow);
 }
 
 /* ─── A11y dataset overrides ─────────────────────────────────────────────── */
 
 [data-high-contrast='true'] {
+  --bg: #000000;
+  --surface: #0a0a0a;
+  --surface-2: #111111;
+  --fg: #ffffff;
+  --muted: #dddddd;
+  --border: #ffffff;
   --clr-bg: #000000;
   --clr-bg-2: #0a0a0a;
   --clr-bg-card: #111111;
@@ -115,7 +141,7 @@
 }
 
 [data-dyslexia='true'] {
-  --font-sans: 'OpenDyslexic', 'Comic Sans MS', cursive, sans-serif;
+  --font-body: 'OpenDyslexic', 'Comic Sans MS', cursive, sans-serif;
 }
 
 [data-reduced-motion='true'] *,
