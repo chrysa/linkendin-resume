@@ -1,0 +1,54 @@
+/*
+ * chrysa Design System — CONTRACT (shared by every app, do not edit per-app).
+ * Spec: chrysa/shared-standards/docs/DESIGN-SYSTEM.md
+ * Vendored from shared-standards/templates/contract.css (PR #143, pending merge).
+ *
+ * Declares the semantic token NAMES (the registry) with neutral fallback values,
+ * plus the a11y floor. This app overrides the VALUES in tokens.css. Names fixed.
+ */
+
+:root {
+  --bg: #0e0e10;
+  --surface: #18181b;
+  --surface-2: #242428;
+  --fg: #fafafa;
+  --muted: #a1a1aa;
+  --border: #2e2e33;
+  --accent: #c8ff00;
+  --accent-ink: #0e0e10;
+  --signal: #22c55e;
+  --warning: #fbbf24;
+  --danger: #ff4d4d;
+  --ring: var(--accent);
+  --radius: 6px;
+  --border-weight: 1px;
+  --shadow: 0 1px 3px rgb(0 0 0 / 0.24);
+  --font-display: system-ui, sans-serif;
+  --font-body: system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, monospace;
+  --density: 2.5rem;
+  --motion: 160ms;
+}
+
+:root.light {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --surface-2: #f0f0f0;
+  --fg: #0e0e10;
+  --muted: #52525b;
+  --border: #d4d4d8;
+  --accent: #a3e000;
+  --accent-ink: #0e0e10;
+  --signal: #15803d;
+  --warning: #b45309;
+  --danger: #dc2626;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

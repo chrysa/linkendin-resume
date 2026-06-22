@@ -10,10 +10,11 @@ const bannerStyle: CSSProperties = {
   padding: '0.4rem 1.25rem',
   fontSize: '0.85rem',
   fontWeight: 500,
-  // Amber on near-black — contrast ratio > 7:1 (WCAG 2.1 AA, even AAA).
-  color: '#451a03',
-  background: '#fbbf24',
-  borderBottom: '1px solid #b45309',
+  // Semantic warning fill (amber, tracks the theme) with graphite ink on top.
+  // --warning is #fbbf24 (dark) / #b45309 (light); graphite ink keeps >7:1 AA.
+  color: 'var(--accent-ink)',
+  background: 'var(--warning)',
+  borderBottom: '1px solid color-mix(in srgb, var(--warning) 70%, #000)',
   textAlign: 'center',
 };
 

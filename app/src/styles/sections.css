@@ -1,3 +1,101 @@
+/* ─── Index-rail / logbook spine (signature element) ─────────────────────── */
+/* A monospaced spine in the reserved left margin of each numbered section:    */
+/* zero-padded entry numbers ([01] [02] …), a baseline tick, and a            */
+/* terminal-prompt section marker (▸ §). Pure CSS — counters + pseudo-elements */
+/* so it survives reduced-motion and print, no JS or markup churn.            */
+
+/* Number the sections of the main monograph column. */
+main {
+  counter-reset: logbook;
+}
+
+/* Reserve the left measure for the spine and create the positioning context.
+   Scoped to sections INSIDE main so the footer/navbar containers are spared. */
+main > .section {
+  counter-increment: logbook;
+}
+main > .section > .container {
+  position: relative;
+  padding-left: calc(var(--space-xl) + var(--rail-width));
+}
+
+/* The spine: a 1px structural hairline running the height of each section,
+   sitting at the inner edge of the reserved margin. */
+main > .section > .container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--rail-width);
+  width: var(--border-weight);
+  background: var(--rail-tick);
+  pointer-events: none;
+}
+
+/* The logbook entry head: zero-padded number + terminal-prompt marker,
+   rendered in the reserved margin, aligned to the section's first line. */
+main > .section > .container::after {
+  content: '[' counter(logbook, decimal-leading-zero) ']' '\A' var(--rail-prompt-glyph);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--rail-width);
+  padding-right: var(--space-sm);
+  white-space: pre; /* honour the \A line break */
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: var(--rail-num);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Tint only the prompt glyph line is not possible from one pseudo-element;
+   instead the whole head reads muted and the prompt marker earns the accent
+   via a second tick at the spine head — a precise registration mark. */
+main > .section > .container .section__label {
+  position: relative;
+}
+main > .section > .container .section__label::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: calc(-1 * var(--space-xl) - var(--border-weight));
+  width: var(--space-md);
+  height: var(--border-weight);
+  background: var(--rail-prompt);
+  transform: translateY(-50%);
+}
+
+/* Mobile: the reserved margin is too costly on narrow screens — collapse the
+   rail to a thin accent tick and drop the number column. */
+@media (max-width: 600px) {
+  main > .section > .container {
+    padding-left: var(--space-lg);
+  }
+  main > .section > .container::after {
+    display: none;
+  }
+  main > .section > .container::before {
+    left: 0;
+  }
+  main > .section > .container .section__label::before {
+    left: calc(-1 * var(--space-lg));
+    width: var(--space-sm);
+  }
+}
+
+/* Reduced motion: the rail is structural (drawn, not animated) — nothing to do
+   beyond the global guards, but make the intent explicit. */
+@media (prefers-reduced-motion: reduce) {
+  main > .section > .container::after,
+  main > .section > .container::before {
+    transition: none;
+  }
+}
+
 /* ─── Navbar ────────────────────────────────────────────────────────────── */
 .navbar {
   position: fixed;
