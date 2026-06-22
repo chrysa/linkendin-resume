@@ -6,8 +6,8 @@
 /*   1. import contract.css — the shared SEMANTIC token registry (--bg, --fg, */
 /*      --accent, --radius, --font-display … fixed names the audit checks).   */
 /*   2. assign the brand values to those semantic names (dark + light).       */
-/*   3. alias the app's local --clr-*/component token names to the semantic   */
-/*      ones, so existing components inherit the brand with zero churn.       */
+/*   3. alias the app's local --clr-* and component token names to the         */
+/*      semantic ones, so existing components inherit the brand, no churn.     */
 
 @import './contract.css';
 
