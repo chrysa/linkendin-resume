@@ -36,7 +36,7 @@ gridlines, and a quiet authority that comes from the work being documented, not 
 
 - **The Manual / technical reference manuals (LaTeX `book` class, O'Reilly animal books):**
   borrow the disciplined measure, the generous margin reserved for marginalia/metadata, the
-  sober display serif used with restraint, and the sense that the page is *typeset*, not laid out.
+  sober display serif used with restraint, and the sense that the page is _typeset_, not laid out.
 - **A well-kept terminal / `man` page:** borrow the monospaced data voice for dates, tech tags,
   and metadata, and one literal terminal-prompt marker (`▸ §`) that signals "an engineer made this".
 - **Engineering field notebook (quadrille/grid paper):** borrow the faint rule-and-tick grid and
@@ -47,21 +47,21 @@ gridlines, and a quiet authority that comes from the work being documented, not 
 A **monospaced index-rail running down the left edge of the page** — a slim vertical spine of
 section numbers, tick marks, and a terminal-prompt section marker that the reader's eye tracks as
 they scroll, like the spine/margin of a bound logbook. It is the one thing that makes this read as
-a *deliberate engineering document* and not a generic dark résumé template.
+a _deliberate engineering document_ and not a generic dark résumé template.
 
 ---
 
 ## Derived decisions
 
 - **Type:** display = **Spectral** (a sober, technical-feeling text serif with quiet authority —
-  keeps the "typeset monograph" gravitas of the old Fraunces but reads as a *reference-manual*
+  keeps the "typeset monograph" gravitas of the old Fraunces but reads as a _reference-manual_
   serif rather than a fashionable display face); body = **Inter** (kept — neutral, legible UI/body
   workhorse); data = **JetBrains Mono** (kept — the logbook/terminal voice for the index-rail,
   dates, tech tags, metric sub-labels, and entry numbers).
 - **Color:** accent = **signal cyan/teal `#3bd6c6` (dark) / `#0e7c70` (light)** — a precise
   instrument-readout hue (oscilloscope trace, terminal status, satellite-telemetry green-cyan)
   that reads as "measured signal" rather than the warm, editorial-magazine amber it replaces; it
-  fits *precise / quiet-authority* and ties to the space/mobility/infra story. surface mood =
+  fits _precise / quiet-authority_ and ties to the space/mobility/infra story. surface mood =
   **cool neutral** (near-black graphite `#0e0e10` dark / paper `#fafafa` light — the page of the
   logbook, never warm).
 - **Shape & depth:** radius = **tight `4px` (sm) / `6px` (md) / `8px` (lg)**, `9999px` only for
@@ -69,10 +69,10 @@ a *deliberate engineering document* and not a generic dark résumé template.
   pillowy. border = **crisp 1px hairlines in a structural border colour**, used as actual rules
   (the grid), with the index-rail drawn as a 1px tick column. shadow = **near-flat** — replace the
   soft 24px blur with a minimal `0 1px 0` hairline-edge + very faint elevation; depth comes from
-  rules and the grid, not glow, so the page feels *printed*.
+  rules and the grid, not glow, so the page feels _printed_.
 - **Motion personality:** **calm** — short (~160–200ms), linear/`ease-out`, no spring or bounce.
   signature transition = on scroll, each logbook entry's number + tick on the index-rail
-  *ticks/registers in* (a 1px-precise fade + 2px settle), like a plotter advancing one line. Fully
+  _ticks/registers in_ (a 1px-precise fade + 2px settle), like a plotter advancing one line. Fully
   **reduced-motion-safe**: under `data-reduced-motion`/`prefers-reduced-motion` the rail and entries
   render in their final state with no movement — the signature is structural (drawn in CSS), not
   animation-dependent.

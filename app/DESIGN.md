@@ -31,15 +31,15 @@ semantic one. Every other stylesheet reads these custom properties unchanged.
 
 **Palette**
 
-| Token | Dark | Light |
-|---|---|---|
-| `--bg` | `#0e0e10` (graphite page) | `#fafafa` (paper) |
-| `--surface` | `#18181b` | `#ffffff` |
-| `--fg` | `#fafafa` | `#0e0e10` |
-| `--muted` | `#a1a1aa` | `#52525b` |
-| `--border` | `#2e2e33` | `#d4d4d8` |
-| `--accent` | `#3bd6c6` (signal teal) | `#0e7c70` (deep teal) |
-| `--accent-ink` | `#0e0e10` | `#ffffff` |
+| Token          | Dark                      | Light                 |
+| -------------- | ------------------------- | --------------------- |
+| `--bg`         | `#0e0e10` (graphite page) | `#fafafa` (paper)     |
+| `--surface`    | `#18181b`                 | `#ffffff`             |
+| `--fg`         | `#fafafa`                 | `#0e0e10`             |
+| `--muted`      | `#a1a1aa`                 | `#52525b`             |
+| `--border`     | `#2e2e33`                 | `#d4d4d8`             |
+| `--accent`     | `#3bd6c6` (signal teal)   | `#0e7c70` (deep teal) |
+| `--accent-ink` | `#0e0e10`                 | `#ffffff`             |
 
 **Shape & depth:** squarer/flatter — `--radius-sm 4px` / `--radius-md 6px` /
 `--radius-lg 8px`, `9999px` only for true circles; `--border-weight 1px` hairlines
@@ -53,12 +53,12 @@ reference-manual serif), body **Inter** (`--font-body`/`--font-sans`), data
 
 **AA contrast ratios (verified):**
 
-| Pair | Dark | Light |
-|---|---|---|
-| `--fg` on `--bg` | 18.48:1 | 18.48:1 |
-| `--muted` on `--bg` | 7.52:1 | 7.41:1 |
-| `--accent-ink` on `--accent` fill | 10.67:1 | 5.08:1 |
-| `--accent` as text on `--bg` | 10.67:1 | 4.86:1 |
+| Pair                              | Dark    | Light   |
+| --------------------------------- | ------- | ------- |
+| `--fg` on `--bg`                  | 18.48:1 | 18.48:1 |
+| `--muted` on `--bg`               | 7.52:1  | 7.41:1  |
+| `--accent-ink` on `--accent` fill | 10.67:1 | 5.08:1  |
+| `--accent` as text on `--bg`      | 10.67:1 | 4.86:1  |
 
 All ≥ 4.5:1 (normal text). The demo banner (`--accent-ink` on `--warning`) is
 11.55:1 dark / 5.02:1 light. The terminal easter-egg keeps authentic ANSI colours
