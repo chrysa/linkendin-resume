@@ -91,6 +91,10 @@ safe (structural, never animation-dependent), and print-safe (a print override i
 - **Density:** comfortable-but-information-dense — generous vertical rhythm and
   margin, but each entry is compact and metadata-rich (mono dates, tech tags,
   numbers) so a skimming reader extracts signal fast.
+- **Print fidelity:** the printed/PDF CV is a first-class surface (recruiters read it
+  offline). Skill proficiency is encoded as dots + a hover tooltip on screen; on paper
+  there is no hover, so print inks the active dots (signal-teal washes out in grayscale)
+  and reveals the tier word inline (`.skill-pill__level-print`). No screen change.
 - **Why this serves the job (not a generic stat-cards + table shell):** a technical
   decision-maker decides in under a minute whether this is a senior systems
   engineer worth talking to. The logbook spine, ruled grid, and mono data voice
