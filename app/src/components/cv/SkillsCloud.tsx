@@ -33,6 +33,12 @@ function SkillPill({ skill, lang }: { skill: Skill; lang: string }) {
           <span key={d} className={'skill-pill__dot' + (d <= skill.level ? ' skill-pill__dot--active' : '')} />
         ))}
       </div>
+      {/* Print-only proficiency tier: the screen reveals it on hover, but a printed/PDF
+          CV has no hover — surface the tier word there. aria-hidden: the <li> aria-label
+          already announces it, this span only restores the visual label on paper. */}
+      <span className="skill-pill__level-print" aria-hidden="true">
+        {levels[skill.level]}
+      </span>
       <AnimatePresence>
         {hovered && (
           <motion.div
