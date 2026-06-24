@@ -528,6 +528,11 @@ main > .section > .container .section__label::before {
 .skill-pill__name {
   color: var(--clr-text);
 }
+/* Proficiency tier word — hidden on screen (dots + hover tooltip carry it there),
+   revealed only in print where there is no hover (see responsive.css print block). */
+.skill-pill__level-print {
+  display: none;
+}
 /* Editorial skill level tooltip: soft pill, amber text on surface */
 .skill-pill__level {
   position: absolute;
