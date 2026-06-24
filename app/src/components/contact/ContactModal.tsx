@@ -42,11 +42,7 @@ interface SuccessViewProps {
 function SuccessView({ issueUrl, onClose }: SuccessViewProps) {
   const { t } = useTranslation();
   return (
-    <motion.div
-      className="modal__success"
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-    >
+    <motion.div className="modal__success" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}>
       <div className="modal__success-icon">🎉</div>
       <h3>{t('modal.success.title')}</h3>
       <p>{t('modal.success.body')}</p>
@@ -74,12 +70,7 @@ function WhatsappTab({ lang }: WhatsappTabProps) {
     encodeURIComponent(CONTACT_CONFIG.whatsappPrefill(lang));
   return (
     <div className="modal__whatsapp">
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="btn btn--primary btn--lg btn--whatsapp"
-      >
+      <a href={href} target="_blank" rel="noopener noreferrer" className="btn btn--primary btn--lg btn--whatsapp">
         <i className="bi bi-whatsapp" /> {t('modal.whatsappCta')}
       </a>
     </div>
@@ -141,10 +132,7 @@ function GithubForm({ form, errors, status, firstInputRef, onChange, onSubmit }:
           id="message"
           name="message"
           rows={5}
-          className={
-            'form-field__input form-field__textarea' +
-            (errors.message ? ' form-field__input--error' : '')
-          }
+          className={'form-field__input form-field__textarea' + (errors.message ? ' form-field__input--error' : '')}
           placeholder={t('modal.message.placeholder')}
           value={form.message}
           onChange={onChange}
@@ -262,9 +250,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
     const labels = inferLabels(form);
     const title = encodeURIComponent('[Contact] ' + form.subject);
-    const body = encodeURIComponent(
-      '**De :** ' + form.senderName + '\n\n' + form.message + '\n\n---\n*CV en ligne*',
-    );
+    const body = encodeURIComponent('**De :** ' + form.senderName + '\n\n' + form.message + '\n\n---\n*CV en ligne*');
     const url =
       'https://github.com/' +
       GITHUB_CONFIG.owner +
