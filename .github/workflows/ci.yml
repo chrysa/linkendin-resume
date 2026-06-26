@@ -28,7 +28,7 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.3
+        uses: actions/checkout@v7.0.0
       - uses: chrysa/github-actions/python-setup@v1.2.1
         with:
           python-version: "3.14"
@@ -52,7 +52,7 @@ jobs:
       patch: ${{ steps.gitversion.outputs.patch }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.3
+        uses: actions/checkout@v7.0.0
         with:
           fetch-depth: 0
       - name: Compute version
@@ -68,7 +68,7 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.3
+        uses: actions/checkout@v7.0.0
       - name: Setup Node.js
         uses: actions/setup-node@v6.4.0
         with:
@@ -94,7 +94,7 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.3
+        uses: actions/checkout@v7.0.0
       - name: Setup Node.js
         uses: actions/setup-node@v6.4.0
         with:
@@ -126,7 +126,7 @@ jobs:
       - test
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.3
+        uses: actions/checkout@v7.0.0
       - name: Setup Node.js
         uses: actions/setup-node@v6.4.0
         with:
@@ -157,7 +157,7 @@ jobs:
       - test
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.3
+        uses: actions/checkout@v7.0.0
       - name: Setup Node.js
         uses: actions/setup-node@v6.4.0
         with:
@@ -196,7 +196,7 @@ jobs:
       pull-requests: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.3
+        uses: actions/checkout@v7.0.0
         with:
           fetch-depth: 0
       - name: SonarCloud Scan
