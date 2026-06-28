@@ -111,7 +111,7 @@ VITE_GITHUB_REPO=contact
 ```bash
 make dev          # Vite dev server → http://localhost:3000
 make test         # Unit tests (116 tests)
-make ci           # lint + type-check + test + build
+make ci           # lint + typecheck + test + build
 ```
 
 ### Docker development
@@ -147,7 +147,7 @@ The project provides three stages in [`docker/Dockerfile`](docker/Dockerfile):
 
 | Workflow  | Trigger            | Steps                                                        |
 |-----------|--------------------|--------------------------------------------------------------|
-| `ci.yml`  | push/PR main+dev   | pre-commit · lint · type-check · test · build · SonarCloud  |
+| `ci.yml`  | push/PR main+dev   | pre-commit · lint · typecheck · test · build · SonarCloud  |
 | `cd.yml`  | push main + tags   | GitVersion · tag · GHCR push · SSH deploy                   |
 
 ### Required GitHub secrets
@@ -274,7 +274,7 @@ app/src/
 make dev            # Dev server (port 3000)
 make build-prod     # Production build
 make lint           # ESLint
-make type-check     # TypeScript check
+make typecheck     # TypeScript check
 make test           # Unit tests (Vitest) — 116 tests
 make test-coverage  # Coverage report
 make ci             # All CI checks locally
