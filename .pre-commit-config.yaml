@@ -56,7 +56,7 @@ repos:
   - id: react-console-error-detection
   - id: no-console-warn
   - additional_dependencies:
-    - tree-sitter>=0.25.2
+    - tree-sitter>=0.26.0
     - tree-sitter-typescript>=0.23.2
     id: ts-unreachable-code
   - id: css-duplicate-property
