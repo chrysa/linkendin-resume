@@ -24,7 +24,7 @@ repos:
   rev: v6.0.0
 - hooks:
   - additional_dependencies:
-    - prettier@^3.8.4
+    - prettier@^3.9.4
     - prettier-plugin-organize-imports@^4.3.0
     args:
     - --print-width=120
