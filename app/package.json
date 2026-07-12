@@ -1,20 +1,4 @@
 {
-  "name": "cv-online",
-  "version": "1.0.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "dev": "vite --port 3000",
-    "build": "tsc && vite build",
-    "preview": "vite preview --port 4173",
-    "lint": "eslint src",
-    "lint:fix": "eslint src --fix",
-    "type-check": "tsc --noEmit",
-    "test": "vitest --run",
-    "test:watch": "vitest --watch",
-    "test:coverage": "vitest --coverage --run",
-    "test:e2e": "playwright test"
-  },
   "dependencies": {
     "@tanstack/react-query": "^5.101.0",
     "bootstrap-icons": "^1.13.1",
@@ -52,5 +36,21 @@
     "typescript": "^6.0.3",
     "vite": "^8.0.16",
     "vitest": "^4.1.8"
-  }
+  },
+  "name": "cv-online",
+  "private": true,
+  "scripts": {
+    "build": "tsc && vite build",
+    "dev": "vite --port 3000",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "preview": "vite preview --port 4173",
+    "test": "vitest --run",
+    "test:coverage": "vitest --coverage --run",
+    "test:e2e": "playwright test",
+    "test:watch": "vitest --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "type": "module",
+  "version": "1.0.0"
 }
