@@ -24,6 +24,11 @@ COPY app/ ./
 
 ENV PATH=/srv/app/node_modules/.bin:$PATH
 
+# Own the tree (incl. the node_modules volume mountpoint) with uid/gid 1000 so
+# the container can run as the host user (compose `user:`) and still write deps
+# and caches without leaving root-owned files in the bind-mounted ./app tree.
+RUN mkdir -p /srv/app/node_modules && chown -R node:node /srv/app
+
 EXPOSE $PORT
 
 # Ensure deps are installed when bind-mount hides prebuilt node_modules
@@ -79,3 +84,8 @@ HEALTHCHECK --interval=30s --timeout=5s --retries=3 --start-period=15s \
 USER node
 
 CMD ["sh", "-c", "serve -s dist -l ${PORT}"]
+
+# --- production alias ---------------------------------------------------------
+# Canonical stage name required by the chrysa artifact-isolation standard.
+# Identical to `prod`; the `prod` name is retained for existing CI (cd/deploy).
+FROM prod AS production

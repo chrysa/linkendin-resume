@@ -32,6 +32,163 @@ function inferLabels(form: ContactFormData): string[] {
   return labels.length > 0 ? labels : ['contact'];
 }
 
+// ─── Sub-components ────────────────────────────────────────────────────────────
+
+interface SuccessViewProps {
+  readonly issueUrl: string;
+  readonly onClose: () => void;
+}
+
+function SuccessView({ issueUrl, onClose }: SuccessViewProps) {
+  const { t } = useTranslation();
+  return (
+    <motion.div className="modal__success" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}>
+      <div className="modal__success-icon">🎉</div>
+      <h3>{t('modal.success.title')}</h3>
+      <p>{t('modal.success.body')}</p>
+      <a href={issueUrl} target="_blank" rel="noopener noreferrer" className="btn btn--primary btn--lg">
+        <i className="bi bi-github" />
+        {t('modal.success.open')}
+      </a>
+      <button className="modal__success-back" onClick={onClose}>
+        {t('modal.success.back')}
+      </button>
+    </motion.div>
+  );
+}
+
+interface WhatsappTabProps {
+  readonly lang: string;
+}
+
+function WhatsappTab({ lang }: WhatsappTabProps) {
+  const { t } = useTranslation();
+  const href =
+    'https://wa.me/' +
+    CONTACT_CONFIG.whatsapp.replace(/\D/g, '') +
+    '?text=' +
+    encodeURIComponent(CONTACT_CONFIG.whatsappPrefill(lang));
+  return (
+    <div className="modal__whatsapp">
+      <a href={href} target="_blank" rel="noopener noreferrer" className="btn btn--primary btn--lg btn--whatsapp">
+        <i className="bi bi-whatsapp" /> {t('modal.whatsappCta')}
+      </a>
+    </div>
+  );
+}
+
+interface GithubFormProps {
+  readonly form: ContactFormData;
+  readonly errors: FormErrors;
+  readonly status: Status;
+  readonly firstInputRef: React.RefObject<HTMLInputElement | null>;
+  readonly onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  readonly onSubmit: (e: React.FormEvent) => void;
+}
+
+function GithubForm({ form, errors, status, firstInputRef, onChange, onSubmit }: GithubFormProps) {
+  const { t } = useTranslation();
+  return (
+    <form className="modal__form" onSubmit={onSubmit} noValidate>
+      <div className="form-field">
+        <label className="form-field__label" htmlFor="senderName">
+          {t('modal.name.label')}
+        </label>
+        <input
+          ref={firstInputRef}
+          id="senderName"
+          name="senderName"
+          type="text"
+          className={'form-field__input' + (errors.senderName ? ' form-field__input--error' : '')}
+          placeholder={t('modal.name.placeholder')}
+          value={form.senderName}
+          onChange={onChange}
+          autoComplete="name"
+        />
+        {errors.senderName && <span className="form-field__error">{errors.senderName}</span>}
+      </div>
+
+      <div className="form-field">
+        <label className="form-field__label" htmlFor="subject">
+          {t('modal.subject.label')}
+        </label>
+        <input
+          id="subject"
+          name="subject"
+          type="text"
+          className={'form-field__input' + (errors.subject ? ' form-field__input--error' : '')}
+          placeholder={t('modal.subject.placeholder')}
+          value={form.subject}
+          onChange={onChange}
+        />
+        {errors.subject && <span className="form-field__error">{errors.subject}</span>}
+      </div>
+
+      <div className="form-field">
+        <label className="form-field__label" htmlFor="message">
+          {t('modal.message.label')}
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          rows={5}
+          className={'form-field__input form-field__textarea' + (errors.message ? ' form-field__input--error' : '')}
+          placeholder={t('modal.message.placeholder')}
+          value={form.message}
+          onChange={onChange}
+        />
+        <div className="form-field__footer">
+          {errors.message && <span className="form-field__error">{errors.message}</span>}
+          <span className="form-field__count">{form.message.length}/2000</span>
+        </div>
+      </div>
+
+      <button type="submit" className="btn btn--primary btn--full" disabled={status === 'loading'}>
+        {status === 'loading' ? (
+          <>
+            <span className="spinner" />
+            {t('modal.sending')}
+          </>
+        ) : (
+          <>
+            <i className="bi bi-send-fill" />
+            {t('modal.submit')}
+          </>
+        )}
+      </button>
+    </form>
+  );
+}
+
+interface ModalTabsProps {
+  readonly tab: Tab;
+  readonly hasWhatsapp: boolean;
+  readonly onTabChange: (tab: Tab) => void;
+}
+
+function ModalTabs({ tab, hasWhatsapp, onTabChange }: ModalTabsProps) {
+  const { t } = useTranslation();
+  if (!hasWhatsapp) return null;
+  return (
+    <div className="modal__tabs">
+      <button
+        className={'modal__tab' + (tab === 'github' ? ' modal__tab--active' : '')}
+        onClick={() => onTabChange('github')}
+      >
+        <i className="bi bi-github" /> {t('modal.tabGithub')}
+      </button>
+      <button
+        className={'modal__tab' + (tab === 'whatsapp' ? ' modal__tab--active' : '')}
+        onClick={() => onTabChange('whatsapp')}
+      >
+        <i className="bi bi-whatsapp" /> {t('modal.tabWhatsapp')}
+      </button>
+    </div>
+  );
+}
+
+// ─── Main component ────────────────────────────────────────────────────────────
+
 export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const { t, i18n } = useTranslation();
   const lang = i18n.language.startsWith('en') ? 'en' : 'fr';
@@ -47,7 +204,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const [issueUrl, setIssueUrl] = useState<string | null>(null);
   const firstInputRef = useRef<HTMLInputElement>(null);
 
-  // Focus piège + fermeture clavier
+  // Focus trap + keyboard close
   useEffect(() => {
     if (!isOpen) return;
     firstInputRef.current?.focus();
@@ -80,7 +237,6 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
-    // Efface l'erreur du champ en cours de saisie
     if (errors[name as keyof ContactFormData]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
@@ -93,7 +249,6 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     setStatus('loading');
 
     const labels = inferLabels(form);
-
     const title = encodeURIComponent('[Contact] ' + form.subject);
     const body = encodeURIComponent('**De :** ' + form.senderName + '\n\n' + form.message + '\n\n---\n*CV en ligne*');
     const url =
@@ -116,7 +271,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
   const handleClose = () => {
     onClose();
-    // Reset avec délai pour laisser l'animation se terminer
+    // Reset after animation completes
     setTimeout(() => {
       setForm({ senderName: '', subject: '', message: '' });
       setErrors({});
@@ -148,7 +303,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            {/* Box animée */}
+            {/* Animated box */}
             <motion.div
               className="modal__box"
               initial={{ y: 40, scale: 0.97 }}
@@ -161,137 +316,30 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               </button>
 
               {status === 'success' && issueUrl ? (
-                <motion.div
-                  className="modal__success"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                >
-                  <div className="modal__success-icon">🎉</div>
-                  <h3>{t('modal.success.title')}</h3>
-                  <p>{t('modal.success.body')}</p>
-                  <a href={issueUrl} target="_blank" rel="noopener noreferrer" className="btn btn--primary btn--lg">
-                    <i className="bi bi-github" />
-                    {t('modal.success.open')}
-                  </a>
-                  <button className="modal__success-back" onClick={handleClose}>
-                    {t('modal.success.back')}
-                  </button>
-                </motion.div>
+                <SuccessView issueUrl={issueUrl} onClose={handleClose} />
               ) : (
                 <>
                   <div className="modal__header">
                     <h2 id="modal-title" className="modal__title">
                       <span className="gradient-text">{t('modal.title')}</span>
                     </h2>
-                    {hasWhatsapp && (
-                      <div className="modal__tabs">
-                        <button
-                          className={'modal__tab' + (tab === 'github' ? ' modal__tab--active' : '')}
-                          onClick={() => setTab('github')}
-                        >
-                          <i className="bi bi-github" /> {t('modal.tabGithub')}
-                        </button>
-                        <button
-                          className={'modal__tab' + (tab === 'whatsapp' ? ' modal__tab--active' : '')}
-                          onClick={() => setTab('whatsapp')}
-                        >
-                          <i className="bi bi-whatsapp" /> {t('modal.tabWhatsapp')}
-                        </button>
-                      </div>
-                    )}
+                    <ModalTabs tab={tab} hasWhatsapp={hasWhatsapp} onTabChange={setTab} />
                     <p className="modal__subtitle">
                       {t(tab === 'whatsapp' ? 'modal.subtitleWhatsapp' : 'modal.subtitleGithub')}
                     </p>
                   </div>
 
                   {tab === 'whatsapp' ? (
-                    <div className="modal__whatsapp">
-                      <a
-                        href={
-                          'https://wa.me/' +
-                          CONTACT_CONFIG.whatsapp.replace(/\D/g, '') +
-                          '?text=' +
-                          encodeURIComponent(CONTACT_CONFIG.whatsappPrefill(lang))
-                        }
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn btn--primary btn--lg btn--whatsapp"
-                      >
-                        <i className="bi bi-whatsapp" /> {t('modal.whatsappCta')}
-                      </a>
-                    </div>
+                    <WhatsappTab lang={lang} />
                   ) : (
-                    <form className="modal__form" onSubmit={handleSubmit} noValidate>
-                      <div className="form-field">
-                        <label className="form-field__label" htmlFor="senderName">
-                          {t('modal.name.label')}
-                        </label>
-                        <input
-                          ref={firstInputRef}
-                          id="senderName"
-                          name="senderName"
-                          type="text"
-                          className={'form-field__input' + (errors.senderName ? ' form-field__input--error' : '')}
-                          placeholder={t('modal.name.placeholder')}
-                          value={form.senderName}
-                          onChange={handleChange}
-                          autoComplete="name"
-                        />
-                        {errors.senderName && <span className="form-field__error">{errors.senderName}</span>}
-                      </div>
-
-                      <div className="form-field">
-                        <label className="form-field__label" htmlFor="subject">
-                          {t('modal.subject.label')}
-                        </label>
-                        <input
-                          id="subject"
-                          name="subject"
-                          type="text"
-                          className={'form-field__input' + (errors.subject ? ' form-field__input--error' : '')}
-                          placeholder={t('modal.subject.placeholder')}
-                          value={form.subject}
-                          onChange={handleChange}
-                        />
-                        {errors.subject && <span className="form-field__error">{errors.subject}</span>}
-                      </div>
-
-                      <div className="form-field">
-                        <label className="form-field__label" htmlFor="message">
-                          {t('modal.message.label')}
-                        </label>
-                        <textarea
-                          id="message"
-                          name="message"
-                          rows={5}
-                          className={
-                            'form-field__input form-field__textarea' +
-                            (errors.message ? ' form-field__input--error' : '')
-                          }
-                          placeholder={t('modal.message.placeholder')}
-                          value={form.message}
-                          onChange={handleChange}
-                        />
-                        <div className="form-field__footer">
-                          {errors.message && <span className="form-field__error">{errors.message}</span>}
-                          <span className="form-field__count">{form.message.length}/2000</span>
-                        </div>
-                      </div>
-
-                      <button type="submit" className="btn btn--primary btn--full" disabled={status === 'loading'}>
-                        {status === 'loading' ? (
-                          <>
-                            <span className="spinner" />
-                            {t('modal.sending')}
-                          </>
-                        ) : (
-                          <>
-                            <i className="bi bi-send-fill" />
-                            {t('modal.submit')}
-                          </>
-                        )}
-                      </button>
-                    </form>
+                    <GithubForm
+                      form={form}
+                      errors={errors}
+                      status={status}
+                      firstInputRef={firstInputRef}
+                      onChange={handleChange}
+                      onSubmit={handleSubmit}
+                    />
                   )}
                 </>
               )}

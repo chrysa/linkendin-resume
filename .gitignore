@@ -61,7 +61,6 @@ graphify
 sys
 graphify-out/
 .gitnexus/
-
 # chrysa canonical .gitignore — source of truth
 # Source: chrysa/shared-standards/templates/gitignore.canonical
 # Appended (not overwritten) into each repo's .gitignore by project-init and

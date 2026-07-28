@@ -10,6 +10,13 @@ services:
       dockerfile: docker/Dockerfile
       target: dev
     container_name: resume-dev
+    user: "${UID:-1000}:${GID:-1000}"
+    environment:
+      HOME: /tmp
+      PYTHONPYCACHEPREFIX: /tmp/.toolcache/pycache
+      RUFF_CACHE_DIR: /tmp/.toolcache/ruff
+      MYPY_CACHE_DIR: /tmp/.toolcache/mypy
+      PYTEST_ADDOPTS: -p no:cacheprovider
     develop:
       watch:
       - action: sync

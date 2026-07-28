@@ -107,4 +107,34 @@
     padding: 2rem 0;
     break-inside: avoid;
   }
+  /* Skill proficiency on paper: ink the active dots (signal-teal washes out in
+     grayscale) and reveal the tier word the hover-tooltip would otherwise hide. */
+  .skill-pill__dot--active {
+    background: #000 !important;
+    border-color: #000 !important;
+  }
+  .skill-pill__level-print {
+    display: block;
+    margin-top: 2px;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+    color: #000;
+  }
+  /* Index-rail: keep the logbook numbering (it belongs on the printed page),
+     but render it in ink and tighten the reserved margin for print width. */
+  main > .section > .container {
+    padding-left: 3rem;
+  }
+  main > .section > .container::before {
+    left: 2.25rem;
+    background: #000;
+  }
+  main > .section > .container::after {
+    width: 2.25rem;
+    color: #000;
+  }
+  main > .section > .container .section__label::before {
+    background: #000;
+  }
 }
