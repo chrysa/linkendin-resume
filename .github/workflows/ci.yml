@@ -29,7 +29,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7.0.1
-      - uses: chrysa/github-actions/python-setup@v1.3.0
+      - uses: chrysa/github-actions/python-setup@v1.4.4
         with:
           python-version: "3.14"
       - name: Install pre-commit
@@ -55,7 +55,7 @@ jobs:
           fetch-depth: 0
       - name: Compute version
         id: gitversion
-        uses: chrysa/github-actions/gitversion@v1.3.0
+        uses: chrysa/github-actions/gitversion@v1.4.4
       - name: Show version
         run: echo "Version ${{ steps.gitversion.outputs.fullSemVer }}"
         shell: bash
@@ -198,7 +198,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: SonarCloud Scan
-        uses: chrysa/github-actions/sonar-scan-node@v1.3.0
+        uses: chrysa/github-actions/sonar-scan-node@v1.4.4
         with:
           sonar-token: ${{ secrets.SONAR_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
