@@ -17,6 +17,10 @@ on:
     - cron: '0 0 * * *'
   workflow_dispatch:
 
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
 jobs:
   call:
     uses: chrysa/github-actions/.github/workflows/dependencies.yml@v1.6.0
