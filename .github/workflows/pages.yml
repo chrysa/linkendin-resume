@@ -20,7 +20,6 @@ jobs:
     build:
         name: Build
         runs-on: ubuntu-latest
-        timeout-minutes: 30
         timeout-minutes: 15
         env:
             VITE_BASE_URL: https://resume.chrysa.dev
@@ -56,6 +55,7 @@ jobs:
         name: Deploy to GitHub Pages
         needs: build
         runs-on: ubuntu-latest
+        timeout-minutes: 30
         steps:
             - name: Deploy to GitHub Pages
               id: deployment
