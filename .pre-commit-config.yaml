@@ -95,6 +95,7 @@ repos:
     exclude: (^|/)tests?/
   - id: python-mutable-default
   - id: python-dispatch-ladder
+  - id: react-no-async-in-useeffect
 - repo: https://github.com/compilerla/conventional-pre-commit
   rev: v4.4.0
   hooks:
