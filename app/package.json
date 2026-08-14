@@ -38,8 +38,8 @@
     "@types/node": "^26.1.2",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
-    "@typescript-eslint/eslint-plugin": "^8.64.0",
-    "@typescript-eslint/parser": "^8.64.0",
+    "@typescript-eslint/eslint-plugin": "^8.66.0",
+    "@typescript-eslint/parser": "^8.66.0",
     "@vitejs/plugin-react": "^6.0.3",
     "@vitest/coverage-v8": "^4.1.10",
     "@vitest/ui": "^4.1.10",
@@ -50,7 +50,7 @@
     "globals": "^17.7.0",
     "jsdom": "^30.0.1",
     "typescript": "~5.9.2",
-    "vite": "^8.1.5",
+    "vite": "^8.2.1",
     "vitest": "^4.1.10"
   }
 }
