@@ -67,7 +67,7 @@ repos:
       - id: dockerfile-no-latest
       - id: env-file-check
       - id: yaml-sorter
-        exclude: ^(\.github/(workflows|ISSUE_TEMPLATE)/|GitVersion\.yml)
+        exclude: ^(\.github/|workflows/|templates/|docker-compose)|(^|/)(pnpm-lock|yarn|uv|poetry)\.(yaml|lock)$|(^|/)\.pre-commit-config\.yaml$
       - id: regression-gate
         stages:
           - pre-push
