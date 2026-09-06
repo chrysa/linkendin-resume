@@ -22,6 +22,12 @@ down: ## Stop and remove all containers
 	@$(DOCKER_COMPOSE) down -v --remove-orphans
 	@echo "$(COLOR_GREEN)✓ Stopped$(COLOR_RESET)"
 
+docker-up: ## Start all services (detached)
+	@COMPOSE_PROFILES=dev $(DOCKER_COMPOSE) up -d
+
+docker-down: ## Stop all services
+	@$(DOCKER_COMPOSE) down --remove-orphans
+
 stop: ## Stop containers
 	@$(_SERVICE_STOP)
 	@$(_SERVICE_REMOVE)
