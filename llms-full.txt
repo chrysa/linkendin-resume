@@ -119,7 +119,6 @@ linkendin-resume — Persuasive Online CV — technical digest
     action-check.yml
     approved-label.yml
     auto-assign.yml
-    auto-update-pre-commit.yml
     cd.yml
     ci.yml
     dependabot-auto-merge.yml
@@ -255,6 +254,7 @@ makefiles/
 opencode.json
 pyproject.toml
 scripts/
+  gen_context_files.py
   quality_gate.py
 sonar-project.properties
 standards/
@@ -289,4 +289,5 @@ standards/
 
 .claude/ape/ape_hook.py
 .github/scripts/linkedin_watch.py — Veille automatisée : solutions d'accès aux données LinkedIn.
+scripts/gen_context_files.py — Generate the standardised per-repo context files from the repo's own content.
 scripts/quality_gate.py
