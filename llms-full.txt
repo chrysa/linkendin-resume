@@ -125,6 +125,7 @@ linkendin-resume — Persuasive Online CV — technical digest
     deploy.yml
     detect-conflicts.yml
     enforce-feature-branch.yml
+    enforce-shortcut-link.yml
     labeler.yml
     linkedin-watch.yml
     pages.yml
