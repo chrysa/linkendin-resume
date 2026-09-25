@@ -34,7 +34,10 @@ linkendin-resume — Persuasive Online CV — technical digest
   hooks/
     check-no-env-files.cjs
     circuit-breaker.cjs
+    claude-config-drift.cjs
+    eslint-autofix.cjs
     frustration-detection.cjs
+    graphify-auto-update.cjs
     memory-consolidation.cjs
     model-debt-inventory.cjs
     secret-scanner.cjs
@@ -62,6 +65,9 @@ linkendin-resume — Persuasive Online CV — technical digest
       SKILL.md
     council/
       SKILL.md
+    cv-content-lint/
+      SKILL.md
+      scripts/
     dockerfile-multistage/
       SKILL.md
     error-handling/
@@ -142,6 +148,7 @@ linkendin-resume — Persuasive Online CV — technical digest
 .vscode/
   extensions.json
 AGENTS.md
+ARCHITECTURE.md
 CHANGELOG.md
 CLAUDE.md
 CODEOWNERS
@@ -263,6 +270,7 @@ standards/
     README.md
     accessibility.md
     agents.md
+    ai-orchestration.md
     api.md
     architecture.md
     backend-python.md
