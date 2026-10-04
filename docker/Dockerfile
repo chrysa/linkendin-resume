@@ -31,6 +31,10 @@ RUN mkdir -p /srv/app/node_modules && chown -R node:node /srv/app
 
 EXPOSE $PORT
 
+# CT-004: native probe (busybox wget, already in the alpine base image).
+HEALTHCHECK --interval=10s --timeout=3s --start-period=10s --retries=10 \
+    CMD wget -q --spider http://127.0.0.1:${PORT}/ || exit 1
+
 # Ensure deps are installed when bind-mount hides prebuilt node_modules
 CMD ["sh", "-lc", "(npm ci || (echo 'npm ci failed at runtime -> npm install fallback' && rm -f package-lock.json && npm install)) && npm run dev"]
 
@@ -79,7 +83,7 @@ ENV PORT=$PORT
 EXPOSE $PORT
 
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 --start-period=15s \
-    CMD wget -q --spider http://localhost:${PORT}/ || exit 1
+    CMD wget -q --spider http://127.0.0.1:${PORT}/ || exit 1
 
 USER node
 
