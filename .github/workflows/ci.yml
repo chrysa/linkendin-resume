@@ -1,204 +1,76 @@
 ---
+# Canonical CI workflow for Node.js / TypeScript projects (chrysa ecosystem),
+# from chrysa/shared-standards workflows/ci-node.yml. Adapted to this repo's
+# layout: the Node project lives in app/ (working-directory) and sonar sources
+# are app/src. Lint (eslint/tsc/pre-commit) does NOT run here: it lives in
+# pre-commit (local) and is replayed at release time.
+#
+# Job names (test / sonar) are the branch-protection required status checks.
+
 name: CI
 
 on:
+  pull_request:
+    branches: [develop, main]
   push:
     branches:
-      - main
       - develop
+      - main
       - "feat/**"
       - "fix/**"
-      - "ci/**"
       - "chore/**"
-  pull_request:
-    branches: [main, develop]
+      - "ci/**"
   workflow_dispatch:
 
 permissions:
+  checks: write
   contents: read
+  pull-requests: write
+  statuses: write
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  pre-commit:
-    name: Pre-commit checks
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7.0.1
-      - uses: chrysa/github-actions/python-setup@v1.10.0
-        with:
-          python-version: "3.14"
-      - name: Install pre-commit
-        run: pip install --quiet pre-commit
-        shell: bash
-      - name: Run pre-commit
-        run: pre-commit run --all-files --show-diff-on-failure
-        shell: bash
-
-  version:
-    name: Compute version (GitVersion)
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    outputs:
-      semver: ${{ steps.gitversion.outputs.fullSemVer }}
-      major: ${{ steps.gitversion.outputs.major }}
-      minor: ${{ steps.gitversion.outputs.minor }}
-      patch: ${{ steps.gitversion.outputs.patch }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7.0.1
-        with:
-          fetch-depth: 0
-      - name: Compute version
-        id: gitversion
-        uses: chrysa/github-actions/gitversion@v1.10.0
-      - name: Show version
-        run: echo "Version ${{ steps.gitversion.outputs.fullSemVer }}"
-        shell: bash
-
-  lint:
-    name: Lint & Type Check
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7.0.1
-      - name: Setup Node.js
-        uses: actions/setup-node@v7.0.0
-        with:
-          node-version: "24"
-          cache: npm
-          cache-dependency-path: app/package-lock.json
-      - name: Install dependencies
-        run: npm ci
-        working-directory: app
-        shell: bash
-      - name: ESLint
-        run: npm run lint
-        working-directory: app
-        shell: bash
-      - name: TypeScript type check
-        run: npm run type-check
-        working-directory: app
-        shell: bash
-
   test:
-    name: Unit Tests + Coverage
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7.0.1
-      - name: Setup Node.js
-        uses: actions/setup-node@v7.0.0
-        with:
-          node-version: "24"
-          cache: npm
-          cache-dependency-path: app/package-lock.json
-      - name: Install dependencies
-        run: npm ci
-        working-directory: app
-        shell: bash
-      - name: Run tests with coverage
-        run: npm run test:coverage
-        working-directory: app
-        shell: bash
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v7
-        if: always()
-        with:
-          name: coverage-lcov
-          path: app/coverage/
-          retention-days: 14
-
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    needs:
-      - lint
-      - test
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7.0.1
-      - name: Setup Node.js
-        uses: actions/setup-node@v7.0.0
-        with:
-          node-version: "24"
-          cache: npm
-          cache-dependency-path: app/package-lock.json
-      - name: Install dependencies
-        run: npm ci
-        working-directory: app
-        shell: bash
-      - name: Build
-        run: npm run build
-        working-directory: app
-        shell: bash
-      - name: Upload dist artifact
-        uses: actions/upload-artifact@v7
-        with:
-          name: dist
-          path: app/dist/
-          retention-days: 1
-
-  e2e:
-    name: E2E (Playwright)
+    name: Tests
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    needs:
-      - lint
-      - test
+    defaults:
+      run:
+        working-directory: app
     steps:
-      - name: Checkout
-        uses: actions/checkout@v7.0.1
-      - name: Setup Node.js
-        uses: actions/setup-node@v7.0.0
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.0.0
         with:
           node-version: "24"
           cache: npm
           cache-dependency-path: app/package-lock.json
-      - name: Install dependencies
-        run: npm ci
-        working-directory: app
-        shell: bash
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium
-        working-directory: app
-        shell: bash
-      - name: Run Playwright E2E tests
-        run: npx playwright test
-        working-directory: app
-        shell: bash
-      - name: Upload Playwright report
+      - run: npm ci
+      - name: Run tests with coverage
+        run: npm run test:coverage
+      - name: Upload coverage
         uses: actions/upload-artifact@v7
-        if: always()
         with:
-          name: playwright-report
-          path: app/playwright-report/
-          retention-days: 14
+          name: coverage-lcov
+          path: app/coverage/lcov.info
+          if-no-files-found: warn
 
   sonar:
-    name: SonarCloud Analysis
+    name: SonarCloud
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    needs: test
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    needs:
-      - test
-    if: github.actor != 'dependabot[bot]'
     permissions:
       contents: read
       pull-requests: read
     steps:
-      - name: Checkout
-        uses: actions/checkout@v7.0.1
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
-      - name: SonarCloud Scan
-        uses: chrysa/github-actions/sonar-scan-node@v1.10.0
+      - uses: chrysa/github-actions/sonar-scan-node@v1.10.0
         with:
           sonar-token: ${{ secrets.SONAR_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
