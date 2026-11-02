@@ -1,0 +1,22 @@
+---
+# TEMPORARY pilot for chrysa/github-actions#338. Do not merge.
+# Calls the fixed reusable workflows from their PR branch on a pull_request event
+# (pull_request_target would run the base branch copy, not this file).
+name: Pilot label checks
+
+"on":
+  pull_request:
+
+jobs:
+  size:
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+    uses: chrysa/github-actions/.github/workflows/pull-request-size.yml@fix/shared-label-checks
+  labels:
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+    uses: chrysa/github-actions/.github/workflows/labeler.yml@fix/shared-label-checks
