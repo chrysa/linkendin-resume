@@ -8,10 +8,6 @@ on:
       - ready_for_review
       - reopened
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   call:
     uses: chrysa/github-actions/.github/workflows/auto-assign.yml@v1.10.0
