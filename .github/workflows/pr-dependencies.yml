@@ -19,4 +19,7 @@ on:
 
 jobs:
   call:
+    permissions:
+      issues: write
+      pull-requests: write
     uses: chrysa/github-actions/.github/workflows/dependencies.yml@v1.10.0
