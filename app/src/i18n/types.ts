@@ -60,7 +60,6 @@ export interface Translations {
     subject: { label: string; placeholder: string };
     message: { label: string; placeholder: string };
     submit: string;
-    sending: string;
     whatsappCta: string;
     success: { title: string; body: string; open: string; back: string };
   };

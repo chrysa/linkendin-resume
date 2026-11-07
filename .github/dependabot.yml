@@ -31,7 +31,13 @@ updates:
   - chrysa
   commit-message:
     prefix: '[SKIP CI] [pre-commit] '
+  cooldown:
+    default-days: 7
   directory: /
+  groups:
+    pre-commit-hooks:
+      patterns:
+      - '*'
   labels:
   - skip-ci
   - dependencies
@@ -68,6 +74,12 @@ updates:
       - vitest
       - '@testing-library/*'
       - jest*
+    z-rest-minor-and-patch:
+      patterns:
+      - '*'
+      update-types:
+      - minor
+      - patch
   labels:
   - dependencies
   - JavaScript

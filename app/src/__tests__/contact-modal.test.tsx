@@ -38,8 +38,11 @@ vi.mock('@/data/profile', () => ({
 }));
 
 import { ContactModal } from '@/components/contact/ContactModal';
+import fr from '@/i18n/fr';
+import en from '@/i18n/en';
 
 const noop = () => {};
+const getForm = () => screen.getByPlaceholderText('modal.name.placeholder').closest('form') as HTMLFormElement;
 
 describe('ContactModal', () => {
   beforeEach(() => {
@@ -52,8 +55,8 @@ describe('ContactModal', () => {
   });
 
   it('renders nothing when isOpen is false', () => {
-    const { container } = render(<ContactModal isOpen={false} onClose={noop} />);
-    expect(container.querySelector('[role="dialog"]')).toBeNull();
+    render(<ContactModal isOpen={false} onClose={noop} />);
+    expect(screen.queryByRole('dialog')).toBeNull();
   });
 
   it('renders dialog when isOpen is true', () => {
@@ -71,16 +74,14 @@ describe('ContactModal', () => {
   it('calls onClose when backdrop is clicked', () => {
     const onClose = vi.fn();
     render(<ContactModal isOpen={true} onClose={onClose} />);
-    const backdrop = document.querySelector('.modal-backdrop') as HTMLElement;
-    if (backdrop) fireEvent.click(backdrop);
+    fireEvent.click(screen.getByTestId('modal-backdrop'));
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
   it('calls onClose when close button is clicked', () => {
     const onClose = vi.fn();
     render(<ContactModal isOpen={true} onClose={onClose} />);
-    const btn = document.querySelector('.modal__close') as HTMLElement;
-    fireEvent.click(btn);
+    fireEvent.click(screen.getByRole('button', { name: 'Fermer' }));
     // after close button: onClose fires + deferred reset
     expect(onClose).toHaveBeenCalledTimes(1);
     vi.advanceTimersByTime(400);
@@ -103,22 +104,20 @@ describe('ContactModal', () => {
     fireEvent.click(screen.getByText('modal.tabWhatsapp'));
     fireEvent.click(screen.getByText('modal.tabGithub'));
     // form should be visible again
-    expect(document.querySelector('form')).toBeTruthy();
+    expect(getForm()).toBeTruthy();
   });
 
   it('shows validation errors on empty submit', () => {
     render(<ContactModal isOpen={true} onClose={noop} />);
-    const form = document.querySelector('form') as HTMLFormElement;
-    fireEvent.submit(form);
+    fireEvent.submit(getForm());
     // errors should appear (schema requires min lengths)
-    const errorEls = document.querySelectorAll('.form-field__error');
-    expect(errorEls.length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Minimum \d+ caractères/).length).toBeGreaterThan(0);
   });
 
   it('clears field error on input change', () => {
     render(<ContactModal isOpen={true} onClose={noop} />);
     // trigger validation to create errors
-    fireEvent.submit(document.querySelector('form') as HTMLFormElement);
+    fireEvent.submit(getForm());
     // start typing in senderName
     const nameInput = screen.getByPlaceholderText('modal.name.placeholder');
     fireEvent.change(nameInput, { target: { name: 'senderName', value: 'A' } });
@@ -126,37 +125,55 @@ describe('ContactModal', () => {
     expect(nameInput).toBeTruthy();
   });
 
-  it('submits form and shows success state', async () => {
-    render(<ContactModal isOpen={true} onClose={noop} />);
-    fireEvent.change(screen.getByPlaceholderText('modal.name.placeholder'), {
-      target: { name: 'senderName', value: 'Alice Dupont' },
-    });
-    fireEvent.change(screen.getByPlaceholderText('modal.subject.placeholder'), {
-      target: { name: 'subject', value: 'Collaboration projet freelance' },
-    });
-    fireEvent.change(screen.getByPlaceholderText('modal.message.placeholder'), {
-      target: { name: 'message', value: 'Bonjour, je souhaite collaborer sur un projet passionnant.' },
-    });
-    fireEvent.submit(document.querySelector('form') as HTMLFormElement);
-    await act(() => vi.runAllTimersAsync());
-    expect(screen.getByText('modal.success.title')).toBeTruthy();
-  });
-
-  it('success view has a link to GitHub issues', async () => {
-    render(<ContactModal isOpen={true} onClose={noop} />);
+  const fillAndSubmit = () => {
     fireEvent.change(screen.getByPlaceholderText('modal.name.placeholder'), {
       target: { name: 'senderName', value: 'Bob Martin' },
     });
     fireEvent.change(screen.getByPlaceholderText('modal.subject.placeholder'), {
-      target: { name: 'subject', value: 'Opportunité CDI intéressante' },
+      target: { name: 'subject', value: 'Opportunité CDI & suite' },
     });
     fireEvent.change(screen.getByPlaceholderText('modal.message.placeholder'), {
       target: { name: 'message', value: 'Je vous contacte concernant un poste de développeur senior.' },
     });
-    fireEvent.submit(document.querySelector('form') as HTMLFormElement);
-    await act(() => vi.runAllTimersAsync());
-    const link = screen.getByText('modal.success.open');
-    expect(link.closest('a')?.href).toContain('github.com/test-owner/test-repo');
+    fireEvent.submit(getForm());
+  };
+
+  it('hands off immediately, with no fake sending delay', () => {
+    render(<ContactModal isOpen={true} onClose={noop} />);
+    const timeoutSpy = vi.spyOn(globalThis, 'setTimeout');
+    fillAndSubmit();
+    // No timer advanced: the hand-off step is already displayed.
+    expect(screen.getByText('modal.success.title')).toBeTruthy();
+    expect(timeoutSpy.mock.calls.filter(([, ms]) => ms === 800)).toHaveLength(0);
+    timeoutSpy.mockRestore();
+  });
+
+  it('CTA href is the prefilled GitHub issues URL, opened safely in a new tab', () => {
+    render(<ContactModal isOpen={true} onClose={noop} />);
+    fillAndSubmit();
+    const link = screen.getByText('modal.success.open').closest('a') as HTMLAnchorElement;
+    const expected =
+      'https://github.com/test-owner/test-repo/issues/new?title=' +
+      encodeURIComponent('[Contact] Opportunité CDI & suite') +
+      '&body=' +
+      encodeURIComponent(
+        '**De :** Bob Martin\n\nJe vous contacte concernant un poste de développeur senior.\n\n---\n*CV en ligne*'
+      ) +
+      '&labels=' +
+      encodeURIComponent('job-offer');
+    expect(link.getAttribute('href')).toBe(expected);
+    expect(link.getAttribute('target')).toBe('_blank');
+    expect(link.getAttribute('rel')).toBe('noopener noreferrer');
+  });
+
+  it.each([
+    ['fr', fr, /pas encore envoy/i],
+    ['en', en, /not been sent/i],
+  ])('%s hand-off wording says the message is not sent yet', (_l, dict, notSent) => {
+    expect(dict.modal.success.title).toMatch(notSent);
+    expect(dict.modal.success.body).toMatch(/GitHub/);
+    expect(dict.modal.success.title).not.toMatch(/Prêt à envoyer|Ready to send|envoyé !|sent!/i);
+    expect(dict.modal.success.open).toMatch(/GitHub/);
   });
 
   it('back button in success view closes modal', async () => {
@@ -171,7 +188,7 @@ describe('ContactModal', () => {
     fireEvent.change(screen.getByPlaceholderText('modal.message.placeholder'), {
       target: { name: 'message', value: 'Simple question sur votre disponibilité pour une mission.' },
     });
-    fireEvent.submit(document.querySelector('form') as HTMLFormElement);
+    fireEvent.submit(getForm());
     await act(() => vi.runAllTimersAsync());
     fireEvent.click(screen.getByText('modal.success.back'));
     expect(onClose).toHaveBeenCalledTimes(1);

@@ -18,7 +18,7 @@ interface ContactModalProps {
   readonly onClose: () => void;
 }
 
-type Status = 'idle' | 'loading' | 'success' | 'error';
+type Status = 'idle' | 'ready';
 type Tab = 'github' | 'whatsapp';
 
 function inferLabels(form: ContactFormData): string[] {
@@ -43,8 +43,10 @@ function SuccessView({ issueUrl, onClose }: SuccessViewProps) {
   const { t } = useTranslation();
   return (
     <motion.div className="modal__success" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}>
-      <div className="modal__success-icon">🎉</div>
-      <h3>{t('modal.success.title')}</h3>
+      <div className="modal__success-icon" aria-hidden="true">
+        <i className="bi bi-box-arrow-up-right" />
+      </div>
+      <h3 role="status">{t('modal.success.title')}</h3>
       <p>{t('modal.success.body')}</p>
       <a href={issueUrl} target="_blank" rel="noopener noreferrer" className="btn btn--primary btn--lg">
         <i className="bi bi-github" />
@@ -80,13 +82,12 @@ function WhatsappTab({ lang }: WhatsappTabProps) {
 interface GithubFormProps {
   readonly form: ContactFormData;
   readonly errors: FormErrors;
-  readonly status: Status;
   readonly firstInputRef: React.RefObject<HTMLInputElement | null>;
   readonly onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   readonly onSubmit: (e: React.FormEvent) => void;
 }
 
-function GithubForm({ form, errors, status, firstInputRef, onChange, onSubmit }: GithubFormProps) {
+function GithubForm({ form, errors, firstInputRef, onChange, onSubmit }: GithubFormProps) {
   const { t } = useTranslation();
   return (
     <form className="modal__form" onSubmit={onSubmit} noValidate>
@@ -143,18 +144,9 @@ function GithubForm({ form, errors, status, firstInputRef, onChange, onSubmit }:
         </div>
       </div>
 
-      <button type="submit" className="btn btn--primary btn--full" disabled={status === 'loading'}>
-        {status === 'loading' ? (
-          <>
-            <span className="spinner" />
-            {t('modal.sending')}
-          </>
-        ) : (
-          <>
-            <i className="bi bi-send-fill" />
-            {t('modal.submit')}
-          </>
-        )}
+      <button type="submit" className="btn btn--primary btn--full">
+        <i className="bi bi-github" />
+        {t('modal.submit')}
       </button>
     </form>
   );
@@ -242,11 +234,9 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
-
-    setStatus('loading');
 
     const labels = inferLabels(form);
     const title = encodeURIComponent('[Contact] ' + form.subject);
@@ -263,10 +253,8 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
       '&labels=' +
       encodeURIComponent(labels.join(','));
 
-    await new Promise((r) => setTimeout(r, 800));
-
     setIssueUrl(url);
-    setStatus('success');
+    setStatus('ready');
   };
 
   const handleClose = () => {
@@ -287,6 +275,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           {/* Backdrop */}
           <motion.div
             className="modal-backdrop"
+            data-testid="modal-backdrop"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -315,7 +304,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 <i className="bi bi-x-lg" />
               </button>
 
-              {status === 'success' && issueUrl ? (
+              {status === 'ready' && issueUrl ? (
                 <SuccessView issueUrl={issueUrl} onClose={handleClose} />
               ) : (
                 <>
@@ -335,7 +324,6 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     <GithubForm
                       form={form}
                       errors={errors}
-                      status={status}
                       firstInputRef={firstInputRef}
                       onChange={handleChange}
                       onSubmit={handleSubmit}
