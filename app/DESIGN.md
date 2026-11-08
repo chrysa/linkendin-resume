@@ -101,23 +101,3 @@ safe (structural, never animation-dependent), and print-safe (a print override i
   signal "a precise engineer made this" before a word is read; the numbered entries
   let a skimmer jump and the typeset measure rewards a closer read — authority by
   documentation, not by decoration.
-
-## UX acceptance and verification
-
-- Make the primary task visible; preserve navigation, filters, input and focus across updates.
-- Define loading, empty, validation error, unavailable dependency, stale data and recovery
-  states where relevant. Never display a failed operation as successful.
-- Use text or icons with labels as well as colour for status. Keep keyboard focus visible,
-  navigation predictable and motion optional; respect reduced-motion preferences.
-- For web content, target WCAG 2.2 AA; use at least 4.5:1 contrast for ordinary text
-  (3:1 for qualifying large text), and aim for 44 CSS px touch controls. Verify the
-  complete applicable standard, not only these examples. Apply equivalent native
-  accessibility APIs to desktop controls; do not claim web certification for a native UI.
-- Test the primary journey, empty data, a failed operation and recovery at representative
-  viewport/window sizes. Verify keyboard use, long labels and realistic data volumes.
-  Keep screenshots or other reproducible evidence with the UI change; document checks
-  that could not run. Static lint is not evidence of usability or accessibility compliance.
-- Maintain provenance and licence records for fonts, icons, artwork and generated assets;
-  serve assets locally where feasible. Do not copy a reference brand's logos or identity.
-- Keep detailed journeys/acceptance evidence in existing project documentation. Update
-  this contract alongside UI changes; preserve existing component and token ownership.
