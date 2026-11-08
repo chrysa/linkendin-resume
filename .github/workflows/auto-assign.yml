@@ -10,4 +10,4 @@ on:
 
 jobs:
   call:
-    uses: chrysa/github-actions/.github/workflows/auto-assign.yml@v1.10.0
+    uses: chrysa/github-actions/.github/workflows/auto-assign.yml@v1.11.1
