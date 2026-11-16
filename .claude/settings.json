@@ -197,7 +197,10 @@
       "Bash(rtk gh issue view *)",
       "Bash(rtk gh issue list *)",
       "Bash(rtk gh run list *)",
-      "Bash(rtk gh run view *)"
+      "Bash(rtk gh run view *)",
+      "Bash(make help)",
+      "Bash(python -m pytest *)",
+      "Bash(mypy *)"
     ],
     "ask": [
       "Bash(git push *)",
@@ -247,7 +250,11 @@
       "Bash(docker compose up *)",
       "Bash(docker compose down *)",
       "Bash(rtk docker compose up *)",
-      "Bash(rtk docker compose down *)"
+      "Bash(rtk docker compose down *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(rtk git add *)",
+      "Bash(rtk git commit *)"
     ],
     "deny": [
       "Read(**/.env)",
